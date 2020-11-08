@@ -10,7 +10,7 @@
 
 - Chrisitan Roubert, christian-roubert, 
 - Duong Dac, ddacw, dacduong071,
-- Elouan Gros, EL-BG-1970, elouangros
+- Elouan Gros, EL-BG-1970, elouangros, Team Leader
 - Carolina Nina Matos, ninocapipoca, carolinaninamatos
 - Remy Seassau, remyjck, remyseassau
 - Nazila Sharifi Amina, sh-amina
