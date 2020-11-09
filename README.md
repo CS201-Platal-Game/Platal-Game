@@ -12,11 +12,11 @@
 - Duong Dac, ddacw, dacduong071,
 - Elouan Gros, EL-BG-1970, elouangros, Team Leader
 - Carolina Nina Matos, ninocapipoca, carolinaninamatos
-- Remy Seassau, remyjck, remyseassau
+- Remy Seassau, remyjck, remyseassau, Git Master
 - Nazila Sharifi Amina, sh-amina
 - Thomas Tressel, thomastressel, thomastressel
 - Tuna Yapakci, tuna-yapakci
-- Anotine Babu, 
+- Anotine Babu, Ant-babu
 
 ## Teams
 
