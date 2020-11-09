@@ -1,6 +1,6 @@
 #include <SDL2/SDL.h>
 #include <iostream>
-#include "src/Game.h"
+#include "Game.h"
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 800;

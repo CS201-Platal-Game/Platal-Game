@@ -2,27 +2,21 @@ cmake_minimum_required(VERSION 3.17)
 project(map_demo)
 
 # PROJECT DIR SETUP
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/bin)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR})
 set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR})
 
-# LIBS
+# SDL2
 find_package(SDL2 REQUIRED)
-include_directories(${PROJECT_NAME} ${SDL2_INCLUDE_DIRS})
+include_directories(${SDL2_INCLUDE_DIRS})
+set(SDL2_LIBS SDL2_image SDL2 pthread)
 
-add_executable(map_demo main.cpp src/Game.cpp src/map.cpp
-        src/TextureManager.cpp)
+# EXECUTABLE
+add_library(map_demo_lib 
+            ${CMAKE_CURRENT_SOURCE_DIR}/src/Game.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/src/map.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/src/TextureManager.cpp)
 
-set(LIBS SDL2_image SDL2 pthread)
-
-include_directories(
-        ${PROJECT_NAME}
-        ${CMAKE_SOURCE_DIR}/src
-        ${OPENGL_INCLUDE_DIRS}
-        ${CMAKE_SOURCE_DIR}/include
-        ${HEADER_FILES}
-)
-target_link_libraries(${PROJECT_NAME} ${LIBS})
-
-link_directories(${CMAKE_SOURCE_DIR}/lib)
+add_executable(map_demo src/main.cpp)
+target_link_libraries(map_demo map_demo_lib ${SDL2_LIBS})
