@@ -8,15 +8,18 @@
 
 ## Members (name surname, github username, trello username, [role])
 
-- Chrisitan Roubert, christian-roubert, christianroubert
-- Duong Dac, ddacw, dacduong071,
-- Elouan Gros, EL-BG-1970, elouangros, Team Leader
-- Carolina Nina Matos, ninocapipoca, carolinaninamatos
-- Remy Seassau, remyjck, remyseassau, Git Master
-- Nazila Sharifi Amina, sh-amina, nazilasharifi
-- Thomas Tressel, thomastressel, thomastressel
-- Tuna Yapakci, tuna-yapakci
-- Anotine Babu, Ant-babu, antoinebabu
+| Name                 | Github username   | Trello Username   | Role        |
+| -------------------- | ----------------- | ----------------- | ----------- |
+| Chrisitan Roubert    | christian-roubert | christianroubert  |             |
+| Duong Dac            | ddacw             | dacduong071       |             |
+| Elouan Gros          | EL-BG-1970        | elouangros        | Team Leader |
+| Carolina Nina Matos  | ninocapipoca      | carolinaninamatos |             |
+| Remy Seassau         | remyjck           | remyseassau       | Git Master  |
+| Nazila Sharifi Amina | sh-amina          | nazilasharifi     |             |
+| Thomas Tressel       | thomastressel     | thomastressel     |             |
+| Tuna Yapakci         | tuna-yapakci      |                   |             |
+| Antoine Babu         | Ant-babu          | antoinebabu       |             |
+
 
 ## Teams
 
