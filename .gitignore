@@ -63,3 +63,11 @@ install_manifest.txt
 compile_commands.json
 CTestTestfile.cmake
 _deps
+
+# CLION gitignore
+.idea
+cmake-build-*/
+
+# Project Specific
+build
+map_demo
