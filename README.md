@@ -13,8 +13,8 @@
 | Chrisitan Roubert    | christian-roubert | christianroubert  |                    |
 | Duong Dac            | ddacw             | dacduong071       | Engine Team Leader |
 | Elouan Gros          | EL-BG-1970        | elouangros        | Project Leader     |
-| Carolina Nina Matos  | ninocapipoca      | carolinaninamatos |                    |
-| Remy Seassau         | remyjck           | remyseassau       | Git Master         |
+| Carolina Nina Matos  | ninocapipoca      | carolinaninamatos | Trello Leader      |
+| Remy Seassau         | remyjck           | remyseassau       | Git Leader         |
 | Nazila Sharifi Amina | sh-amina          | nazilasharifi     |                    |
 | Thomas Tressel       | thomastressel     | thomastressel     |                    |
 | Tuna Yapakci         | tuna-yapakci      |                   |                    |
