@@ -1,10 +1,17 @@
 # Platal Game (name pending)
 
-    The goal of this project is to make a 2d isometric game based on the platal. 
+    The goal of this project is to make a 2d isometric game based on the platal.
     Its story elements, locations and characters will all be based on the school.
     The first priority will be to add some base mechanics before expanding on  the main storylines.
     Planned additions also include sidequests, easter eggs and character evolution.
 
+## Build
+
+Prerequisites: `cmake`, `sdl2`, `sdl2_image`.
+
+```
+mkdir build && cd build && cmake .. && make -j
+```
 
 ## Members (name surname, github username, trello username, [role])
 
@@ -20,7 +27,6 @@
 | Tuna Yapakci         | tuna-yapakci      |                   |                    |
 | Antoine Babu         | Ant-babu          | antoinebabu       |                    |
 
-
 ## Teams
 
 ### Graphics
@@ -32,7 +38,6 @@
 - Christian Roubert
 - Antoine Babu
 
-
 ### Game Engine
 
 - Duong Dac
@@ -43,4 +48,5 @@
 - Nazila Sharifi Amina
 
 #### [Trello Page](https://trello.com/b/yN1MSB1b/platal-game)
+
 #### [Notion Page](https://www.notion.so/Preliminary-notes-1cfb63b026dd48b6ae74da4d36dd5983)
