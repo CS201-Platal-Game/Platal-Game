@@ -12,7 +12,7 @@
 | -------------------- | ----------------- | ----------------- | ------------------ |
 | Chrisitan Roubert    | christian-roubert | christianroubert  |                    |
 | Duong Dac            | ddacw             | dacduong071       | Engine Team Leader |
-| Elouan Gros          | EL-BG-1970        | elouangros        | Team Leader        |
+| Elouan Gros          | EL-BG-1970        | elouangros        | Project Leader     |
 | Carolina Nina Matos  | ninocapipoca      | carolinaninamatos |                    |
 | Remy Seassau         | remyjck           | remyseassau       | Git Master         |
 | Nazila Sharifi Amina | sh-amina          | nazilasharifi     |                    |
