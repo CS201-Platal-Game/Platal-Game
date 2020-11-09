@@ -20,7 +20,7 @@ jobs:
 
     # Install dependencies
     - name: Install dependencies
-      run: sudo apt-get install g++ libsdl2-dev libsdl2-image-dev valgrind
+      run: sudo apt update && sudo apt install g++ libsdl2-dev libsdl2-image-dev valgrind
 
     # Build the code
     - name: Build
