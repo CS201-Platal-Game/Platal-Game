@@ -29,7 +29,8 @@
 - Carolina Nina Matos
 - Tuna Yapakci
 - Nazila Sharifi Amina
-- Chrisitan Roubert
+- Christian Roubert
+- Antoine Babu
 
 
 ### Game Engine
