@@ -1,5 +1,5 @@
 #pragma once
-#include "Game.h"
+#include "game.h"
 
 class Map {
   public:
@@ -10,10 +10,7 @@ class Map {
     void DrawMap();
 
   private:
-    SDL_Rect src, dest;
-    SDL_Texture* dirt;
-    SDL_Texture* grass;
-    SDL_Texture* water;
-
-    int map[20][25];
+    SDL_Rect src_, dest_;
+    SDL_Texture *dirt_, *grass_, *water_;
+    int map_[20][25];
 };

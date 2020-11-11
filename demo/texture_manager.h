@@ -1,5 +1,5 @@
 #pragma once
-#include "Game.h"
+#include "game.h"
 
 class TextureManager {
   public:

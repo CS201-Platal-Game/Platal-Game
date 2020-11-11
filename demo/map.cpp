@@ -1,5 +1,5 @@
 #include "map.h"
-#include "TextureManager.h"
+#include "texture_manager.h"
 
 int lv1[20][25] = {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -24,20 +24,20 @@ int lv1[20][25] = {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
 
 Map::Map() {
-    dirt = TextureManager::LoadTexture("./images/maptexture/dirt.png");
-    grass = TextureManager::LoadTexture("./images/maptexture/grass.png");
-    water = TextureManager::LoadTexture("./images/maptexture/water.png");
+    dirt_ = TextureManager::LoadTexture("./images/maptexture/dirt.png");
+    grass_ = TextureManager::LoadTexture("./images/maptexture/grass.png");
+    water_ = TextureManager::LoadTexture("./images/maptexture/water.png");
 
     LoadMap(lv1);
 
-    src = {0, 0, 32, 32};
-    dest = {0, 0, 32, 32};
+    src_ = {0, 0, 32, 32};
+    dest_ = {0, 0, 32, 32};
 }
 
 void Map::LoadMap(int arr[20][25]) {
     for (int row = 0; row < 20; row++) {
         for (int col = 0; col < 25; col++) {
-            map[row][col] = arr[row][col];
+            map_[row][col] = arr[row][col];
         }
     }
 }
@@ -47,20 +47,20 @@ void Map::DrawMap() {
 
     for (int row = 0; row < 20; row++) {
         for (int col = 0; col < 25; col++) {
-            type = map[row][col];
+            type = map_[row][col];
 
-            dest.x = col * 32;
-            dest.y = row * 32;
+            dest_.x = col * 32;
+            dest_.y = row * 32;
 
             switch (type) {
             case 0:
-                TextureManager::Draw(water, src, dest);
+                TextureManager::Draw(water_, src_, dest_);
                 break;
             case 1:
-                TextureManager::Draw(grass, src, dest);
+                TextureManager::Draw(grass_, src_, dest_);
                 break;
             case 2:
-                TextureManager::Draw(dirt, src, dest);
+                TextureManager::Draw(dirt_, src_, dest_);
                 break;
             default:
                 break;

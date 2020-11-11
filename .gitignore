@@ -68,6 +68,9 @@ _deps
 .idea
 cmake-build-*/
 
+# Visual Studio Code gitignore
+.vscode
+
 # Project Specific
 build
 map_demo
