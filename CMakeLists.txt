@@ -28,6 +28,7 @@ add_library(platal_lib
             src/dialogue.cpp
             src/game.cpp
             src/platal_map.cpp
-            src/object.cpp)
+            src/object.cpp
+            src/utils/texture_manager.cpp)
 add_executable(platal src/main.cpp)
 target_link_libraries(platal platal_lib ${SDL2_LIBS})
