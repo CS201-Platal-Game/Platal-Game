@@ -57,6 +57,9 @@ class Dialogue {
 
   private:
     DialogueNode* head_;
-    std::vector<std::string> responses;
+
+    // At the moment, each response is stored twice, one here and
+    // one in DialogueNode. Feel free to optimize this.
+    std::vector<std::string> response_lines_;
     std::vector<DialogueNode> nodes_;
 };
