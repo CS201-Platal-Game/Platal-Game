@@ -27,7 +27,7 @@ add_library(platal_lib
             src/character.cpp
             src/dialogue.cpp
             src/game.cpp
-            src/map.cpp
+            src/platal_map.cpp
             src/object.cpp)
 add_executable(platal src/main.cpp)
 target_link_libraries(platal platal_lib ${SDL2_LIBS})
