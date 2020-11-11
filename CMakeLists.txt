@@ -22,3 +22,12 @@ set(SDL2_LIBS SDL2_image SDL2 pthread)
 if(PLATAL_BUILD_DEMO)
     add_subdirectory(demo)
 endif()
+
+add_library(platal_lib 
+            src/character.cpp
+            src/dialogue.cpp
+            src/game.cpp
+            src/map.cpp
+            src/object.cpp)
+add_executable(platal src/main.cpp)
+target_link_libraries(platal platal_lib ${SDL2_LIBS})
