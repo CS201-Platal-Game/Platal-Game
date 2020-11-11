@@ -1,6 +1,7 @@
 #pragma once
+#include "SDL2/SDL.h"
+#include "SDL2/SDL_image.h"
 #include "character.h"
-#include "game.h"
 #include "object.h"
 #include <vector>
 
@@ -20,11 +21,11 @@ class Map {
     void AddObject(Object item);
     Object RemoveObject(int obj_id); // return the object if it was found
 
-    readonly int map_id_; // the location of the map
+    int map_id_; // the name of the location the map represents
 
   private:
     int width_, height_; // width and height of the map, in squares
-    int **map_array_; // loaded from csv
+    int** map_array_; // loaded from csv
     std::vector<Character> *npc_;       // TODO think about implementation some more
     std::vector<Object> *objects_;      // TODO think about implementation some more
     SDL_Rect src_, dest_; // attributes used while rendering
