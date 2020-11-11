@@ -1,14 +1,14 @@
+#include "Game.h"
 #include <SDL2/SDL.h>
 #include <iostream>
-#include "Game.h"
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 640;
 
-Game *game = nullptr;
+Game* game = nullptr;
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
     // FPS LIMITER
     const int fps = 60;
     const int frameDelay = 1000 / fps;
@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
                SCREEN_HEIGHT,
                false);
 
-    while (game->running()){
+    while (game->running()) {
         frameStart = SDL_GetTicks(); // start chrono
 
         game->handleEvents();
