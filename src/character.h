@@ -11,12 +11,12 @@ enum Direction {
     kDown
 };
 
-struct Position {
-    int x, y;
-};
-
 class Character {
   public:
+    struct Position {
+        int x, y;
+    };
+
     Character();
     Character(const std::string& name, const Position& position);
     ~Character();
@@ -46,12 +46,11 @@ class NPC : public Character {
   public:
     void AddDialogue(Dialogue* const dialogue);
 
-    // NPC follows a fixed route, or stand still
-    // if interrupted / empty route_.
+    // NPC follows a fixed route, or stand still if interrupted / empty route_.
     void MoveRoute();
 
     // Triggers conversations or actions.
-    // Might return a status (enum/int).
+    // Might return a status (enum/int) instead.
     void Interact();
 
   private:

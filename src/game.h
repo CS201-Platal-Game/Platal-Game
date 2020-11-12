@@ -1,8 +1,8 @@
 #pragma once
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
-#include <iostream>
 #include "platal_map.h"
+#include <iostream>
 
 class Game {
   public:
@@ -16,8 +16,8 @@ class Game {
               bool fullscreen);
 
     void HandleEvents(); // reacts to user input
-    void Update(); // gets the objects to react to user input
-    void Render(); // renders all elements to screen
+    void Update();       // gets the objects to react to user input
+    void Render();       // renders all elements to screen
 
     void ChangeMap(int map_id); // TODO think about how this is gonna be implemented
 
