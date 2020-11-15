@@ -1,13 +1,15 @@
-# Christian Roubert
-# Duong Dac
-# Elouan Gros
-# Carolina Nina Matos
-# Remy Seassau
-# Nazila Sharifi Amina
-# Thomas Tressel: This week, I especially focused on making sure the project could run on my Windows laptop. I installed WSL 2 using the Ubuntu distribution, then installed a GUI, and finally made sure I could run the demo of our project by installing necessary things such as CMake and SDL2. I had a few issues doing so, mainly regarding rendering the demo map with the GUI, and it took me quite some time to find my errors and configure everything properly. Once this was all done, I began looking at implementing the GameObject class for our game. Next week, I will mainly continue working on the GameObject class, now that I have set up everything needed for the project to run.
-# Tuna Yapakci
-# Antoine Babu
+## Christian Roubert
+## Duong Dac
+## Elouan Gros
+## Carolina Nina Matos
+## Remy Seassau
+- Spent some time trying to get SDL2 to work on windows (~2 hours on Wednesday + the full TD with about an hour of help from Mr Mover).
+- Finally settled on using a Linux subsystem on Linux to compile the project (at this point we a small demo to test the dependencies). Spent about 30min to install SDL2 and compile the project in the subsystem.
+- The project now compiles and I am ready to start coding my part of the engine: keyboard inputs.
+## Nazila Sharifi Amina
+## Thomas Tressel
+## Tuna Yapakci
+## Antoine Babu
 This week I worked on a function converting csv files into 2D arrays, which is how we will store and manipulate maps. 
 I am almost done with the function and will commit it in the next few days. My goal for next week is to work on visualizing these arrays and maybe implementing textures.
-
 
