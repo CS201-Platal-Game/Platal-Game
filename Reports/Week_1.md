@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-# Christian Roubert
-# Duong Dac
-# Elouan Gros
-# Carolina Nina Matos
-# Remy Seassau
-# Nazila Sharifi Amina
-# Thomas Tressel
-# Tuna Yapakci
-# Antoine Babu
-=======
 ## Christian Roubert
 
 - Week 9th -15th November 2020: This week I mostly focused on installing the compiler and libraries such as cmake or sdl2 & sdl2_image , specifically for Mac, which will be essential when trying to code the game and which we will use in the upcoming weeks.
@@ -52,4 +41,3 @@ This week, I especially focused on making sure the project could run on my lapto
 
 This week I worked on a function converting csv files into 2D arrays, which is how we will store and manipulate maps.
 I am almost done with the function and will commit it in the next few days. My goal for next week is to work on visualizing these arrays and maybe implementing textures.
->>>>>>> upstream/main
