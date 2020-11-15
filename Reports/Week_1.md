@@ -2,6 +2,10 @@
 - Week 9th -15th November 2020: This week I mostly focused on installing the compiler and libraries  such as cmake or sdl2 & sdl2_image , specifically for Mac, which will be essential when trying to code the game and which we will use in the upcoming weeks.
 ## Duong Dac
 ## Elouan Gros
+- I wrote the header files for the map class, the game class, and the texture manager
+- I attempted to help my fellow group members install and run the project on windows, but without much success...
+- Wrote and shared an SDL2 and SDL2_IMG demo with my fellow group members
+- Next week, i plan on helping my fellow members complete their parts, as well as work on the implementation of the Game object
 ## Carolina Nina Matos
 ## Remy Seassau
 - Spent some time trying to get SDL2 to work on windows (~2 hours on Wednesday + the full TD with about an hour of help from Mr Mover).
