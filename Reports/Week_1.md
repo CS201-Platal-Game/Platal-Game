@@ -15,6 +15,11 @@
 
 ## Elouan Gros
 
+- I wrote the header files for the map class, the game class, and the texture manager
+- I attempted to help my fellow group members install and run the project on windows, but without much success...
+- Wrote and shared an SDL2 and SDL2_IMG demo with my fellow group members
+- Next week, i plan on helping my fellow members complete their tasks, as well as work on the implementation of the Game object
+
 ## Carolina Nina Matos
 
 ## Remy Seassau
