@@ -5,7 +5,6 @@
 # Carolina Nina Matos
 # Remy Seassau
 # Nazila Sharifi Amina
-I struggled with using installing SDL2 library and Cmake on windows, trying to figure out the installation process with online tutorials and my classmate's help. The solution was to install WSL and some other dependencies. It finally resulted in a successful build. Next week, I'll learn and try to implement SDL2 methods to get started on the game map and its display.
 # Thomas Tressel
 # Tuna Yapakci
 # Antoine Babu
@@ -41,6 +40,7 @@ I struggled with using installing SDL2 library and Cmake on windows, trying to f
 - The project now compiles and I am ready to start coding my part of the engine: keyboard inputs.
 
 ## Nazila Sharifi Amina
+I struggled with using installing SDL2 library and Cmake on windows, trying to figure out the installation process with online tutorials and my classmate's help. The solution was to install WSL and some other dependencies. It finally resulted in a successful build. Next week, I'll learn and try to implement SDL2 methods to get started on the game map and its display.
 
 ## Thomas Tressel
 
