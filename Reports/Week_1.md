@@ -9,6 +9,7 @@
 - The project now compiles and I am ready to start coding my part of the engine: keyboard inputs.
 ## Nazila Sharifi Amina
 ## Thomas Tressel
+This week, I especially focused on making sure the project could run on my laptop. After first trying to simply have the project compile and run on Windows, I installed WSL 2 using the Ubuntu distribution, then installed a GUI, and finally made sure I could run the demo map of our project by installing necessary things such as CMake and SDL2. I had a few issues doing so, mainly regarding rendering our demo map with the GUI, and it took me a couple hours to find my errors and configure everything properly. Once this was all done, I began looking at implementing the GameObject class for our game. Next week, I will work on coding the GameObject class, now that I have set up everything needed for the project to compile.
 ## Tuna Yapakci
 ## Antoine Babu
 This week I worked on a function converting csv files into 2D arrays, which is how we will store and manipulate maps. 
