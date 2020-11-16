@@ -23,6 +23,10 @@
 - Next week, i plan on helping my fellow members complete their tasks, as well as work on the implementation of the Game object
 
 ## Carolina Nina Matos
+- Attempted to install SDL2, unsuccessfully (I have a Mac computer and nobody, not even YouTube, seems to be able to help :( )
+- Started drawing sprites to experiment with graphics style
+- Did research on how to implement a texture manager and how to use SDL
+- Spent some time figuring out how to work with GitHub
 
 ## Remy Seassau
 
