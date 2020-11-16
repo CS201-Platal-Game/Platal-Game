@@ -13,6 +13,8 @@
 - Wrote manuals.
 - Wrote headers with implementation details.
 
+**Next week**: Design other components (`menu`, `item`, `task`, etc.).
+
 ## Elouan Gros
 
 - I wrote the header files for the map class, the game class, and the texture manager
