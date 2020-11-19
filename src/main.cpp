@@ -1,6 +1,9 @@
+#define SDL_MAIN_HANDLED
 #include "game.h"
 #include <iostream>
 
-int main(int argc, char* argv[]) {
+int main(void) {
     std::cout << "Platal Game" << std::endl;
+
+    return 0;
 }
