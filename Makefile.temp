@@ -1,0 +1,54 @@
+IDIR=./src
+OS=# Windows Darwin Linux # [!] no space before beginning of comment
+$(info $(OS)) #print os 
+SDL2=#sdl 2 location on your windows / Mac machine
+SDL2_image=#location of SDL2_image on your windows / Mac machine
+
+ifeq ($(OS), Windows)
+	CC=mingw32-gcc.exe
+	CXX=mingw32-g++.exe
+	EXECUTABLE_NAME=platal_game.exe
+	LIBS=-lm -lSDL2 -lpthread -lSDL2_image -L$(SDL2) -I$(SDL2)/include -L$(SDL2_image)/lib -I$(SDL2_image)/include
+
+else ifeq ($(OS), Darwin) #hasn't been tested yet! (didn't have a mac machine handy)
+	CC=gcc
+	CXX=g++
+	EXECUTABLE_NAME=platal_game
+	LIBS=-lm -lSDL2 -lpthread -lSDL2_image -L$(SDL2) -I$(SDL2)/include -L$(SDL2_image)/lib -I$(SDL2_image)/include
+
+else
+	CC=gcc
+	CXX=g++
+	EXECUTABLE_NAME=platal_game
+	LIBS=-lm -lSDL2 -lpthread -lSDL2_image
+endif
+
+CFLAGS=-Wall -pedantic
+ODIR=./build
+LDIR=./lib
+SOURCE=./src
+BINDIR=./bin
+
+
+_DEPS= character.cpp dialogue.cpp game.cpp object.cpp platal_map.cpp stats.cpp utils/csv2map.cpp utils/texture_manager.cpp
+DEPS= $(patsubst %,$(IDIR)/%,$(_DEPS))
+
+_OBJ= main.o character.o dialogue.o  game.o object.o platal_map.o stats.o utils/texture_manager.o
+OBJ= $(patsubst %,$(ODIR)/%,$(_OBJ))
+
+
+$(ODIR)/%.o: $(SOURCE)/%.cpp
+	@mkdir -p $(@D)
+	$(CXX) -c -o $@ $< $(CFLAGS) $(LIBS)
+
+$(BINDIR)/$(EXECUTABLE_NAME): $(OBJ)
+	@mkdir -p $(@D)
+	$(CXX) -o $@ $^ $(CFLAGS) 
+
+
+.PHONY: clean
+
+clean:
+	$(info CLEANING UP)
+	rm -f $(ODIR)/*.o *~ core $(INCDIR)/*~
+	rm -r $(ODIR)/*
