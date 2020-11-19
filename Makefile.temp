@@ -1,9 +1,9 @@
-IDIR=./src
+### THE THREE VARIABLES YOU NEED TO SET: ###
 OS=# Windows Darwin Linux # [!] no space before beginning of comment
-$(info $(OS)) #print os 
 SDL2=#sdl 2 location on your windows / Mac machine
 SDL2_image=#location of SDL2_image on your windows / Mac machine
 
+$(info $(OS)) #print os 
 ifeq ($(OS), Windows)
 	CC=mingw32-gcc.exe
 	CXX=mingw32-g++.exe
@@ -24,6 +24,7 @@ else
 endif
 
 CFLAGS=-Wall -pedantic
+IDIR=./src
 ODIR=./build
 LDIR=./lib
 SOURCE=./src
@@ -38,11 +39,19 @@ OBJ= $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 
 $(ODIR)/%.o: $(SOURCE)/%.cpp
-	@mkdir -p $(@D)
+	ifeq ($(OS), Windows)
+		@if not exist $(@D) mkdir $(@D)
+	else
+		@mkdir -p $(@D)
+	endif
 	$(CXX) -c -o $@ $< $(CFLAGS) $(LIBS)
 
 $(BINDIR)/$(EXECUTABLE_NAME): $(OBJ)
-	@mkdir -p $(@D)
+	ifeq ($(OS), Windows)
+		@if not exist $(@D) mkdir $(@D)
+	else
+		@mkdir -p $(@D)
+	endif
 	$(CXX) -o $@ $^ $(CFLAGS) 
 
 
