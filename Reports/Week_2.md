@@ -4,6 +4,10 @@
 
 ## Elouan Gros
 
+- I worked on the implementation of the game object, defining most of its essential methods.
+- I also worked on a cross platform makefile, that i tested on my windows machine and my linux machine and received good results. However, some of my comrades did have to tinker to make it work.
+- **Next week** i thus plan to write the manual entry to use my makefile on windows, or even write a separate makefile for each platform (for ease of use), as well as making sure all objects interface correctly by running tests. 
+
 ## Carolina Nina Matos
 
 - Managed to get SDL working on a Linux virtual machine
