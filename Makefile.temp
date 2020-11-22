@@ -2,6 +2,8 @@
 OS=# Windows Darwin Linux # [!] no space before beginning of comment
 SDL2=#sdl 2 location on your windows / Mac machine
 SDL2_image=#location of SDL2_image on your windows / Mac machine
+### IF YOU ARE ON WINDOWS ###
+# you need to create all subdirectories of the build and bin folders
 
 $(info $(OS)) #print os 
 ifeq ($(OS), Windows)
@@ -34,7 +36,7 @@ BINDIR=./bin
 _DEPS= character.cpp dialogue.cpp game.cpp object.cpp platal_map.cpp stats.cpp utils/csv2map.cpp utils/texture_manager.cpp
 DEPS= $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ= main.o character.o dialogue.o  game.o object.o platal_map.o stats.o utils/texture_manager.o
+_OBJ= main.o character.o dialogue.o  game.o object.o platal_map.o stats.o utils/csv2map.cpp utils/texture_manager.o
 OBJ= $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 
