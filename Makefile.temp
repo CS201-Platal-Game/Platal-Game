@@ -1,5 +1,5 @@
 ### THE THREE VARIABLES YOU NEED TO SET: ###
-OS=# Windows Darwin Linux # [!] no space before beginning of comment
+OS=Linux# Windows Darwin Linux # [!] no space before beginning of comment
 SDL2=#sdl 2 location on your windows / Mac machine
 SDL2_image=#location of SDL2_image on your windows / Mac machine
 ### IF YOU ARE ON WINDOWS ###
@@ -36,24 +36,24 @@ BINDIR=./bin
 _DEPS= character.cpp dialogue.cpp game.cpp object.cpp platal_map.cpp stats.cpp utils/csv2map.cpp utils/texture_manager.cpp
 DEPS= $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ= main.o character.o dialogue.o  game.o object.o platal_map.o stats.o utils/csv2map.cpp utils/texture_manager.o
+_OBJ= main.o character.o dialogue.o  game.o object.o platal_map.o stats.o utils/csv2map.o utils/texture_manager.o
 OBJ= $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 
 $(ODIR)/%.o: $(SOURCE)/%.cpp
-	ifeq ($(OS), Windows)
-		@if not exist $(@D) mkdir $(@D)
-	else
-		@mkdir -p $(@D)
-	endif
+ifeq ($(OS), Windows)
+	@if not exist $(@D) mkdir $(@D)
+else
+	@mkdir -p $(@D)
+endif
 	$(CXX) -c -o $@ $< $(CFLAGS) $(LIBS)
 
 $(BINDIR)/$(EXECUTABLE_NAME): $(OBJ)
-	ifeq ($(OS), Windows)
-		@if not exist $(@D) mkdir $(@D)
-	else
-		@mkdir -p $(@D)
-	endif
+ifeq ($(OS), Windows)
+	@if not exist $(@D) mkdir $(@D)
+else
+	@mkdir -p $(@D)
+endif
 	$(CXX) -o $@ $^ $(CFLAGS) 
 
 
