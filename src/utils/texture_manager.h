@@ -2,6 +2,7 @@
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
 #include <string>
+#include <vector>
 
 class TextureManager {
   public:
@@ -26,7 +27,7 @@ class TextureManager {
     // the frames thing is to facilitate animation of characters (think of a GIF, but as one long image with multiple frames)
     void drawFrame(std::string id, int x, int y,
                    int width, int height,
-                   int row, int col,
+                   int row, int frame,
                    SDL_Renderer* renderer,
                    SDL_RendererFlip flip = SDL_FLIP_NONE)
 
@@ -34,15 +35,16 @@ class TextureManager {
     void exterminate(std::string id);
 
 private:
-    map<std::string SDL_Texture*> m_textureMap; // map with all SDL textures
+    vector<std::string SDL_Texture*> textureMap; // vector wit h all SDL textures
     TextureManager(){}; // make it a singleton
     ~TextureManager(); // unmake it
     static SDL_Texture* myInstance;
 
 };
 
-// I am calling it Mr Texture Manager so we don't get confused with the class name
-typedef TextureManager MrTextureManager;
+// not sure this is 100% necessary but might make things easier
+// if I understood correctly what I'm doing then this should let us use MyTextureManager as a typename
+typedef TextureManager MyTextureManager;
 
 // in the event that I am overcomplicating, I'm leaving this stuff here
 //static SDL_Texture* LoadTexture(const char* filename);
