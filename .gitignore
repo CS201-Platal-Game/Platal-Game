@@ -27,7 +27,6 @@ qrc_*.cpp
 ui_*.h
 *.qmlc
 *.jsc
-Makefile*
 *build-*
 *.qm
 *.prl
@@ -75,3 +74,4 @@ cmake-build-*/
 build
 map_demo
 platal
+bin
