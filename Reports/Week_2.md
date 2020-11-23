@@ -20,6 +20,9 @@ Next steps: debug texture manager, get it to render at least a test image and ma
 
 ## Remy Seassau
 
+- I helphed Elouan in making the makefile, running some tests on windows. I also took the first steps in handling keyboard events in SDL2.
+- My objective for next week is to finish the keyboard events and impliment the movement of our main character.
+
 ## Nazila Sharifi Amina
 
 ## Thomas Tressel
