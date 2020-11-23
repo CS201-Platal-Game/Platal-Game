@@ -2,6 +2,9 @@
 
 ## Duong Dac
 
+- I reviewed pull requests and looked into a sample engine (`cdogs-sdl`).
+- I plan to look further into the references to finalize the engine structure.
+
 ## Elouan Gros
 
 - I worked on the implementation of the game object, defining most of its essential methods.
