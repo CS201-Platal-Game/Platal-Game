@@ -1,4 +1,7 @@
 ## Christian Roubert
+- I looked into whether or not I could get an alternative to having a linux virtual machine on my computer in order to be able to work with the makefile.
+- This week I researched about how we can implement given images/drawings to make them appear as the background for our game.
+- The plan will be to now try and actually test an implementation of the background
 
 ## Duong Dac
 
