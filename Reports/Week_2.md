@@ -20,6 +20,7 @@ Next steps: debug texture manager, get it to render at least a test image and ma
 ## Nazila Sharifi Amina
 
 ## Thomas Tressel
+I worked on the game object class, building onto the frame written by Elouan. Next week I plan to continue working on the object class, potentially implementing the object's texture if possible.
 
 ## Tuna Yapakçı
 
