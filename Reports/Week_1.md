@@ -23,6 +23,10 @@
 - Next week, i plan on helping my fellow members complete their tasks, as well as work on the implementation of the Game object
 
 ## Carolina Nina Matos
+- Attempted to install SDL2, unsuccessfully (I have a Mac computer and nobody, not even YouTube, seems to be able to help :( )
+- Started drawing sprites to experiment with graphics style
+- Did research on how to implement a texture manager and how to use SDL
+- Spent some time figuring out how to work with GitHub
 
 ## Remy Seassau
 
@@ -37,7 +41,9 @@ I struggled with using installing SDL2 library and Cmake on windows, trying to f
 
 This week, I especially focused on making sure the project could run on my laptop. After first trying to simply have the project compile and run on Windows, I installed WSL 2 using the Ubuntu distribution, then installed a GUI, and finally made sure I could run the demo map of our project by installing necessary things such as CMake and SDL2. I had a few issues doing so, mainly regarding rendering our demo map with the GUI, and it took me a couple hours to find my errors and configure everything properly. Once this was all done, I began looking at implementing the GameObject class for our game. Next week, I will work on coding the GameObject class, now that I have set up everything needed for the project to compile.
 
-## Tuna Yapakci
+## Tuna Yapakçı
+
+This week I spent quite some time on figuring out how to install Cmake and required libraries (SDL2, SDL2 image) for the project on Windows. I tried many different methods on several IDEs (Qt, Virtual Studio, VSCode and CLion) to run the project, but none of them worked. In the end, I managed to compile the demo by installing a Linux subsystem. Finally I spent time to understand the current code and how SDL2 works.
 
 ## Antoine Babu
 

@@ -8,6 +8,8 @@ class Object {
 
     Object(int width, int height, bool collidable);
     ~Object();
+    // may want to have a texture sheet as an argument in the constructor,
+    // to do once we have a functioning texture manager
 
     int GetWidth();
     int GetHeight();
