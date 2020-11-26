@@ -7,6 +7,7 @@
 // NOTE - This has not been tested yet because of the bugs
 // and because I need help to run it from my linux virtual machine (I've forgotten how to)
 // based on examples seen, will be debugged and further modified to fit our needs once I get a basic thing working
+TextureManager* TextureManager::myInstance = 0;
 
 bool TextureManager::load(std::string id, std::string filename, SDL_renderer* renderer){
     // I could use const char* here but I've decided this is easier since my input filename is a string
@@ -27,12 +28,12 @@ bool TextureManager::load(std::string id, std::string filename, SDL_renderer* re
     //exception handlers:
     if (texture == 0){
         std::cout << "Error creating texture, filename:" << filename << std::endl;
-        return false
+        return false;
     }
 
     //I'm also not sure why here it says textureMap is undeclared
     //Even though CLion recognises that it is declared in texture_manager.h
-    textureMap.insert(id, texture) //save the texture in the vector by inserting it at position id
+    textureMap.insert(id, texture); //save the texture in the vector by inserting it at position id
     return true;
 }
 
@@ -82,6 +83,19 @@ void TextureManager::drawFrame(std::string id, int x, int y,
 
 void TextureManager::exterminate(std::string id) {
     textureMap.erase(id);
+}
+
+TextureManager::~TextureManager() {
+    SDL_Texture* texture;
+    vector<std::string, SDL_Texture*>::iterator iter = textureMap.begin();
+    while(iter != textureMap.end())
+    {
+        texture = iter->second;
+        delete texture;
+        iter++;
+    }
+
+
 }
 
 
