@@ -26,7 +26,13 @@ class Map {
   private:
     int width_, height_; // width and height of the map, in squares
     int** map_array_; // loaded from csv
-    std::vector<Character> *npc_;       // TODO think about implementation some more
-    std::vector<Object> *objects_;      // TODO think about implementation some more
+
+    //std::vector<Character> *npc_       // TODO think about implementation some more
+    //std::vector<Object> *objects_     // TODO think about implementation some more 
+
+    // decided it should be a map instead of vectors,
+    // map from position on screen to object
+    // std::map<(int,int), Object> *objects_;
+
     SDL_Rect src_, dest_; // attributes used while rendering
 };

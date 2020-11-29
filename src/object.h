@@ -1,4 +1,4 @@
-#pragma once
+ #pragma once
 
 class Object {
   public:
@@ -28,6 +28,7 @@ class Object {
                         // subject to changes
 
     // TODO: texture
+    // TODO: int obj_id 
 };
 
 // Object signalling map changes.
