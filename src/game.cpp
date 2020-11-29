@@ -7,7 +7,7 @@ Game::Game() {
 
     // init all keys to be false
     for (int i = 0; i < 322; i++) { 
-        KEYS[i] = false;
+        event_array_[i] = false;
     }
 }
 
@@ -53,10 +53,10 @@ void Game::HandleEvents() {
         is_running_ = false;
         break;
     case SDL_KEYDOWN:
-        KEYS[event.key.keysym.sym] = true;
+        event_array_[event.key.keysym.sym] = true;
         break;
     case SDL_KEYUP:
-        KEYS[event.key.keysym.sym] = false;
+        event_array_[event.key.keysym.sym] = false;
         break;
     default:
         // to be extended once the facilities to handle user input have been created
