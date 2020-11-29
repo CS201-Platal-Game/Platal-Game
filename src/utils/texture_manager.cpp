@@ -33,7 +33,8 @@ bool TextureManager::load(std::string id, std::string filename, SDL_renderer* re
 
     //I'm also not sure why here it says textureMap is undeclared
     //Even though CLion recognises that it is declared in texture_manager.h
-    textureMap.insert(id, texture); //save the texture in the vector by inserting it at position id
+    textureMap[id] = texture; //save the texture in the map data structure by inserting it at position id
+    // a map is the equivalent of a python dictionary
     return true;
 }
 
@@ -87,7 +88,7 @@ void TextureManager::exterminate(std::string id) {
 
 TextureManager::~TextureManager() {
     SDL_Texture* texture;
-    vector<std::string, SDL_Texture*>::iterator iter = textureMap.begin();
+    map<std::string, SDL_Texture*>::iterator iter = textureMap.begin();
     while(iter != textureMap.end())
     {
         texture = iter->second;

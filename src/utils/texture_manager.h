@@ -35,8 +35,8 @@ class TextureManager {
     void exterminate(std::string id);
 
 private:
-    vector<std::string, SDL_Texture*> textureMap; // vector wit h all SDL textures
-    TextureManager()= default;;
+    map<std::string, SDL_Texture*> textureMap; // map with all SDL textures
+    TextureManager()= default;
     ~TextureManager();
     static SDL_Texture* myInstance;
 
