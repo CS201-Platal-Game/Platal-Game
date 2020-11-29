@@ -26,16 +26,16 @@ int main(void) {
                false);
 
     while (game->Running()) {
-      frameStart = SDL_GetTicks(); // start chrono
+        frameStart = SDL_GetTicks(); // start chrono
 
-      game->HandleEvents();
-      game->Update();
-      game->Render();
+        game->HandleEvents();
+        game->Update();
+        game->Render();
 
-      frameTime = SDL_GetTicks() - frameStart; //end chrono
+        frameTime = SDL_GetTicks() - frameStart; //end chrono
 
-      if (frameDelay > frameTime) // delay if game runs too fast
-        SDL_Delay(frameDelay - frameTime);
+        if (frameDelay > frameTime) // delay if game runs too fast
+            SDL_Delay(frameDelay - frameTime);
     }
 
     delete game;
