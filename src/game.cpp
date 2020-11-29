@@ -2,7 +2,14 @@
 #include "platal_map.h"
 
 SDL_Renderer* Game::renderer_ = nullptr;
-Game::Game() { is_running_ = false; }
+Game::Game() { 
+    is_running_ = false; 
+
+    // init all keys to be false
+    for (int i = 0; i < 322; i++) { 
+        KEYS[i] = false;
+    }
+}
 
 Game::~Game() {
     SDL_DestroyRenderer(renderer_);
@@ -44,6 +51,12 @@ void Game::HandleEvents() {
     switch (event.type) {
     case SDL_QUIT:
         is_running_ = false;
+        break;
+    case SDL_KEYDOWN:
+        KEYS[event.key.keysym.sym] = true;
+        break;
+    case SDL_KEYUP:
+        KEYS[event.key.keysym.sym] = false;
         break;
     default:
         // to be extended once the facilities to handle user input have been created
