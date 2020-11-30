@@ -10,6 +10,9 @@
 
 ## Remy Seassau
 
+ - This week I implimented a basic version of chracter movement and handling of keyboard inputs. I also went on a little bug hunt.
+ - Next week I will look further into improving the game engine and smoothing out movement with collision and such things.
+
 ## Nazila Sharifi Amina
 
 ## Thomas Tressel
