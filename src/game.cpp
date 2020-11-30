@@ -1,12 +1,15 @@
 #include "game.h"
 #include "platal_map.h"
 
+// static members definition
 SDL_Renderer* Game::renderer_ = nullptr;
-Game::Game() { 
-    is_running_ = false; 
+bool Game::event_array_[] = {0};
+
+Game::Game() {
+    is_running_ = false;
 
     // init all keys to be false
-    for (int i = 0; i < 322; i++) { 
+    for (int i = 0; i < 322; i++) {
         Game::event_array_[i] = false;
     }
 }

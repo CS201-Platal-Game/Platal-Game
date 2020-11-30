@@ -4,6 +4,9 @@
 
 ## Duong Dac
 
+- I reviewed PR(s) and fixed implementing errors that others missed. I will look into some GitHub options that prevent merging buggy code.
+- I couldn't spend more time for finalizing the structure this week. Next week, I will implement a time (date, second, etc.) mechanism for the game.
+
 ## Elouan Gros
 
 ## Carolina Nina Matos
