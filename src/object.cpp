@@ -24,7 +24,7 @@ bool Object::IsCollidable() {
     return collidable_;
 }
 
-Position Object::GetPosition() {
+Object::Position Object::GetPosition() {
     return position_;
 }
 
