@@ -3,7 +3,7 @@
 
 // static members definition
 SDL_Renderer* Game::renderer_ = nullptr;
-bool Game::event_array_[] = {0};
+bool Game::event_array_[];
 
 Game::Game() {
     is_running_ = false;
