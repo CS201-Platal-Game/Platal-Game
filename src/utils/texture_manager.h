@@ -2,19 +2,20 @@
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
 #include <string>
-#include <vector>
+#include <iostream>
+#include <map>
 
 class TextureManager {
   public:
     // this is Nina trying some stuff, it might be a disaster
-    static SDL_Texture* Instance(){
+    static TextureManager* Instance(){
         if (myInstance == 0){
-            myInstance = new TextureManager()
+            myInstance = new TextureManager();
         }
-        return myInstance
+        return myInstance;
     }
     //initialiser
-    bool load(std::string, std::string, SDL_renderer*); //load the element so we are able to reference it later
+    bool load(std::string, std::string, SDL_Renderer*); //load the element so we are able to reference it later
 
     // for drawing static objects like the background image
     // takes an id, position rendered (x,y), width, height and orientation
@@ -35,10 +36,10 @@ class TextureManager {
     void exterminate(std::string id);
 
 private:
-    map<std::string, SDL_Texture*> textureMap; // map with all SDL textures
+    std::map<std::string, SDL_Texture*> textureMap; // map with all SDL textures
     TextureManager()= default;
     ~TextureManager();
-    static SDL_Texture* myInstance;
+    static TextureManager* myInstance;
 
 };
 

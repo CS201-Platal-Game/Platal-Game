@@ -1,15 +1,12 @@
 #include "texture_manager.h"
-#include "SDL2/SDL.h"
-#include "SDL2/SDL_image.h"
-#include <string>
-#include <iostream>
+
 
 // NOTE - This has not been tested yet because of the bugs
 // and because I need help to run it from my linux virtual machine (I've forgotten how to)
 // based on examples seen, will be debugged and further modified to fit our needs once I get a basic thing working
 TextureManager* TextureManager::myInstance = 0;
 
-bool TextureManager::load(std::string id, std::string filename, SDL_renderer* renderer){
+bool TextureManager::load(std::string id, std::string filename, SDL_Renderer* renderer){
     // I could use const char* here but I've decided this is easier since my input filename is a string
     SDL_Surface* TempSurface = IMG_Load(filename.c_str());
 
@@ -38,10 +35,12 @@ bool TextureManager::load(std::string id, std::string filename, SDL_renderer* re
     return true;
 }
 
-void TextureManager::draw(std::string id, int x, int y, int width, int height, int *renderer, int flip) {
+void TextureManager::draw(std::string id, int x, int y,
+                          int width, int height,
+                          SDL_Renderer* renderer, SDL_RendererFlip flip) {
     // creates source and destination rectangles
-    SDL_rect source;
-    SDL_rect destination;
+    SDL_Rect source;
+    SDL_Rect destination;
 
     // just setting dimensions and positions
     source.x = 0;
@@ -65,8 +64,8 @@ void TextureManager::drawFrame(std::string id, int x, int y,
                                SDL_RendererFlip flip) {
 
     // creates source and destination rectangles
-    SDL_rect source;
-    SDL_rect destination;
+    SDL_Rect source;
+    SDL_Rect destination;
 
     // just setting dimensions and positions
     source.x = width * frame;
@@ -88,7 +87,7 @@ void TextureManager::exterminate(std::string id) {
 
 TextureManager::~TextureManager() {
     SDL_Texture* texture;
-    map<std::string, SDL_Texture*>::iterator iter = textureMap.begin();
+    std::map<std::string, SDL_Texture*>::iterator iter = textureMap.begin();
     while(iter != textureMap.end())
     {
         texture = iter->second;
