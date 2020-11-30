@@ -42,7 +42,7 @@ void TextureManager::draw(std::string id, int x, int y,
     SDL_Rect source;
     SDL_Rect destination;
 
-    // just setting dimensions and positions
+    // just setting dimensions and positionxs
     source.x = 0;
     source.y = 0;
     source.x = 0;
