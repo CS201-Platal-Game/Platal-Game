@@ -8,6 +8,10 @@
 - I couldn't spend more time for finalizing the structure this week. Next week, I will implement a time (date, second, etc.) mechanism for the game.
 
 ## Elouan Gros
+- This week i coordinated work between my comrades and helped them when they had trouble understanding the specifications.
+- I still haven't had the opportunity to write makefiles, and this task has been relegated due to its low importance.
+- **next week** i plan on sorting out all the problems that might arise when everyone pull request their progress; 
+I also plan on running some tests to make sure everything interfaces correctly.
 
 ## Carolina Nina Matos
 
