@@ -29,6 +29,6 @@ add_library(platal_lib
             src/game.cpp
             src/platal_map.cpp
             src/object.cpp
-            src/utils/texture_manager.cpp)
+            src/utils/texture_manager.cpp src/utils/Animation.h)
 add_executable(platal src/main.cpp)
 target_link_libraries(platal platal_lib ${SDL2_LIBS})
