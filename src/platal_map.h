@@ -4,6 +4,7 @@
 #include "character.h"
 #include "object.h"
 #include <vector>
+#include <map>
 struct Position {
         int x, y;
     };
