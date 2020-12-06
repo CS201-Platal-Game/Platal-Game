@@ -35,3 +35,5 @@ This week was rather busy, and unfortunately I didn't have enough time to do wha
 
 ## Antoine Babu
 
+- This week I essentially worked on completing the csv2map function, the main obstacle being researching about different ways to have 2D arrays and what to use.
+I ended up using the vector library because it was coherent with the rest of the code.
