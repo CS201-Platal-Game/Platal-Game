@@ -2,4 +2,4 @@
 
 Map::Map() {}
 
-void Map::DrawMap() {}
+void Map::DrawMap(Position position) {}

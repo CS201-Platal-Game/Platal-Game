@@ -1,6 +1,7 @@
 #pragma once
 #include "dialogue.h"
 #include "stats.h"
+#include "utils/structs.h"
 #include <string>
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
@@ -14,16 +15,12 @@ enum Direction {
 
 class Character {
   public:
-    struct Position {
-        int x, y;
-    };
-
     Character();
     Character(const std::string& name, const Position& position);
     ~Character();
 
     std::string GetName();
-    Position GetPosition();
+    Position GetPosition() { return position_; };
     SDL_Rect rect_;
     void Render();
     void Update();
@@ -39,6 +36,9 @@ class Protagonist : public Character {
     struct Velocity {
         int xVel, yVel;
     };
+
+    // inherit constructors
+    using Character::Character;
 
     //Takes key presses and adjusts the protag's velocity
     void HandleInput();
@@ -56,6 +56,9 @@ class Protagonist : public Character {
 
 class NPC : public Character {
   public:
+    // inherit constructors
+    using Character::Character;
+
     void AddDialogue(Dialogue* const dialogue);
 
     // NPC follows a fixed route, or stand still if interrupted / empty route_.

@@ -3,6 +3,7 @@
 #include "SDL2/SDL_image.h"
 #include "character.h"
 #include "object.h"
+#include "utils/structs.h"
 #include <vector>
 
 class Map {
@@ -11,7 +12,7 @@ class Map {
     ~Map();
 
     void LoadMap(char *filename); // load map from file
-    void DrawMap(); // draw map to screen
+    void DrawMap(Position position); // draw map to screen
 
     // interactions with the npcs
     void AddNpc(Character npc);
