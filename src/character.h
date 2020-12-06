@@ -2,6 +2,8 @@
 #include "dialogue.h"
 #include "stats.h"
 #include <string>
+#include "SDL2/SDL.h"
+#include "SDL2/SDL_image.h"
 
 enum Direction {
     kLeft = 0,
@@ -22,6 +24,9 @@ class Character {
 
     std::string GetName();
     Position GetPosition();
+    SDL_Rect rect_;
+    void Render();
+    void Update();
 
   protected:
     std::string name_;
