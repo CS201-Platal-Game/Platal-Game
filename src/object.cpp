@@ -20,6 +20,11 @@ int Object::GetHeight() {
     return height_;
 }
 
+
+int Object::GetObjId(){
+    return obj_id;
+}
+
 bool Object::IsCollidable() {
     return collidable_;
 }

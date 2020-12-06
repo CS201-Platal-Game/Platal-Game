@@ -10,10 +10,11 @@ void Map::DrawMap() {}
 
 
 // return the object if it was found
-*Object Map::RemoveObject(int obj_id){
-    for(std::map<Position,Object>::iterator i = *(objects_).begin();i != *(objects_).end();i++){
-        if ((i->second).obj_id==obj_id){
-            return i->second
+Object Map::RemoveObject(int obj_id){
+    for(std::map<Position,Object>::iterator i = objects_->begin();i != objects_->end();i++){
+        if ((i->second).GetObjId()==obj_id){
+            return i->second;
         }
     }
+    return Object();
 }

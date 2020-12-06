@@ -11,6 +11,7 @@ class Object {
     ~Object();
     // may want to have a texture sheet as an argument in the constructor,
     // to do once we have a functioning texture manager
+    int GetObjId();
 
     int GetWidth();
     int GetHeight();
@@ -29,7 +30,8 @@ class Object {
                         // subject to changes
 
     // TODO: texture
-    // TODO: int obj_id 
+    // TODO: int obj_id  , GetObjId() was implemented
+    int obj_id;
 };
 
 // Object signalling map changes.
