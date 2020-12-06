@@ -20,6 +20,9 @@ class Object {
     // Returns a copy of the object.
     Object Copy();
 
+    // Allows the player to interact with the object
+    void Interact();
+
     // TODO: set texture
 
   protected:

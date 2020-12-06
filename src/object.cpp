@@ -2,8 +2,8 @@
 
 Object::Object(int width, int height, bool collidable) {
     // Initializing all the attributes. We set x = y = 0 for the moment,
-    // subject to change depening on whether or not we want it
-    // as an argument in the contructor
+    // subject to change depending on whether or not we want it
+    // as an argument in the constructor
     width_ = width;
     height_ = height;
     collidable_ = collidable;
