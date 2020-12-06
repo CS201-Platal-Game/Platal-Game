@@ -3,6 +3,7 @@
 #include "SDL2/SDL_image.h"
 #include "character.h"
 #include "object.h"
+#include "utils/structs.h"
 #include <vector>
 // Chris here working on platal_map objects, Since textures are not yet defined the outcome can't be tested, so I am coding for a general idea.
 
@@ -12,7 +13,7 @@ class Map {
     ~Map(); // the map deconstructor
 
     void LoadMap(char *filename); // load map from file
-    void DrawMap(); // draw map to screen
+    void DrawMap(Position position); // draw map to screen
 
     // interactions with the npcs
     void AddNpc(Character npc);

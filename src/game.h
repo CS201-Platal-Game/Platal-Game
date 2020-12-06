@@ -32,4 +32,5 @@ class Game {
     int count_ = 0;
     SDL_Window* window_;
     Map* current_map_;
+    Protagonist* player_;
 };
