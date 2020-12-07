@@ -1,5 +1,6 @@
 ## Christian Roubert
-
+- This week I researched into how to render character, Carolina completed that task.
+- I thus looked into how to render a map, and starting coding the DrawMap function for the map part of the game, which draws the map given an array that is associated to the map.
 
 ## Duong Dac
 - I created a header for `clock.h`, a time managing system.
