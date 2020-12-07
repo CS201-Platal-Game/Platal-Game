@@ -1,5 +1,6 @@
 #include "game.h"
 #include "platal_map.h"
+#include "utils/texture_manager.h"
 
 // static members definition
 SDL_Renderer* Game::renderer_ = nullptr;
@@ -46,6 +47,10 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height,
         is_running_ = false;
 
     current_map_ = new Map();
+
+    // create the game character
+    // might need to store that on the heap
+    *player_ = Protagonist("player", { width/2, height/2 });
 }
 
 void Game::HandleEvents() {
@@ -68,12 +73,16 @@ void Game::HandleEvents() {
     }
 }
 
-void Game::Update() {}
+void Game::Update() {
+    // update player
+    player_->HandleInput();
+    player_->Move();
+}
 
 void Game::Render() {
     SDL_RenderClear(renderer_);
     // where we add stuff to render in rendering order {map -> chars -> menus}
-    current_map_->DrawMap();
+    current_map_->DrawMap(player_->GetPosition());
 
     SDL_RenderPresent(renderer_);
 }

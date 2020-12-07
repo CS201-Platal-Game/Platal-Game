@@ -6,7 +6,7 @@
 // Here we will add as many textures as needed, need yet to be determined
 
 
-void Map::DrawMap(){
+void Map::DrawMap(Position position){
 
 	int type = 0;
 
