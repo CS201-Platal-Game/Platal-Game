@@ -26,7 +26,7 @@ void DialogueNode::PrintResponses() {
 
 // Goes to the next DialogueNode.
 void DialogueNode::Next(int response_id) {
-
+    //TODO
 }
 
 Dialogue::Dialogue(const char filename[]) {
@@ -74,13 +74,10 @@ bool Dialogue::Import(const char *filename) {
     };
     getline(dialogue,line_reader);
     int edge_n = std::stoi(line_reader);
-    for (int i = 0; i <= edge_n; i += 1);
-    getline(dialogue, line_reader);
-    //TODO assumed the numbers have 1 digits correct it
-    int from = std::stoi(line_reader.substr(0,1));
-    int with = std::stoi(line_reader.substr(2,1));
-    int to = std::stoi(line_reader.substr(4,1));
-    this->AddEdge(from,with,to);
+    int from, with, to;
+    while (dialogue >> from >> with >> to) {
+        this->AddEdge(from, with, to);
+    };
     head_ = nodes_[0];
     current = 0;
 }
@@ -89,16 +86,15 @@ bool Dialogue::Import(const char *filename) {
 void Dialogue::Advance() {
     nodes_[current]->PrintLine();
     nodes_[current]->PrintResponses();
-
 }
 
-/*
+
 // Resets the conversation, e.g. the protag talks to the NPC again.
 void Dialogue::Reset() {
-
+    //TODO
 }
 
 // Verifies if the graph is cycle-free. Returns true on success.
 bool Dialogue::CheckCycle() {
-
-}*/
+    //TODO
+}
