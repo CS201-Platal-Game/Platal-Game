@@ -5,6 +5,7 @@
 #include "object.h"
 #include "utils/structs.h"
 #include <vector>
+#include <map>
 // Chris here working on platal_map objects, Since textures are not yet defined the outcome can't be tested, so I am coding for a general idea.
 
 class Map {
@@ -29,8 +30,8 @@ class Map {
     // We will probably have textures here, not yet defined
     int width_, height_; // width and height of the map, in squares
     int** map_array_; // loaded from csv
-    std::vector<Character> *npc_;       // TODO think about implementation some more
-    std::vector<Object> *objects_;      // TODO think about implementation some more
+    std::map <Position, Object> *objects_; // map from position on screen to object
+  
     SDL_Rect src_, dest_; // attributes used while rendering
     // SDL_Texture* texture1
     // SDL_Texture* texture2 
