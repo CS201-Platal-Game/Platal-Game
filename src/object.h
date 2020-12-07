@@ -1,4 +1,8 @@
 #pragma once
+#include "dialogue.h"
+#include "character.h"
+#include "SDL2/SDL.h"
+#include "SDL2/SDL_image.h"
 
 class Object {
   public:
@@ -21,7 +25,10 @@ class Object {
     Object Copy();
 
     // Allows the player to interact with the object
-    void Interact();
+    void InteractButton();
+
+    // Check if the player is colliding with the object
+    bool InteractCollision(Character character);
 
     // TODO: set texture
 
