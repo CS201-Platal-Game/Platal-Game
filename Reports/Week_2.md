@@ -35,3 +35,5 @@ I worked on the game object class, building onto the frame written by Elouan. Ne
 
 ## Antoine Babu
 
+- This week I started working on a csv2map function, which reads from a csv files and returns a 2D array.
+

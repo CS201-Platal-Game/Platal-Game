@@ -47,5 +47,4 @@ This week I spent quite some time on figuring out how to install Cmake and requi
 
 ## Antoine Babu
 
-This week I worked on a function converting csv files into 2D arrays, which is how we will store and manipulate maps.
-I am almost done with the function and will commit it in the next few days. My goal for next week is to work on visualizing these arrays and maybe implementing textures.
+This week I spent most of time installing the libraries required for our project. I also started looking at the handling of csv files in C++ to make a csv2map function.
