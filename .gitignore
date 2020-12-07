@@ -75,3 +75,9 @@ build
 map_demo
 platal
 bin
+
+# Mac
+.DS_Store
+
+# Elouan (Arch)
+.ccls-cache
