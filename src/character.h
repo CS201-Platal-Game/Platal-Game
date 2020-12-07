@@ -40,6 +40,7 @@ class Protagonist : public Character {
 
     // inherit constructors
     using Character::Character;
+
     //Takes key presses and adjusts the protag's orientation
     void HandleInput(SDL_Event key);
 
