@@ -20,7 +20,7 @@ SDL_TTF library (to display dialogue); finally, i wish that i'll be able to set 
 
 
 ## Nazila Sharifi Amina
-
+- This week I worked on class Map's methods. AddObject and RemoveObj are practically completed. A few little issues remain that I need to discuss with my teammates.
 
 ## Thomas Tressel
 
