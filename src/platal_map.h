@@ -5,9 +5,7 @@
 #include "object.h"
 #include <vector>
 #include <map>
-struct Position {
-        int x, y;
-    };
+
 
 class Map {
   public:
@@ -31,10 +29,7 @@ class Map {
   private:
     int width_, height_; // width and height of the map, in squares
     int** map_array_; // loaded from csv
-
-    // decided it should be a map instead of vectors,
-    // map from position on screen to object
-     std::map <Position, Object> *objects_;
+    std::map <Position, Object> *objects_; // map from position on screen to object
 
     SDL_Rect src_, dest_; // attributes used while rendering
 };

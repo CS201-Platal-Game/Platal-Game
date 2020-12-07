@@ -1,10 +1,11 @@
 #pragma once
 
-class Object {
-  public:
-    struct Position {
+struct Position {
         int x, y;
     };
+class Object {
+  public:
+    
     
     Object();
     Object(int width, int height, bool collidable);
