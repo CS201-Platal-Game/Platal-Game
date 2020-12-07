@@ -1,17 +1,13 @@
 #include "dialogue.h"
 #include <iostream>
 #include <fstream>
+#include <string>
 
-DialogueNode::DialogueNode() {
-
-}
+DialogueNode::DialogueNode() {}
+DialogueNode::~DialogueNode() {}
 
 DialogueNode::DialogueNode(const std::string &line) {
     line_ = line;
-}
-
-DialogueNode::~DialogueNode() {
-
 }
 
 void DialogueNode::AddResponse(const std::string &response, DialogueNode* const next) {
@@ -19,12 +15,12 @@ void DialogueNode::AddResponse(const std::string &response, DialogueNode* const 
 }
 
 void DialogueNode::PrintLine() {
-    std::cout << line_;
+    std::cout << line_ << std::endl;
 };
 
 void DialogueNode::PrintResponses() {
-    for (int i; i <= responses_.size(); i += 1) {
-        std::cout << std::get<1>(responses_[i]);
+    for (int i = 0; i < responses_.size(); i += 1) {
+        std::cout << std::get<0>(responses_[i]) << std::endl;
     };
 }
 
@@ -33,12 +29,14 @@ void DialogueNode::Next(int response_id) {
 
 }
 
-Dialogue::Dialogue() {
-
+Dialogue::Dialogue(const char filename[]) {
+    this->Import(filename);
 }
 
 Dialogue::~Dialogue() {
-
+    for (int i = 0; i < nodes_.size(); i += 1) {
+        delete nodes_[i];
+    }
 }
 
 // Add a DialogueNode with no responses.
@@ -56,37 +54,45 @@ void Dialogue::AddEdge(int node_id, int response_id, int next_node_id) {
 // Generates the dialogue from a text file (sample file in Notion/Structure).
 // Returns false on failure (e.g. file does not exist).
 bool Dialogue::Import(const char *filename) {
-    std::ifstream dialogue;
-    dialogue.open(filename, std::ios::in);
-    std::string linereader;
-    getline(dialogue,linereader);
-    int sample_n = std::stoi(linereader);
-    for (int i; i <= sample_n; i += 1) {
-        getline(dialogue,linereader);
-        this->AddNode(linereader);
+    //TODO where do we put dialogue files?
+    std::ifstream dialogue(filename);
+    std::string line_reader;
+    if(!dialogue) {
+        std::cout << "Couldn't open file" << std::endl;
+    }
+    getline(dialogue,line_reader);
+    int sample_n = std::stoi(line_reader);
+    for (int i = 0; i < sample_n; i += 1) {
+        getline(dialogue,line_reader);
+        this->AddNode(line_reader);
     };
-    getline(dialogue,linereader);
-    int response_n = std::stoi(linereader);
-    for (int i; i <= response_n; i += 1) {
-        getline(dialogue,linereader);
-        response_lines_.push_back(linereader);
+    getline(dialogue,line_reader);
+    int response_n = std::stoi(line_reader);
+    for (int i = 0; i < response_n; i += 1) {
+        getline(dialogue,line_reader);
+        response_lines_.push_back(line_reader);
     };
-    getline(dialogue,linereader);
-    int edge_n = std::stoi(linereader);
-    for (int i; i <= edge_n; i += 1);
-        getline(dialogue, linereader);
-        //TODO assumed the numbers have 1 digits correct it
-        int from= std::stoi(linereader.substr(0,1));
-        int with= std::stoi(linereader.substr(2,1));
-        int to= std::stoi(linereader.substr(4,1));
-        this->AddEdge(from,with,to);
+    getline(dialogue,line_reader);
+    int edge_n = std::stoi(line_reader);
+    for (int i = 0; i <= edge_n; i += 1);
+    getline(dialogue, line_reader);
+    //TODO assumed the numbers have 1 digits correct it
+    int from = std::stoi(line_reader.substr(0,1));
+    int with = std::stoi(line_reader.substr(2,1));
+    int to = std::stoi(line_reader.substr(4,1));
+    this->AddEdge(from,with,to);
+    head_ = nodes_[0];
+    current = 0;
 }
 
 // Prints the current line and possible responses, then call Next().
 void Dialogue::Advance() {
+    nodes_[current]->PrintLine();
+    nodes_[current]->PrintResponses();
 
 }
 
+/*
 // Resets the conversation, e.g. the protag talks to the NPC again.
 void Dialogue::Reset() {
 
@@ -95,4 +101,4 @@ void Dialogue::Reset() {
 // Verifies if the graph is cycle-free. Returns true on success.
 bool Dialogue::CheckCycle() {
 
-}
+}*/

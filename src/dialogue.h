@@ -5,7 +5,7 @@
 #include <vector>
 
 class DialogueNode {
-  public:
+public:
     DialogueNode();
     DialogueNode(const std::string& line);
     ~DialogueNode();
@@ -19,7 +19,7 @@ class DialogueNode {
     // Goes to the next DialogueNode.
     void Next(int response_id);
 
-  private:
+private:
     // Line of NPCs or objects.
     std::string line_;
 
@@ -31,8 +31,9 @@ class DialogueNode {
 // Dialogues for NPCs or objects.
 // Contains a directed graph, represented by an adjacency list.
 class Dialogue {
-  public:
+public:
     Dialogue();
+    Dialogue(const char filename[]);
     ~Dialogue();
 
     // Add a DialogueNode with no responses.
@@ -55,7 +56,7 @@ class Dialogue {
     // Verifies if the graph is cycle-free. Returns true on success.
     bool CheckCycle();
 
-  private:
+private:
     DialogueNode* head_;
     int current;
     // At the moment, each response is stored twice, one here and
