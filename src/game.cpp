@@ -61,6 +61,7 @@ void Game::HandleEvents() {
     case SDL_KEYUP:
         Game::event_array_[event.key.keysym.sym] = false;
         break;
+    // New case to be added for the implementation of the character interaction with the object
     default:
         // to be extended once the facilities to handle user input have been created
         break;
