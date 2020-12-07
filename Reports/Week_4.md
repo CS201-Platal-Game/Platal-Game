@@ -27,7 +27,7 @@ SDL_TTF library (to display dialogue); finally, i wish that i'll be able to set 
 
 
 ## Tuna Yapakçı
-
+- This week I worked on the Dialogue and DialogueNode classes and tested the methods that are complete. I will need more information on how we will display dialogue in game (we will discuss it this week) in order to complete them.
 
 ## Antoine Babu
 
