@@ -24,8 +24,7 @@ void Map::DrawMap(Position position) {
 }
 
 
-//TODO insert syntax
-/*void Map::AddObject(Object item){
+/*  void Map::AddObject(Object item){
     
     (*objects_)[item.GetPosition()]= item;
 }*/

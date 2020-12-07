@@ -19,7 +19,7 @@ class Game {
     void Update();       // gets the objects to react to user input
     void Render();       // renders all elements to screen
 
-    void ChangeMap(int map_id); // TODO think about how this is gonna be implemented
+    void ChangeMap(int map_id); // TODO think about how this is gonna be implemented - for later
 
     bool Running() { return is_running_; }
 
