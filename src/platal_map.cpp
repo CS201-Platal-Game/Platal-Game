@@ -18,9 +18,7 @@ void Map::DrawMap(){
 				//TextureManager::draw(texture12345etc,src_,dest_);
 				default:
 					break;
-
 			}
 		}
-
 	}
 }
