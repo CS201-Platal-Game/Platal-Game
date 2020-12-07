@@ -15,22 +15,35 @@ Character::Position Character::GetPosition() {
     return position_;
 }
 
-void Protagonist::HandleInput() {
-    // move left
-    if(Game::event_array_[SDLK_LEFT]) {
-        velocity_.xVel -= 1; // number here is subject to change depending on how the movement feels when testing
-    }
-    // move right
-    if(Game::event_array_[SDLK_RIGHT]) {
-        velocity_.xVel += 1;
-    }
-    //move up
-    if(Game::event_array_[SDLK_UP]) { 
-        velocity_.yVel += 1;
-    }
-    // move down
-    if(Game::event_array_[SDLK_DOWN]) { 
-        velocity_.yVel -= 1;
+void Protagonist::HandleInput(SDL_Event event) {
+    switch (event.key.keysym.sym) {
+        case SDLK_LEFT:
+            orientation_ = kLeft;
+            velocity_.yVel = 0;
+            if(velocity_.xVel>0) velocity_.xVel = 0;
+            velocity_.xVel -= 8;
+            break;
+        
+        case SDLK_RIGHT:
+            orientation_ = kRight;
+            velocity_.yVel = 0;
+            if(velocity_.xVel<0) velocity_.xVel = 0;
+            velocity_.xVel += 8;
+            break;
+
+        case SDLK_UP:
+            orientation_ = kUp;
+            velocity_.xVel = 0;
+            if(velocity_.yVel<0) velocity_.yVel = 0;
+            velocity_.yVel += 8;
+            break;
+
+        case SDLK_DOWN:
+            orientation_ = kDown;
+            velocity_.xVel = 0;
+            if(velocity_.yVel>0) velocity_.yVel = 0;
+            velocity_.yVel -= 8;
+            break;
     }
 }
 
@@ -44,7 +57,7 @@ void Protagonist::Move() {
     // update the velocities so they fall back to zero when a key isn't being pressed
     if( !Game::event_array_[SDLK_LEFT] ){
         if( velocity_.xVel < 0){
-            velocity_.xVel += 5; // value subject to change
+            velocity_.xVel += 16; // value subject to change
             // we now treat the case where we overshoot 0
             if( velocity_.xVel > 0){
                 velocity_.xVel = 0;
@@ -54,7 +67,7 @@ void Protagonist::Move() {
     
     if( !Game::event_array_[SDLK_RIGHT] ){
         if( velocity_.xVel > 0){
-            velocity_.xVel -= 5;
+            velocity_.xVel -= 16;
             if( velocity_.xVel > 0){
                 velocity_.xVel = 0;
             }
@@ -63,7 +76,7 @@ void Protagonist::Move() {
 
     if( !Game::event_array_[SDLK_UP] ){
         if( velocity_.yVel > 0){
-            velocity_.yVel -= 5;
+            velocity_.yVel -= 16;
             if( velocity_.yVel > 0){
                 velocity_.yVel = 0;
             }
@@ -72,7 +85,7 @@ void Protagonist::Move() {
 
     if( !Game::event_array_[SDLK_DOWN] ){
         if( velocity_.yVel < 0){
-            velocity_.yVel += 5;
+            velocity_.yVel += 16;
             if( velocity_.yVel > 0){
                 velocity_.yVel = 0;
             }

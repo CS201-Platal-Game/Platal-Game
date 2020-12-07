@@ -42,7 +42,7 @@ class Protagonist : public Character {
     };
 
     //Takes key presses and adjusts the protag's velocity
-    void HandleInput();
+    void HandleInput(SDL_Event key);
 
     // Assumed possible movement (checked by Map or Game).
     // We move depending on the state of the velocity 
