@@ -2,7 +2,9 @@
 
 
 ## Duong Dac
-
+- I created a header for `clock.h`, a time managing system.
+- As I was working on `clock.h`, I also drafted the structure for `Event` (classes, exams, etc.), `Task` (analysis homework, etc.), and `Day` (containing events, tasks, and map modifications). This is to achieve the *simulation* aspect of the game.
+- Next week, I plan to finalize this structure into C++ headers.
 
 ## Elouan Gros
 - this week i helped Carolina with the testing of the texture manager; we managed to print a character texture to screen!
