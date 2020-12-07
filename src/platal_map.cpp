@@ -24,11 +24,11 @@ void Map::DrawMap(Position position) {
 }
 
 
-//TODO insert syntax
-/*void Map::AddObject(Object item){
+//to check 
+void Map::AddObject(Object item){
     
     (*objects_)[item.GetPosition()]= item;
-}*/
+}
 
 
 
