@@ -17,7 +17,8 @@ SDL_TTF library (to display dialogue); finally, i wish that i'll be able to set 
 
 
 ## Remy Seassau
-
+- This week I further improved the way we make charachters move
+- This week I also did some minor bugfixes in order to ensure compilation
 
 ## Nazila Sharifi Amina
 - This week I worked on class Map's methods. AddObject and RemoveObj are practically completed. A few little issues remain that I need to discuss with my teammates.
