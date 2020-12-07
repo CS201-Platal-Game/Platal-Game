@@ -3,12 +3,10 @@
 #include "character.h"
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
+#include "utils/structs.h"
 
 class Object {
   public:
-    struct Position {
-        int x, y;
-    };
     
     Object();
     Object(int width, int height, bool collidable);
