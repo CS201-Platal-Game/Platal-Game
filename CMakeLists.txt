@@ -30,6 +30,7 @@ add_library(platal_lib
             src/platal_map.cpp
             src/object.cpp
             src/clock.cpp
+            src/stats.cpp
             src/utils/texture_manager.cpp 
             src/utils/Animation.h)
 add_executable(platal src/main.cpp)

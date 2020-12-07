@@ -20,14 +20,14 @@ class Character {
     ~Character();
 
     std::string GetName();
-    Position GetPosition() { return position_; };
+    Position GetPosition();
     SDL_Rect rect_;
     void Render();
     void Update();
 
   protected:
     std::string name_;
-    Position position_;
+    Position position_{ 0, 0 };
     Direction orientation_; // e.g. protag is facing up/down/etc.
     // TODO: sprites
 };
@@ -39,7 +39,8 @@ class Protagonist : public Character {
     };
 
     // inherit constructors
-    using Character::Character;
+    Protagonist();
+    Protagonist(const std::string& name, const Position& position);
 
     //Takes key presses and adjusts the protag's orientation
     void HandleInput(SDL_Event key);
@@ -49,7 +50,7 @@ class Protagonist : public Character {
     void Move();
 
   private:
-    Velocity velocity_;
+    Velocity velocity_{ 0, 0 };
     Stats stats_;
     // TODO: inventories?
 };

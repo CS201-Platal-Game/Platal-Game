@@ -4,15 +4,9 @@
 
 // static members definition
 SDL_Renderer* Game::renderer_ = nullptr;
-bool Game::event_array_[];
 
 Game::Game() {
     is_running_ = false;
-
-    // init all keys to be false
-    for (int i = 0; i < 322; i++) {
-        Game::event_array_[i] = false;
-    }
 }
 
 Game::~Game() {
@@ -45,12 +39,11 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height,
         is_running_ = true;
     } else
         is_running_ = false;
-
     current_map_ = new Map();
 
     // create the game character
     // might need to store that on the heap
-    *player_ = Protagonist("player", { width/2, height/2 });
+    player_ = new Protagonist("player", { width/2, height/2 });
 }
 
 void Game::HandleEvents() {
@@ -61,10 +54,9 @@ void Game::HandleEvents() {
         is_running_ = false;
         break;
     case SDL_KEYDOWN:
-        Game::event_array_[event.key.keysym.sym] = true;
+        player_->HandleInput(event);
         break;
     case SDL_KEYUP:
-        Game::event_array_[event.key.keysym.sym] = false;
         break;
     default:
         // to be extended once the facilities to handle user input have been created
@@ -74,7 +66,6 @@ void Game::HandleEvents() {
 
 void Game::Update() {
     // update player
-    player_->HandleInput();
     player_->Move();
 }
 

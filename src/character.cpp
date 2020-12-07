@@ -1,19 +1,35 @@
 #include "character.h"
 #include "game.h"
 
+Character::Character() {}
+
 Character::Character(const std::string& name, const Position& position) {
     name_ = name;
     position_ = position;
     orientation_ = kDown;
 }
 
+Character::~Character() {}
+
 std::string Character::GetName() {
     return name_;
 }
 
-Character::Position Character::GetPosition() {
+Position Character::GetPosition() {
     return position_;
 }
+
+
+/********* PROTAGONIST *********/
+Protagonist::Protagonist() {
+  stats_ = Stats();
+}
+
+Protagonist::Protagonist(const std::string &name, const Position &position)
+    : Character(name, position) {
+  stats_ = Stats();
+}
+
 
 void Protagonist::HandleInput(SDL_Event event) {
     switch (event.key.keysym.sym) {
@@ -47,10 +63,11 @@ void Protagonist::HandleInput(SDL_Event event) {
 
 void Protagonist::Move() {
     // The orientation allows us to determine what the last pressed key is
+    const Uint8* event_array = SDL_GetKeyboardState(NULL);
     switch (orientation_){
         case kLeft:
             // update the velocities so they increase if a key is being pressed or fall back to zero when a key isn't being pressed
-            if( Game::event_array_[SDLK_LEFT] ) {
+            if( event_array[SDL_SCANCODE_LEFT] ) {
                 if( velocity_.xVel > -64 ) { // We want to limit the velocity in any direction at 64
                     velocity_.xVel -= 8;
                     if( velocity_.xVel < -64 ) { // We check after increasing that we are not above the limit
@@ -68,7 +85,7 @@ void Protagonist::Move() {
             break;
         
         case kRight:
-            if( Game::event_array_[SDLK_RIGHT] ) {
+            if( event_array[SDL_SCANCODE_RIGHT] ) {
                 if( velocity_.xVel < 64 ) { 
                     velocity_.xVel += 8;
                     if( velocity_.xVel > 64 ) { 
@@ -85,7 +102,7 @@ void Protagonist::Move() {
             break;
         
         case kUp:
-            if( Game::event_array_[SDLK_UP] ) {
+            if( event_array[SDL_SCANCODE_UP] ) {
                 if( velocity_.yVel < 64 ) { 
                     velocity_.yVel += 8;
                     if( velocity_.yVel > 64 ) { 
@@ -102,7 +119,7 @@ void Protagonist::Move() {
             break;
 
         case kDown:
-            if( Game::event_array_[SDLK_DOWN] ) {
+            if( event_array[SDL_SCANCODE_DOWN] ) {
                 if( velocity_.yVel > -64 ) { 
                     velocity_.yVel -= 8;
                     if( velocity_.yVel < -64 ) { 
