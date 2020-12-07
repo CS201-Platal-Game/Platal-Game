@@ -15,7 +15,10 @@ SDL_TTF library (to display dialogue); finally, i wish that i'll be able to set 
   on screen
 
 ## Carolina Nina Matos
-
+- Drew a little man (one of the sprites!)
+- Debugged texture manager with help and managed to render one of the sprites
+- Added rendering methods to various classes
+- Some bugs in the code that need to be solved, also want to test rendering map stuff
 
 ## Remy Seassau
 - This week I further improved the way we make charachters move
