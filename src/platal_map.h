@@ -8,7 +8,7 @@
 
 class Map {
   public:
-    Map(); // the map constructor basically
+    Map() {}; // added empty default constructor, could be changed later
     ~Map(); // the map deconstructor
 
     void LoadMap(char *filename); // load map from file
