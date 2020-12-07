@@ -2,7 +2,7 @@
 #include "game.h"
 #include "utils/texture_manager.h"
 
-Character::Character() {}
+Character::Character(){};
 
 Character::Character(const std::string& name, const Position& position) {
     name_ = name;

@@ -49,6 +49,7 @@ void TextureManager::DrawFrame(std::string id, SDL_Rect src, SDL_Rect dest, SDL_
 }
 
 void TextureManager::exterminate(std::string id) {
+    delete textureMap[id];
     textureMap.erase(id);
 }
 

@@ -54,7 +54,7 @@ void Dialogue::AddEdge(int node_id, int response_id, int next_node_id) {
 // Generates the dialogue from a text file (sample file in Notion/Structure).
 // Returns false on failure (e.g. file does not exist).
 bool Dialogue::Import(const char *filename) {
-    //TODO where do we put dialogue files?
+    //TODO where do we put dialogue files? -> create a folder
     std::ifstream dialogue(filename);
     std::string line_reader;
     if(!dialogue) {

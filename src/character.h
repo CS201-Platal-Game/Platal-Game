@@ -33,7 +33,7 @@ class Character {
     int char_id;
     Position position_{ 0, 0 };
     Direction orientation_; // e.g. protag is facing up/down/etc.
-    // TODO: sprites
+    // TODO: sprites, draw and load; call texture manager in render method
 };
 
 class Protagonist : public Character {
