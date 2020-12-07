@@ -1,0 +1,12 @@
+4 // number of sample lines
+Sample Line 0
+Sample Line 1
+Sample Line 2
+Sample Line 3
+3 // number of responses
+Response 0
+Response 1
+Response 2
+2 // number of edges
+0 0 2 // Sample line 0 -> Response 0 -> Sample line 2
+0 1 3

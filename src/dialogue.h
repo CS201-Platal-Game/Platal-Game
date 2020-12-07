@@ -23,7 +23,7 @@ class DialogueNode {
     // Line of NPCs or objects.
     std::string line_;
 
-    // Vector of responses and coressponding DialogueNode.
+    // Vector of responses and corresponding DialogueNode.
     // The dialogue ends when responses_ is empty.
     std::vector<std::pair<std::string, DialogueNode*>> responses_;
 };
@@ -46,7 +46,7 @@ class Dialogue {
     // Returns false on failure (e.g. file does not exist).
     bool Import(const char filename[]);
 
-    // Prints the current line and possible respones, then call Next().
+    // Prints the current line and possible responses, then call Next().
     void Advance();
 
     // Resets the conversation, e.g. the protag talks to the NPC again.
@@ -57,9 +57,9 @@ class Dialogue {
 
   private:
     DialogueNode* head_;
-
+    int current;
     // At the moment, each response is stored twice, one here and
     // one in DialogueNode. Feel free to optimize this.
     std::vector<std::string> response_lines_;
-    std::vector<DialogueNode> nodes_;
+    std::vector<DialogueNode*> nodes_;
 };
