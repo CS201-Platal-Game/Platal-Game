@@ -31,6 +31,7 @@ class Character {
   protected:
     std::string name_;
     Position position_;
+    Direction orientation_; // e.g. protag is facing up/down/etc.
     // TODO: sprites
 };
 
@@ -40,8 +41,8 @@ class Protagonist : public Character {
         int xVel, yVel;
     };
 
-    //Takes key presses and adjusts the protag's velocity
-    void HandleInput();
+    //Takes key presses and adjusts the protag's orientation
+    void HandleInput(SDL_Event key);
 
     // Assumed possible movement (checked by Map or Game).
     // We move depending on the state of the velocity 
@@ -49,7 +50,6 @@ class Protagonist : public Character {
 
   private:
     Velocity velocity_;
-    Direction orientation_; // e.g. protag is facing up/down/etc.
     Stats stats_;
     // TODO: inventories?
 };
