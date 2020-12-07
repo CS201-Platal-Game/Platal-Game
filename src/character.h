@@ -31,6 +31,7 @@ class Character {
   protected:
     std::string name_;
     Position position_;
+    Direction orientation_; // e.g. protag is facing up/down/etc.
     // TODO: sprites
 };
 
@@ -49,7 +50,6 @@ class Protagonist : public Character {
 
   private:
     Velocity velocity_;
-    Direction orientation_; // e.g. protag is facing up/down/etc.
     Stats stats_;
     // TODO: inventories?
 };
