@@ -46,12 +46,6 @@ void Protagonist::HandleInput(SDL_Event event) {
 }
 
 void Protagonist::Move() {
-    //Move the protag left or right
-    position_.x += velocity_.xVel;
-    
-    //Move the protag up or down
-    position_.y += velocity_.yVel;
-
     // The orientation allows us to determine what the last pressed key is
     switch (orientation_){
         case kLeft:
@@ -127,4 +121,10 @@ void Protagonist::Move() {
         default:
             break;
     }
+
+    //Move the protag left or right
+    position_.x += velocity_.xVel;
+    
+    //Move the protag up or down
+    position_.y += velocity_.yVel;
 }

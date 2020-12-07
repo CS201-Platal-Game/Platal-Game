@@ -41,7 +41,7 @@ class Protagonist : public Character {
         int xVel, yVel;
     };
 
-    //Takes key presses and adjusts the protag's velocity
+    //Takes key presses and adjusts the protag's orientation
     void HandleInput(SDL_Event key);
 
     // Assumed possible movement (checked by Map or Game).
