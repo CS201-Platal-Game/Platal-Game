@@ -25,6 +25,8 @@ class Game {
 
     static SDL_Renderer* renderer_;
 
+    static bool event_array_[322]; // 322 is the number of SDLK_DOWN events, so this is an array to indicate if a key is being pressed
+
   private:
     bool is_running_;
     int count_ = 0;

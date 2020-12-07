@@ -1,8 +1,9 @@
 #pragma once
-
 #include "dialogue.h"
 #include "stats.h"
 #include <string>
+#include "SDL2/SDL.h"
+#include "SDL2/SDL_image.h"
 
 enum Direction {
     kLeft = 0,
@@ -23,10 +24,9 @@ class Character {
 
     std::string GetName();
     Position GetPosition();
-
-    // Assumed possible movement (checked by Map or Game).
-    // Ask Elouan for how x, y should be modified.
-    void Move(Direction direction);
+    SDL_Rect rect_;
+    void Render();
+    void Update();
 
   protected:
     std::string name_;
@@ -36,7 +36,19 @@ class Character {
 
 class Protagonist : public Character {
   public:
+    struct Velocity {
+        int xVel, yVel;
+    };
+
+    //Takes key presses and adjusts the protag's velocity
+    void HandleInput();
+
+    // Assumed possible movement (checked by Map or Game).
+    // We move depending on the state of the velocity 
+    void Move();
+
   private:
+    Velocity velocity_;
     Direction orientation_; // e.g. protag is facing up/down/etc.
     Stats stats_;
     // TODO: inventories?
