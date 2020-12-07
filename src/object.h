@@ -16,6 +16,7 @@ class Object {
 
     int GetWidth();
     int GetHeight();
+    int GetObjId();
     bool IsCollidable();
     Position GetPosition();
 
