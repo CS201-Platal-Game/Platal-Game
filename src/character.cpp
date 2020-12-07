@@ -1,6 +1,20 @@
 #include "character.h"
 #include "game.h"
 
+Character::Character(const std::string& name, const Position& position) {
+    name_ = name;
+    position_ = position;
+    orientation_ = kDown;
+}
+
+std::string Character::GetName() {
+    return name_;
+}
+
+Character::Position Character::GetPosition() {
+    return position_;
+}
+
 void Protagonist::HandleInput() {
     // move left
     if(Game::event_array_[SDLK_LEFT]) {
