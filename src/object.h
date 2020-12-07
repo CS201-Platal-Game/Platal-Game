@@ -36,6 +36,7 @@ class Object {
     bool collidable_;
     Position position_; // possibly the up-left position of the object,
                         // subject to changes
+    int obj_id;
 
     // TODO: texture
 };
