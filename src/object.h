@@ -29,15 +29,15 @@ class Object {
     // Check if the player is colliding with the object
     bool InteractCollision(Character character);
 
-    // TODO: set texture
+    // TODO: set texture - add a rendering method + load texture
 
   protected:
+    // TODO: add texture id
     int width_, height_; // dimension in squares
     bool collidable_;
     Position position_; // possibly the up-left position of the object,
                         // subject to changes
 
-    // TODO: texture
 };
 
 // Object signalling map changes.

@@ -1,7 +1,7 @@
 #include "character.h"
 #include "game.h"
 
-Character::Character() {}
+Character::Character(){};
 
 Character::Character(const std::string& name, const Position& position) {
     name_ = name;

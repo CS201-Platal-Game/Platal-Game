@@ -82,6 +82,7 @@ void TextureManager::drawFrame(std::string id, int x, int y,
 }
 
 void TextureManager::exterminate(std::string id) {
+    delete textureMap[id];
     textureMap.erase(id);
 }
 
