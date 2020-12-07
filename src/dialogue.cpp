@@ -16,7 +16,7 @@ void DialogueNode::AddResponse(const std::string &response, DialogueNode* const 
 
 void DialogueNode::PrintLine() {
     std::cout << line_ << std::endl;
-};
+}
 
 void DialogueNode::PrintResponses() {
     for (int i = 0; i < responses_.size(); i += 1) {

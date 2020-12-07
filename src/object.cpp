@@ -35,7 +35,7 @@ Object Object::Copy() {
 }
 
 void Object::InteractButton() {
-    if (Game::event_array_[SDLK_e]) {
+    if (SDL_GetKeyboardState(NULL)[SDL_SCANCODE_E]) {
         // Have the object be affected, not sure how to do this
     }
 }
