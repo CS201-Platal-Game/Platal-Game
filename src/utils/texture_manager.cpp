@@ -97,5 +97,6 @@ TextureManager::~TextureManager() {
 
 
 }
+// Chris here, I might have to add something with Draw, need to check //
 
 
