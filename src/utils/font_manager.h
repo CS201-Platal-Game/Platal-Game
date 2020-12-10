@@ -24,6 +24,8 @@ class FontManager {
     void Draw(std::string id, std::string txt, int x, int y,
               SDL_Color, SDL_Renderer*);
 
+    void Exterminate(std::string id);
+
   private:
     std::map<std::string, TTF_Font*> fontMap; // map with all the fonts
     FontManager() = default;

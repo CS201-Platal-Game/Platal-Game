@@ -35,6 +35,12 @@ void FontManager::Draw(std::string id, std::string txt, int x, int y,
 }
 
 
+void FontManager::Exterminate(std::string id) {
+    //TTF_CloseFont(fontMap[id]);
+    fontMap.erase(id);
+}
+
+
 FontManager::~FontManager() {
     TTF_Font* font;
     auto iter = fontMap.begin();

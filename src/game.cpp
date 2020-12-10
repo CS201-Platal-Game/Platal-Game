@@ -81,9 +81,13 @@ void Game::Render() {
     // where we add stuff to render in rendering order {map -> chars -> menus}
     current_map_->DrawMap(player_->GetPosition());
 
-        FontManager::Instance()->Load("retganon", "./fonts/retganon.ttf", 16);
+    // begin font demo
+    FontManager::Instance()->Load("retganon", "./fonts/retganon.ttf", 16);
     FontManager::Instance()->Draw("retganon", "PLATAL GAME!", 250, 250,
                                   {200, 50, 50}, renderer_);
+    FontManager::Instance()->Exterminate("retganon");
+    // end font demo
+
 
     SDL_RenderPresent(renderer_);
 }
