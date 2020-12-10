@@ -1,0 +1,23 @@
+#include "quiz.h"
+
+// TODO: finish implementation
+Quiz::Quiz(Question q1, Question q2, Question q3, Question q4, Question q4, int min_pass){
+    for (int i = 0; i < 5; i++){
+        // add each question from input into question array
+    }
+    correctAnswers_ = 0;  // default value at the start
+
+    // not sure this part is necessary since it is a private attribute
+    while (min_pass > 5){ // not sure if this works the way i want it to but
+        // the idea is that if for some reason one inputs a min_pass that is greater than the number of questions
+        // then you subtract until it is AT MOST equal to the number of questions
+        min_pass--;
+    }
+
+    while (min_pass < 1){
+        // same idea as above, except here it deals with the case where min_pass is too low
+        min_pass++;
+    }
+
+    passCondition_ = min_pass;
+};
