@@ -7,7 +7,7 @@
 
 ## Build
 
-Prerequisites: `cmake`, `sdl2`, `sdl2_image`.
+Prerequisites: `cmake`, `sdl2`, `sdl2_image`, `sdl2_ttf`.
 
 ```
 mkdir build && cd build && cmake .. && make -j
