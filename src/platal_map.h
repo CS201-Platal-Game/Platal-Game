@@ -31,6 +31,7 @@ class Map {
     int width_, height_; // width and height of the map, in squares
     int** map_array_; // loaded from csv
     std::map <Position, Object> *objects_; // map from position on screen to object
+    std::map <Position*, Object> *npc_; // map from pointers to position on screen to object
   
     SDL_Rect src_, dest_; // attributes used while rendering
     // SDL_Texture* texture1

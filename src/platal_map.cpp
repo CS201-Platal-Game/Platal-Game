@@ -23,14 +23,11 @@ void Map::DrawMap(Position position) {
     }
 }
 
-
 //to check 
 void Map::AddObject(Object item){
     
     (*objects_)[item.GetPosition()]= item;
 }
-
-
 
 // return the object if it was found
 Object Map::RemoveObject(int obj_id){
@@ -41,3 +38,17 @@ Object Map::RemoveObject(int obj_id){
     }
     return Object();
 }
+
+void Map::AddNpc(Character npc){
+    (*npc_)[npc.GetPosition()]= npc;
+}
+
+Character Map::RemoveNpc(int char_id){
+    for(std::map<Position*,Object>::iterator i = npc_->begin();i != npc_->end();i++){
+        if ((i->second).GetCharId()==char_id){
+            return i->second;
+        }
+    }
+    return Object();
+}
+
