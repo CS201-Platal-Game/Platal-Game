@@ -23,7 +23,7 @@ class Character {
     Position GetPosition();
     SDL_Rect rect_{};
     void Render();
-    void Update();
+    void Update(); //TODO: implement update method
 
   protected:
     std::string name_;

@@ -1,5 +1,6 @@
 #include "character.h"
 #include "game.h"
+#include "utils/texture_manager.h"
 
 Character::Character(){};
 
@@ -17,6 +18,14 @@ std::string Character::GetName() {
 
 Position Character::GetPosition() {
     return position_;
+}
+
+void Character::Render() {
+    TextureManager::Instance()->drawFrame(name_,
+                                          position_.x, position_.y,
+                                          32, 32, //size
+                                          1, 0, //row, frame
+                                          Game::renderer_);
 }
 
 
