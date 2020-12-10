@@ -81,3 +81,7 @@ bin
 
 # Elouan (Arch)
 .ccls-cache
+
+# fonts
+fonts/*.txt
+fonts/*.zip
