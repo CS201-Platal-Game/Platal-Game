@@ -15,6 +15,9 @@ Game::~Game() {
     SDL_DestroyRenderer(renderer_);
     SDL_DestroyWindow(window_);
     // need to add the delete map
+    TTF_Quit();
+    IMG_Quit();
+    SDL_Quit();
     std::cout << "game cleaned" << std::endl;
 }
 

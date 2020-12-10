@@ -91,7 +91,7 @@ TextureManager::~TextureManager() {
     while(iter != textureMap.end())
     {
         texture = iter->second;
-        delete texture;
+        SDL_DestroyTexture(texture);
         iter++;
     }
 
