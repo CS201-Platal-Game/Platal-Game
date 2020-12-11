@@ -21,7 +21,7 @@ Position Character::GetPosition() {
 }
 
 void Character::Render() {
-    TextureManager::Instance()->draw(name_, position_.x, position_.y, 32, 32, Game::renderer_);
+    TextureManager::Instance()->draw(name_, position_.x, position_.y, 64, 64, Game::renderer_);
 }
 
 
