@@ -6,9 +6,9 @@
 Map::Map() {
     // The textures we have for the moment are in Platal-Game -> images ->
 
-    TextureManager::load("dirt", "maptexture/dirt.png", Game::renderer);
-    TextureManager::load("grass", "maptexture/grass.png", Game::renderer);
-    TextureManager::load("water", "maptexture/water.png", Game::renderer);
+    TextureManager::load("dirt", "maptexture/dirt.png", Game::renderer_);
+    TextureManager::load("grass", "maptexture/grass.png", Game::renderer_);
+    TextureManager::load("water", "maptexture/water.png", Game::renderer_);
 
      //Here we will add as many textures as needed, need yet to be determined
 
