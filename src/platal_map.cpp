@@ -29,9 +29,9 @@ void Map::DrawMap(Position center){
     int type = 0;
     std::string name = "";
 
-    for(width = 0; width < width_ ; width +=1)
+    for(int width = 0; width < width_ ; width +=1)
     {
-        for(height=0; height <height_ ; height +=1)
+        for(int height=0; height <height_ ; height +=1)
         {
             type = map_array_[width][height];
 
@@ -53,7 +53,7 @@ void Map::DrawMap(Position center){
 
             }
             if(name != "") 
-            TextureManager::Draw(name,src_ , dest_, Game::renderer)  // Here I use TextureManager from texture_manager.cpp
+            TextureManager::Draw(name,src_ , dest_, Game::renderer_)  // Here I use TextureManager from texture_manager.cpp
 
         }
 
