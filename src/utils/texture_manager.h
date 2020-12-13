@@ -16,7 +16,7 @@ class TextureManager {
     }
     // Chris here adding a static for my Map part of the game, changes start here
 
-      static void Draw(std::string, SDL_Rect src_, SDL_Rect dest_, SDL_Renderer*);
+    void Draw(std::string, SDL_Rect src_, SDL_Rect dest_, SDL_Renderer*);
       
     // Chris changes end here
       
