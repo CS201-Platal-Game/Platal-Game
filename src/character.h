@@ -18,15 +18,17 @@ class Character {
     Character();
     Character(const std::string& name, const Position& position);
     ~Character();
-
+    int GetCharId();
     std::string GetName();
     Position GetPosition();
+    Position* GetPositionPointer();
     SDL_Rect rect_;
     void Render();
     void Update();
 
   protected:
     std::string name_;
+    int char_id;
     Position position_{ 0, 0 };
     Direction orientation_; // e.g. protag is facing up/down/etc.
     // TODO: sprites
@@ -36,6 +38,9 @@ class Protagonist : public Character {
   public:
     struct Velocity {
         int xVel, yVel;
+    };
+    struct Accel {
+        int terminalVelocity, speedUp, sloDown;
     };
 
     // inherit constructors
@@ -52,6 +57,7 @@ class Protagonist : public Character {
   private:
     Velocity velocity_{ 0, 0 };
     Stats stats_;
+    Accel accel_ = {32, 4, 8};
     // TODO: inventories?
 };
 
