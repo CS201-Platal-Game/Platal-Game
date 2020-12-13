@@ -73,6 +73,6 @@ class NPC : public Character {
 
   private:
     bool moving_ = false;
-    std::list<Direction> route_;     // NPC fixed movements, the next move is located at the back.
+    std::list<Direction> route_;     // NPC fixed movements, the next move is located at the back, to add a new move just push to the front.
     std::vector<Dialogue*> dialogues_; // NPC possible dialogues.
 };
