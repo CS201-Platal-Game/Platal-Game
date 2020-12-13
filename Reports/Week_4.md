@@ -1,5 +1,6 @@
 ## Christian Roubert
-
+- This week I researched into how to render character, Carolina completed that task.
+- I thus looked into how to render a map, and starting coding the DrawMap function for the map part of the game, which draws the map given an array that is associated to the map.
 
 ## Duong Dac
 - I created a header for `clock.h`, a time managing system.
@@ -14,7 +15,10 @@ SDL_TTF library (to display dialogue); finally, i wish that i'll be able to set 
   on screen
 
 ## Carolina Nina Matos
-
+- Drew a little man (one of the sprites!)
+- Debugged texture manager with help and managed to render one of the sprites
+- Added rendering methods to various classes
+- Some bugs in the code that need to be solved, also want to test rendering map stuff
 
 ## Remy Seassau
 - This week I further improved the way we make charachters move

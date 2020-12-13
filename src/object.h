@@ -3,12 +3,10 @@
 #include "character.h"
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
+#include "utils/structs.h"
 
 class Object {
   public:
-    struct Position {
-        int x, y;
-    };
     
     Object();
     Object(int width, int height, bool collidable);
@@ -18,6 +16,7 @@ class Object {
 
     int GetWidth();
     int GetHeight();
+    int GetObjId();
     bool IsCollidable();
     Position GetPosition();
 
@@ -37,6 +36,7 @@ class Object {
     bool collidable_;
     Position position_; // possibly the up-left position of the object,
                         // subject to changes
+    int obj_id;
 
     // TODO: texture
 };

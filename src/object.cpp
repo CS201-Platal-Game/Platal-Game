@@ -1,6 +1,9 @@
 #include "object.h"
 #include "game.h"
 
+Object::Object() {} // TODO
+Object::~Object() {}
+
 Object::Object(int width, int height, bool collidable) {
     // Initializing all the attributes. We set x = y = 0 for the moment,
     // subject to change depending on whether or not we want it
@@ -21,11 +24,15 @@ int Object::GetHeight() {
     return height_;
 }
 
+int Object::GetObjId() {
+    return obj_id;
+}
+
 bool Object::IsCollidable() {
     return collidable_;
 }
 
-Object::Position Object::GetPosition() {
+Position Object::GetPosition() {
     return position_;
 }
 
@@ -45,15 +52,14 @@ bool Object::InteractCollision(Character character) {
 
     // We haven't yet done the position and width/height attributed for the character class,
     // hence I set them as true for the moment
-    bool width_condition = true; // position_.x < character.position_.x + character.rect_w && character.position_.x < position_.x + width_
+    bool width_condition = true;  // position_.x < character.position_.x + character.rect_w && character.position_.x < position_.x + width_
     bool height_condition = true; // position_.y < character.position_.y + character.rect_h && character.position_.y < position_.y + height_
     bool x_collision = false;
     bool y_collision = false;
     if (collidable_) {
         if (height_condition) {
             y_collision = true;
-        }
-        else if (width_condition) {
+        } else if (width_condition) {
             x_collision = true;
         }
     }
