@@ -52,7 +52,7 @@ void Map::DrawMap(Position center){
 
             }
             if(name != "") 
-            TextureManager::Instance()->Draw(name,src_ , dest_, Game::renderer_)  // Here I use TextureManager from texture_manager.cpp
+            TextureManager::Instance()->Draw(name,src_ , dest_, Game::renderer_);  // Here I use TextureManager from texture_manager.cpp
 
         }
 
