@@ -147,10 +147,14 @@ void Protagonist::Move() {
 }
 
 void NPC::MoveRoute() {
-    if (moving_ = true) {
-        if (route_.empty()) moving_ = false;
+    if (moving_ ) {
+        if (route_.empty()) {
+            moving_ = false;
+        }
         else {
-            Direction direction = route_.pop_back();
+            Direction direction = route_.back();
+            route_.pop_back();
+            
             switch (direction) {
                 case kLeft:
                     position_.x -= 8;
