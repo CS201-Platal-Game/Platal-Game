@@ -9,6 +9,8 @@ This week I completed the map rendering, or at least the Map::Draw, which takes 
 
 ## Remy Seassau
 
+    - This week I conceived and implimented a movement function for NPCs. I also helped Chris with debugging his code.
+
 ## Nazila Sharifi Amina
 
 ## Thomas Tressel
