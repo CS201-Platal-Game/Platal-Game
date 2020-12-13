@@ -1,4 +1,5 @@
-#include "platal_map.h" 
+#include "platal_map.h"
+#include "game.h" // added game.h, just in case
 //Chris here changing stuff for the map part, changes still need to be made, 
 
 
@@ -19,9 +20,6 @@ src_.w = src_.h = 32 ;
 // The void Map::LoadMap I think has already been coded by Carolina, if not I'll do it
 
 
-
-
-
 void Map::DrawMap(Position center){
     // type here is for the type of texture, i.e 
 
@@ -34,22 +32,13 @@ void Map::DrawMap(Position center){
         {
             type = map_array_[width][height];
 
-            switch(type)
-
-            {
-                case 0:
-                name = "dirt" ;
-
-                case 1:
-                name = "grass";
-
-                case 2:
-                name = "water";
-
+            switch(type) {
+                case 0: name = "dirt" ;
+                case 1: name = "grass";
+                case 2: name = "water";
                 default:
                 name = "";
                     break;
-
             }
             if(name != "") 
             TextureManager::Instance()->Draw(name,src_ , dest_, Game::renderer_);  // Here I use TextureManager from texture_manager.cpp

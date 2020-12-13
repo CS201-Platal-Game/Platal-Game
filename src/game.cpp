@@ -6,6 +6,8 @@
 
 // static members definition
 SDL_Renderer* Game::renderer_ = nullptr;
+// this stays just in the unlikely case that we wish to make game a singleton
+//Game* Game::myInstance = 0;
 
 Game::Game() {
     is_running_ = false;
