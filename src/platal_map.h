@@ -5,7 +5,7 @@
 #include "object.h"
 #include "game.h" // added game.h, just in case
 #include <vector>
-#include "texture_manager.h"
+#include "utils/texture_manager.h"
 #include <map>
 // Chris here working on platal_map objects, Since textures are not yet defined the outcome can't be tested, so I am coding for a general idea.
 
