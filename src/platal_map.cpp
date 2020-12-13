@@ -14,7 +14,7 @@ Map::Map() {
 
 LoadMap(map_array_);
 
-src_.width_ = src_.height_ = 32 ; 
+src_.w = src_.h = 32 ; 
 
 }
 // The void Map::LoadMap I think has already been coded by Carolina, if not I'll do it
@@ -23,7 +23,7 @@ src_.width_ = src_.height_ = 32 ;
 
 
 
-void Map::DrawMap(){
+void Map::DrawMap(Position center){
     // type here is for the type of texture, i.e 
 
     int type = 0;
