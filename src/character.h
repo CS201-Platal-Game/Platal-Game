@@ -65,6 +65,7 @@ class NPC : public Character {
     void AddDialogue(Dialogue* const dialogue);
 
     // NPC follows a fixed route, or stand still if interrupted / empty route_.
+    // Only does something if moving_ is true
     void MoveRoute();
 
     // Triggers conversations or actions.
