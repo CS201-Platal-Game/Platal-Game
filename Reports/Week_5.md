@@ -2,6 +2,7 @@
 - This week I completed the map rendering, or at least the Map::Draw, which takes the map array and depending on the value renders different textures, using the different SDL functions and texture managers. This next week I will refine the map rendering if needed. 
 
 ## Duong Dac
+- This week I finished the time manager `clock` and part of the activities manager `synapses`. I also did some code review. Next week, I will probably work with the graphic team on `map`, movements, and objects.
 
 ## Elouan Gros
 
