@@ -18,15 +18,17 @@ class Character {
     Character();
     Character(const std::string& name, const Position& position);
     ~Character();
-
+    int GetCharId();
     std::string GetName();
     Position GetPosition();
+    Position* GetPositionPointer();
     SDL_Rect rect_;
     void Render();
     void Update();
 
   protected:
     std::string name_;
+    int char_id;
     Position position_{ 0, 0 };
     Direction orientation_; // e.g. protag is facing up/down/etc.
     // TODO: sprites
