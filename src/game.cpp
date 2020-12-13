@@ -1,6 +1,8 @@
 #include "game.h"
 #include "platal_map.h"
 #include "utils/texture_manager.h"
+#include "utils/font_manager.h"
+#include "SDL2/SDL_ttf.h"
 
 // static members definition
 SDL_Renderer* Game::renderer_ = nullptr;
@@ -13,6 +15,9 @@ Game::~Game() {
     SDL_DestroyRenderer(renderer_);
     SDL_DestroyWindow(window_);
     // need to add the delete map
+    TTF_Quit();
+    IMG_Quit();
+    SDL_Quit();
     std::cout << "game cleaned" << std::endl;
 }
 
@@ -23,7 +28,8 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height,
         flags = SDL_WINDOW_FULLSCREEN;
 
     if (SDL_Init(SDL_INIT_EVERYTHING) == 0 &&
-        IMG_Init(IMG_INIT_PNG) == IMG_INIT_PNG) {
+        IMG_Init(IMG_INIT_PNG) == IMG_INIT_PNG &&
+        TTF_Init() == 0) {
         std::cout << "subsystem initialized..." << std::endl;
 
         window_ = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
@@ -44,6 +50,7 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height,
     // create the game character
     // might need to store that on the heap
     player_ = new Protagonist("player", { width/2, height/2 });
+    TextureManager::Instance()->load("player", "./images/sprites/littleman1.png", renderer_);
 }
 
 void Game::HandleEvents() {
@@ -74,6 +81,15 @@ void Game::Render() {
     SDL_RenderClear(renderer_);
     // where we add stuff to render in rendering order {map -> chars -> menus}
     current_map_->DrawMap(player_->GetPosition());
+
+    player_->Render();
+
+    // begin font demo
+    FontManager::Instance()->Load("retganon", "./fonts/retganon.ttf", 16);
+    FontManager::Instance()->Draw("retganon", "PLATAL GAME!", 250, 250,
+                                  {200, 50, 50}, renderer_);
+    FontManager::Instance()->Exterminate("retganon");
+    // end font demo
 
     SDL_RenderPresent(renderer_);
 }
