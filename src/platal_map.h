@@ -3,7 +3,6 @@
 #include "SDL2/SDL_image.h"
 #include "character.h"
 #include "object.h"
-#include "game.h" // added game.h, just in case
 #include <vector>
 #include "utils/texture_manager.h"
 #include <map>
