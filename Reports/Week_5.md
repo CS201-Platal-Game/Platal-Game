@@ -12,6 +12,8 @@ Next week, I will continue working on this, as I need some help in order to comp
 ## Remy Seassau
 - This week I conceived and implimented a movement function for NPCs. I also helped Chris with debugging his code.
 
+    - This week I conceived and implimented a movement function for NPCs. I also helped Chris with debugging his code.
+
 ## Nazila Sharifi Amina
 - This week I implemented NPC remove and add, and had to update my previous implementations for the Class Map (addobject, removeobject, etc).
 
