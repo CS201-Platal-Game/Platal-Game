@@ -7,6 +7,7 @@
 #include <vector>
 #include "utils/texture_manager.h"
 #include <map>
+#include "utils/structs.h"
 // Chris here working on platal_map objects, Since textures are not yet defined the outcome can't be tested, so I am coding for a general idea.
 
 class Map {
@@ -15,7 +16,7 @@ class Map {
     ~Map(); // the map deconstructor
 
     void LoadMap(char *filename); // load map from file
-    void DrawMap(); // draw map to screen
+    void DrawMap(Position); // draw map to screen
 
     // interactions with the npcs
     void AddNpc(Character npc);
