@@ -12,7 +12,6 @@ Map::Map() {
 
      //Here we will add as many textures as needed, need yet to be determined
 
-LoadMap(map_array_);
 
 src_.w = src_.h = 32 ; 
 
