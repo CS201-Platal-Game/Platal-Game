@@ -3,6 +3,7 @@
 #include "stats.h"
 #include "utils/structs.h"
 #include <string>
+#include <list>
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
 
@@ -72,6 +73,6 @@ class NPC : public Character {
 
   private:
     bool moving_ = false;
-    std::vector<Direction> route_;     // NPC fixed movements.
+    std::list<Direction> route_;     // NPC fixed movements, the next move is located at the back.
     std::vector<Dialogue*> dialogues_; // NPC possible dialogues.
 };
