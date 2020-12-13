@@ -32,22 +32,26 @@ void Map::AddObject(Object item) {
 Object Map::RemoveObject(int obj_id){
     for(std::map<Position,Object>::iterator i = objects_->begin(); i != objects_->end(); i++){
         if ((i->second).GetObjId()==obj_id){
-            return i->second;
+            Object res = i->second;
+            objects_->erase(i);
+            return res;
         }
     }
     return Object();
 }
 
 void Map::AddNpc(Character npc){
-    (*npc_)[npc.GetPosition()]= npc;
+    (*npc_)[npc.GetPositionPointer()]= npc;
 }
 
 Character Map::RemoveNpc(int char_id){
-    for(std::map<Position*,Object>::iterator i = npc_->begin();i != npc_->end();i++){
+    for(std::map<Position*,Character>::iterator i = npc_->begin();i != npc_->end();i++){
         if ((i->second).GetCharId()==char_id){
-            return i->second;
+            Character res = i->second;
+            npc_->erase(i);
+            return res;
         }
     }
-    return Object();
+    return Character();
 }
 

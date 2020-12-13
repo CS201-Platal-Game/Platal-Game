@@ -20,10 +20,17 @@ Position Character::GetPosition() {
     return position_;
 }
 
+Position* Character::GetPositionPointer() {
+    return &position_;
+}
+
 void Character::Render() {
     TextureManager::Instance()->draw(name_, position_.x, position_.y, 64, 64, Game::renderer_);
 }
 
+int Character::GetCharId() {
+    return char_id;
+}
 
 /********* PROTAGONIST *********/
 Protagonist::Protagonist() {

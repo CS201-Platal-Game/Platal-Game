@@ -17,7 +17,6 @@ class Object {
     int GetWidth();
     int GetHeight();
     int GetObjId();
-    int GetCharId();
     bool IsCollidable();
     Position GetPosition();
 
@@ -41,7 +40,7 @@ class Object {
     // TODO: obj_id and char_id
     // GetObjId() and GetCharId() are implemented.  
     int obj_id;
-    int char_id;
+    
 
     // TODO: texture
 };

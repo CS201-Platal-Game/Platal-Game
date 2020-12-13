@@ -28,10 +28,6 @@ int Object::GetObjId() {
     return obj_id;
 }
 
-int Object::GetCharId() {
-    return char_id;
-}
-
 bool Object::IsCollidable() {
     return collidable_;
 }
