@@ -15,22 +15,21 @@ class TextureManager {
         return myInstance;
     }
     //initialiser
-    bool load(std::string, std::string, SDL_Renderer*); //load the element so we are able to reference it later
+    bool load(std::string id, std::string filename, SDL_Renderer* renderer); //load the element so we are able to reference it later
 
     // for drawing static objects like the background image
     // takes an id, position rendered (x,y), width, height and orientation
-    void draw(std::string , int , int ,
-              int , int ,
-              SDL_Renderer* ,
-              SDL_RendererFlip  = SDL_FLIP_NONE );
+    void draw(std::string id, int x, int y,
+              int width, int height,
+              SDL_Renderer* renderer, SDL_RendererFlip flip = SDL_FLIP_NONE );
 
     // for drawing objects and characters (can also be used to draw tiled objects)
     // the frames thing is to facilitate animation of characters (think of a GIF, but as one long image with multiple frames)
-    void drawFrame(std::string, int, int ,
-                   int , int ,
-                   int , int ,
-                   SDL_Renderer* ,
-                   SDL_RendererFlip = SDL_FLIP_NONE);
+    void drawFrame(std::string id, int x, int y,
+                   int width, int height,
+                   int row, int frame,
+                   SDL_Renderer *renderer,
+                   SDL_RendererFlip flip = SDL_FLIP_NONE);
 
     // delete SDL texture (yes this is a doctor who reference)
     void exterminate(std::string id);

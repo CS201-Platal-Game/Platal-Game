@@ -1,5 +1,6 @@
 #include "character.h"
 #include "game.h"
+#include "utils/texture_manager.h"
 
 Character::Character() {}
 
@@ -17,6 +18,10 @@ std::string Character::GetName() {
 
 Position Character::GetPosition() {
     return position_;
+}
+
+void Character::Render() {
+    TextureManager::Instance()->draw(name_, position_.x, position_.y, 64, 64, Game::renderer_);
 }
 
 
@@ -68,15 +73,15 @@ void Protagonist::Move() {
         case kLeft:
             // update the velocities so they increase if a key is being pressed or fall back to zero when a key isn't being pressed
             if( event_array[SDL_SCANCODE_LEFT] ) {
-                if( velocity_.xVel > -64 ) { // We want to limit the velocity in any direction at 64
-                    velocity_.xVel -= 8;
-                    if( velocity_.xVel < -64 ) { // We check after increasing that we are not above the limit
-                        velocity_.xVel = 64;
+                if( velocity_.xVel > -accel_.terminalVelocity ) { // We want to limit the velocity in any direction; originally at 64
+                    velocity_.xVel -= accel_.speedUp;
+                    if( velocity_.xVel < -accel_.terminalVelocity ) { // We check after increasing that we are not above the limit
+                        velocity_.xVel = accel_.terminalVelocity;
                     }
                 }
             }
             else if( velocity_.xVel < 0){
-                    velocity_.xVel += 16; // value subject to change
+                    velocity_.xVel += accel_.sloDown; // value subject to change
                     // we now treat the case where we overshoot 0
                     if( velocity_.xVel > 0){
                         velocity_.xVel = 0;
@@ -86,49 +91,49 @@ void Protagonist::Move() {
         
         case kRight:
             if( event_array[SDL_SCANCODE_RIGHT] ) {
-                if( velocity_.xVel < 64 ) { 
-                    velocity_.xVel += 8;
-                    if( velocity_.xVel > 64 ) { 
-                        velocity_.xVel = 64;
+                if( velocity_.xVel < accel_.terminalVelocity ) {
+                    velocity_.xVel += accel_.speedUp;
+                    if( velocity_.xVel > accel_.terminalVelocity ) {
+                        velocity_.xVel = accel_.terminalVelocity;
                     }
                 }
             }
             else if( velocity_.xVel > 0){
-                    velocity_.xVel -= 16; 
+                    velocity_.xVel -= accel_.sloDown;
                     if( velocity_.xVel < 0){
                         velocity_.xVel = 0;
                     }
             }
             break;
         
-        case kUp:
-            if( event_array[SDL_SCANCODE_UP] ) {
-                if( velocity_.yVel < 64 ) { 
-                    velocity_.yVel += 8;
-                    if( velocity_.yVel > 64 ) { 
-                        velocity_.yVel = 64;
+        case kDown:
+            if( event_array[SDL_SCANCODE_DOWN] ) {
+                if( velocity_.yVel < accel_.terminalVelocity ) {
+                    velocity_.yVel += accel_.speedUp;
+                    if( velocity_.yVel > accel_.terminalVelocity ) {
+                        velocity_.yVel = accel_.terminalVelocity;
                     }
                 }
             }
             else if( velocity_.yVel > 0){
-                    velocity_.yVel -= 16; 
+                    velocity_.yVel -= accel_.sloDown;
                     if( velocity_.yVel < 0){
                         velocity_.yVel = 0;
                     }
             }
             break;
 
-        case kDown:
-            if( event_array[SDL_SCANCODE_DOWN] ) {
-                if( velocity_.yVel > -64 ) { 
-                    velocity_.yVel -= 8;
-                    if( velocity_.yVel < -64 ) { 
-                        velocity_.yVel = 64;
+        case kUp:
+            if( event_array[SDL_SCANCODE_UP] ) {
+                if( velocity_.yVel > -accel_.terminalVelocity ) {
+                    velocity_.yVel -= accel_.speedUp;
+                    if( velocity_.yVel < -accel_.terminalVelocity ) {
+                        velocity_.yVel = accel_.terminalVelocity;
                     }
                 }
             }
             else if( velocity_.yVel < 0){
-                    velocity_.yVel += 16; 
+                    velocity_.yVel += accel_.sloDown;
                     if( velocity_.yVel > 0){
                         velocity_.yVel = 0;
                     }

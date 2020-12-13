@@ -39,6 +39,9 @@ class Protagonist : public Character {
     struct Velocity {
         int xVel, yVel;
     };
+    struct Accel {
+        int terminalVelocity, speedUp, sloDown;
+    };
 
     // inherit constructors
     Protagonist();
@@ -54,6 +57,7 @@ class Protagonist : public Character {
   private:
     Velocity velocity_{ 0, 0 };
     Stats stats_;
+    Accel accel_ = {32, 4, 8};
     // TODO: inventories?
 };
 
