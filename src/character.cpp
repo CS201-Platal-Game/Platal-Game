@@ -48,24 +48,24 @@ void Protagonist::HandleInput(SDL_Event event) {
         case SDLK_LEFT:
             orientation_ = kLeft;
             velocity_.yVel = 0;
-            velocity_.xVel = 0;
+            //velocity_.xVel = 0;
             break;
         
         case SDLK_RIGHT:
             orientation_ = kRight;
             velocity_.yVel = 0;
-            velocity_.xVel = 0;
+            //velocity_.xVel = 0;
             break;
 
         case SDLK_UP:
             orientation_ = kUp;
-            velocity_.yVel = 0;
+            //velocity_.yVel = 0;
             velocity_.xVel = 0;
             break;
 
         case SDLK_DOWN:
             orientation_ = kDown;
-            velocity_.yVel = 0;
+            //velocity_.yVel = 0;
             velocity_.xVel = 0;
             break;
         default:
@@ -75,7 +75,7 @@ void Protagonist::HandleInput(SDL_Event event) {
 
 void Protagonist::Move() {
     // The orientation allows us to determine what the last pressed key is
-    const Uint8* event_array = SDL_GetKeyboardState(NULL);
+    const Uint8* event_array = SDL_GetKeyboardState(nullptr);
     switch (orientation_){
         case kLeft:
             // update the velocities so they increase if a key is being pressed or fall back to zero when a key isn't being pressed
@@ -140,10 +140,10 @@ void Protagonist::Move() {
                 }
             }
             else if( velocity_.yVel < 0){
-                    velocity_.yVel += accel_.sloDown;
-                    if( velocity_.yVel > 0){
-                        velocity_.yVel = 0;
-                    }
+                velocity_.yVel += accel_.sloDown;
+                if( velocity_.yVel > 0){
+                    velocity_.yVel = 0;
+                }
             }
             break;
         
