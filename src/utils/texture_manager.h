@@ -14,6 +14,12 @@ class TextureManager {
         }
         return myInstance;
     }
+    // Chris here adding a static for my Map part of the game, changes start here
+
+      static void Draw(SDL_Texture* texture, SDL_Rect src_, SDL_Rect dest_);
+      
+    // Chris changes end here
+      
     //initialiser
     bool load(std::string, std::string, SDL_Renderer*); //load the element so we are able to reference it later
 
