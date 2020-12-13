@@ -10,7 +10,8 @@ enum Direction {
     kLeft = 0,
     kRight,
     kUp,
-    kDown
+    kDown,
+    stop
 };
 
 class Character {
@@ -70,6 +71,7 @@ class NPC : public Character {
     void Interact();
 
   private:
+    bool moving_ = false;
     std::vector<Direction> route_;     // NPC fixed movements.
     std::vector<Dialogue*> dialogues_; // NPC possible dialogues.
 };

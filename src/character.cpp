@@ -145,3 +145,36 @@ void Protagonist::Move() {
     //Move the protag up or down
     position_.y += velocity_.yVel;
 }
+
+void NPC::MoveRoute() {
+    if (moving_ = true) {
+        if (route_.empty()) moving_ = false;
+        else {
+            Direction direction = route_.pop_back();
+            switch (direction) {
+                case kLeft:
+                    position_.x -= 8;
+                    break;
+
+                case kRight:
+                    position_.x += 8;
+                    break;
+                
+                case kUp:
+                    position_.y -= 8;
+                    break;
+                
+                case kDown:
+                    position_.y += 8;
+                    break;
+                
+                case stop:
+                    moving_ = false;
+                    break;
+                
+                default:
+                    break;
+            }
+        }
+    }
+}
