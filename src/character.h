@@ -3,6 +3,7 @@
 #include "stats.h"
 #include "utils/structs.h"
 #include <string>
+#include <list>
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
 
@@ -10,7 +11,8 @@ enum Direction {
     kLeft = 0,
     kRight,
     kUp,
-    kDown
+    kDown,
+    stop
 };
 
 class Character {
@@ -69,6 +71,7 @@ class NPC : public Character {
     void AddDialogue(Dialogue* const dialogue);
 
     // NPC follows a fixed route, or stand still if interrupted / empty route_.
+    // Only functions if moving_ is true, pops last element from route_ and goes in that direction
     void MoveRoute();
 
     // Triggers conversations or actions.
@@ -76,6 +79,7 @@ class NPC : public Character {
     void Interact();
 
   private:
-    std::vector<Direction> route_;     // NPC fixed movements.
+    bool moving_ = false;
+    std::list<Direction> route_;     // NPC fixed movements, the next move is located at the back, to add a new move just push to the front.
     std::vector<Dialogue*> dialogues_; // NPC possible dialogues.
 };
