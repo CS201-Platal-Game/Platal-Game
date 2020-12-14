@@ -34,11 +34,11 @@ void Map::LoadMap(char *filename) {
 }
 
 
-void Map::DrawMap(Position position) {
+void Map::DrawMap(Position center) {
 
     int type = 0;
 
-
+    std::string name;
     for(int width = 0; width < width_ ; width +=1){
         for(int height=0; height <height_ ; height +=1){
             type = map_array_[width][height];
