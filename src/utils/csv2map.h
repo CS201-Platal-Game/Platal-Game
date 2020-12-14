@@ -4,7 +4,12 @@
 #include <vector>
 using namespace std;
 
-vector<vector<int>> csv2map(const std::string& filename){
+struct MapBundle {
+    int width, height;
+    vector<vector<int>> map_array;
+};
+
+MapBundle csv2map(const std::string& filename){
 
     ifstream file;
     file.open(filename);
@@ -25,11 +30,13 @@ vector<vector<int>> csv2map(const std::string& filename){
             getline(file, line, ',');
             int n = stoi(line);
             tmp.push_back(n);
+            std::cout << n << ", ";
         }
         getline(file, line, '\n'); //by default, the last element of each line doesn't have a comma
         int n = stoi(line);
         tmp.push_back(n);
         aout.push_back(tmp);
+        std::cout << n << "," << std::endl;
     }
-    return aout;
+    return {b, a, aout};
 }

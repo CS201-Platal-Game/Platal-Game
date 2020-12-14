@@ -8,19 +8,26 @@
 Map::Map() {
     // The textures we have for the moment are in Platal-Game -> images ->
 
+    //Here we will add as many textures as needed, need yet to be determined
     TextureManager::Instance()->load("dirt", "./images/maptexture/dirt.png", Game::renderer_);
     TextureManager::Instance()->load("grass", "./images/maptexture/grass.png", Game::renderer_);
     TextureManager::Instance()->load("water", "./images/maptexture/water.png", Game::renderer_);
 
-     //Here we will add as many textures as needed, need yet to be determined
-    src_.w = src_.h = 32;
-    width_ = height_ = 0;
+    // sdl source and dest rects
+    src_ = dest_ = {0, 0, 64, 64};
 
+    // width and height of the map in squares
+    width_ = height_ = 0;
 }
 // The void Map::LoadMap I think has already been coded by Carolina, if not I'll do it
 
 void Map::LoadMap(char *filename) {
-    map_array_ = csv2map(filename);
+    struct MapBundle tmp;
+    tmp = csv2map(filename);
+
+    width_ = tmp.width;
+    height_ = tmp.height;
+    map_array_ = tmp.map_array;
 }
 
 
@@ -32,23 +39,20 @@ void Map::DrawMap(Position center){
 
     for(int width = 0; width < width_ ; width +=1)
     {
-        for(int height=0; height <height_ ; height +=1)
+        for(int height=0; height < height_ ; height +=1)
         {
             type = map_array_[width][height];
 
             switch(type) {
-                case 0: name = "dirt" ;
-                case 1: name = "grass";
-                case 2: name = "water";
-                default:
-                name = "";
-                    break;
+                case 1: name = "dirt" ; break;
+                case 2: name = "grass"; break;
+                case 3: name = "water"; break;
+                default: name = ""; break;
             }
             if(name != "") 
-            TextureManager::Instance()->Draw(name,src_ , dest_, Game::renderer_);  // Here I use TextureManager from texture_manager.cpp
-
+                TextureManager::Instance()->Draw(name,src_ , {32*width, 32*height, src_.w, src_.h}, Game::renderer_);
+            // Here I use TextureManager from texture_manager.cpp
         }
-
     }
 }
 
