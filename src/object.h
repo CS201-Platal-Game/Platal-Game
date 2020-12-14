@@ -24,11 +24,9 @@ class Object {
     Object Copy();
 
     // Allows the player to interact with the object
-    // Will most likely be implemented in the subclasses
-    // that use it
     void InteractButton();
 
-    // Checks if the player is colliding with the object
+    // Check if the player is colliding with the object
     bool InteractCollision(Character character);
 
     void Render();
@@ -40,12 +38,6 @@ class Object {
     Position position_; // possibly the up-left position of the object,
                         // subject to changes
 
-    // TODO: obj_id and char_id
-    // GetObjId() and GetCharId() are implemented.  
-    int obj_id;
-    
-
-    // TODO: texture
 };
 
 // Object signalling map changes.

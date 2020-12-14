@@ -86,21 +86,15 @@ bool Dialogue::Import(const char *filename) {
 void Dialogue::Advance() {
     nodes_[current]->PrintLine();
     nodes_[current]->PrintResponses();
-    //TODO call Next() once it's implemented, then change current
 }
 
 
 // Resets the conversation, e.g. the protag talks to the NPC again.
 void Dialogue::Reset() {
-    current = 0;
+    //TODO - implement
 }
 
 // Verifies if the graph is cycle-free. Returns true on success.
 bool Dialogue::CheckCycle() {
-    // Use CheckCycleUtil()
-}
-
-// Auxiliary function for CheckCycle()
-bool Dialogue::CheckCycleUtil(DialogueNode* node, bool visited[]) {
-    // TODO
+    //TODO - implement
 }

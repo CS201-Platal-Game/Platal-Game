@@ -2,10 +2,8 @@
 
 // TODO: finish implementation
 Quiz::Quiz(Question *questions, int min_pass){
-    for (int i = 0; i < 5; i++){
-        questionArray_ = questions;
-        // add each question from input into question array
-    }
+    questionArray_ = questions;
+
     correctAnswers_ = 0;  // default value at the start
 
     // not sure this part is necessary since it is a private attribute
