@@ -63,10 +63,8 @@ bool Object::InteractCollision(Character character) {
 }
 
 void Object::Render() {
-    TextureManager::Instance()->drawFrame(textureId_,
-                                          position_.x, position_.y,
-                                          32, 32, // size (is this correct? or is it 64x64?)
-                                          1, 0, // row, frame
+    TextureManager::Instance()->DrawFrame(textureId_, {32, 0, 32, 32},
+                                          {position_.x, position_.y, 32, 32},
                                           Game::renderer_);
 
 }

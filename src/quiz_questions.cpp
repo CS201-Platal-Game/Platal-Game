@@ -15,21 +15,21 @@ Question::Question(std::string question,
     answer_ = ans;
     chosen_ = "default";
 
-};
+}
 
 bool Question::checkCorrect() {
     if (chosen_ == answer_){
         return true;
     }
     return false;
-};
+}
 
 void Question::renderQuestion() { // TODO: implement this
     // since we are using keyboard controls this needs to be done such that
     // when an option is selected it changes color
 
-};
+}
 
 void Question::pickOption(){  //TODO: implement this
     // the idea is that when a person clicks on an option, it sets answer equal to the option clicked.
-};
+}

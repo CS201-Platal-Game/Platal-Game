@@ -41,7 +41,7 @@ void FontManager::Exterminate(std::string id) {
 }
 
 
-FontManager::~FontManager() {
+void FontManager::Clean() {
     TTF_Font* font;
     auto iter = fontMap.begin();
     while (iter != fontMap.end()) {

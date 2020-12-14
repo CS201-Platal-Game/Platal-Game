@@ -1,8 +1,9 @@
 #include "quiz.h"
 
 // TODO: finish implementation
-Quiz::Quiz(Question q1, Question q2, Question q3, Question q4, Question q4, int min_pass){
+Quiz::Quiz(Question *questions, int min_pass){
     for (int i = 0; i < 5; i++){
+        questionArray_ = questions;
         // add each question from input into question array
     }
     correctAnswers_ = 0;  // default value at the start
@@ -20,4 +21,4 @@ Quiz::Quiz(Question q1, Question q2, Question q3, Question q4, Question q4, int 
     }
 
     passCondition_ = min_pass;
-};
+}

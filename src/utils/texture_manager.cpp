@@ -53,9 +53,9 @@ void TextureManager::exterminate(std::string id) {
     textureMap.erase(id);
 }
 
-TextureManager::~TextureManager() {
+void TextureManager::Clean() {
     SDL_Texture* texture;
-    std::map<std::string, SDL_Texture*>::iterator iter = textureMap.begin();
+    auto iter = textureMap.begin();
     while(iter != textureMap.end())
     {
         texture = iter->second;
