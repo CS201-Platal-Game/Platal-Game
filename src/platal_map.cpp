@@ -10,8 +10,8 @@ Map::Map() {
 
     //Here we will add as many textures as needed, need yet to be determined
     TextureManager::Instance()->load("dirt", "./images/maptexture/dirt.png", Game::renderer_);
-    TextureManager::Instance()->load("grass", "./images/maptexture/grass.png", Game::renderer_);
     TextureManager::Instance()->load("water", "./images/maptexture/water.png", Game::renderer_);
+    TextureManager::Instance()->load("grass_1l", "./images/maptexture/grasstile_oneleaf.png", Game::renderer_);
 
     // sdl source and dest rects
     src_ = dest_ = {0, 0, 64, 64};
@@ -45,12 +45,14 @@ void Map::DrawMap(Position center){
 
             switch(type) {
                 case 1: name = "dirt" ; break;
-                case 2: name = "grass"; break;
+                case 2: name = "grass_1l"; break;
                 case 3: name = "water"; break;
                 default: name = ""; break;
             }
             if(name != "") 
-                TextureManager::Instance()->Draw(name,src_ , {64*height, 64*width, src_.w, src_.h}, Game::renderer_);
+                TextureManager::Instance()->Draw(name,src_ ,
+                                                 {64*height - center.x, 64*width - center.y, src_.w, src_.h},
+                                                 Game::renderer_);
             // Here I use TextureManager from texture_manager.cpp
         }
     }

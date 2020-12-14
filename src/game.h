@@ -34,6 +34,7 @@ class Game {
     static SDL_Renderer* renderer_;
 
   private:
+    int width_, height_;
     bool is_running_;
     int count_ = 0;
     SDL_Window* window_;

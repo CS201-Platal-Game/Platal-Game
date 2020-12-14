@@ -27,6 +27,8 @@ Game::~Game() {
 
 void Game::Init(const char* title, int xpos, int ypos, int width, int height,
                 bool fullscreen) {
+    width_ = width;
+    height_ = height;
     int flags = 0;
     if (fullscreen)
         flags = SDL_WINDOW_FULLSCREEN;
@@ -90,7 +92,7 @@ void Game::Render() {
 
     player_->Render();
 
-    FontManager::Instance()->Draw("retganon", "PLATAL GAME!", 250, 250,
+    FontManager::Instance()->Draw("retganon", "PLATAL GAME!", 250, 0,
                                   {200, 50, 50}, renderer_);
 
     SDL_RenderPresent(renderer_);

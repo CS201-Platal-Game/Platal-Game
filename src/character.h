@@ -38,9 +38,6 @@ class Character {
 
 class Protagonist : public Character {
   public:
-    struct Velocity {
-        int xVel, yVel;
-    };
     struct Accel {
         int terminalVelocity, speedUp, sloDown;
     };
@@ -56,7 +53,12 @@ class Protagonist : public Character {
     // We move depending on the state of the velocity 
     void Move();
 
+    void Render();
+
+    Velocity GetVelocity() { return velocity_; }
+
   private:
+    Position viewport_center_;
     Velocity velocity_{ 0, 0 };
     Stats stats_;
     Accel accel_ = {32, 4, 8};
