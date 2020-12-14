@@ -1,5 +1,6 @@
 #include "object.h"
 #include "game.h"
+#include "utils/texture_manager.h"
 
 Object::Object() {} // TODO
 Object::~Object() {}
@@ -59,6 +60,15 @@ bool Object::InteractCollision(Character character) {
         // Might want to prevent the character from moving if there is a collision
     }
     return (x_collision || y_collision);
+}
+
+void Object::Render() {
+    TextureManager::Instance()->drawFrame(textureId_,
+                                          position_.x, position_.y,
+                                          32, 32, // size (is this correct? or is it 64x64?)
+                                          1, 0, // row, frame
+                                          Game::renderer_);
+
 }
 
 Portal::Portal(int width, int height, int map_id) {
