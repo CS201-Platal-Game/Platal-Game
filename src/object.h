@@ -38,7 +38,11 @@ class Object {
     bool collidable_;
     Position position_; // possibly the up-left position of the object,
                         // subject to changes
+
+    // TODO: obj_id and char_id
+    // GetObjId() and GetCharId() are implemented.  
     int obj_id;
+    
 
     // TODO: texture
 };

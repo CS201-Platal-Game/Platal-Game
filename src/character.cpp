@@ -1,5 +1,6 @@
 #include "character.h"
 #include "game.h"
+#include "utils/texture_manager.h"
 
 Character::Character() {}
 
@@ -19,6 +20,17 @@ Position Character::GetPosition() {
     return position_;
 }
 
+Position* Character::GetPositionPointer() {
+    return &position_;
+}
+
+void Character::Render() {
+    TextureManager::Instance()->draw(name_, position_.x, position_.y, 64, 64, Game::renderer_);
+}
+
+int Character::GetCharId() {
+    return char_id;
+}
 
 /********* PROTAGONIST *********/
 Protagonist::Protagonist() {
@@ -36,24 +48,24 @@ void Protagonist::HandleInput(SDL_Event event) {
         case SDLK_LEFT:
             orientation_ = kLeft;
             velocity_.yVel = 0;
-            velocity_.xVel = 0;
+            //velocity_.xVel = 0;
             break;
         
         case SDLK_RIGHT:
             orientation_ = kRight;
             velocity_.yVel = 0;
-            velocity_.xVel = 0;
+            //velocity_.xVel = 0;
             break;
 
         case SDLK_UP:
             orientation_ = kUp;
-            velocity_.yVel = 0;
+            //velocity_.yVel = 0;
             velocity_.xVel = 0;
             break;
 
         case SDLK_DOWN:
             orientation_ = kDown;
-            velocity_.yVel = 0;
+            //velocity_.yVel = 0;
             velocity_.xVel = 0;
             break;
         default:
@@ -63,20 +75,20 @@ void Protagonist::HandleInput(SDL_Event event) {
 
 void Protagonist::Move() {
     // The orientation allows us to determine what the last pressed key is
-    const Uint8* event_array = SDL_GetKeyboardState(NULL);
+    const Uint8* event_array = SDL_GetKeyboardState(nullptr);
     switch (orientation_){
         case kLeft:
             // update the velocities so they increase if a key is being pressed or fall back to zero when a key isn't being pressed
             if( event_array[SDL_SCANCODE_LEFT] ) {
-                if( velocity_.xVel > -64 ) { // We want to limit the velocity in any direction at 64
-                    velocity_.xVel -= 8;
-                    if( velocity_.xVel < -64 ) { // We check after increasing that we are not above the limit
-                        velocity_.xVel = 64;
+                if( velocity_.xVel > -accel_.terminalVelocity ) { // We want to limit the velocity in any direction; originally at 64
+                    velocity_.xVel -= accel_.speedUp;
+                    if( velocity_.xVel < -accel_.terminalVelocity ) { // We check after increasing that we are not above the limit
+                        velocity_.xVel = accel_.terminalVelocity;
                     }
                 }
             }
             else if( velocity_.xVel < 0){
-                    velocity_.xVel += 16; // value subject to change
+                    velocity_.xVel += accel_.sloDown; // value subject to change
                     // we now treat the case where we overshoot 0
                     if( velocity_.xVel > 0){
                         velocity_.xVel = 0;
@@ -86,52 +98,52 @@ void Protagonist::Move() {
         
         case kRight:
             if( event_array[SDL_SCANCODE_RIGHT] ) {
-                if( velocity_.xVel < 64 ) { 
-                    velocity_.xVel += 8;
-                    if( velocity_.xVel > 64 ) { 
-                        velocity_.xVel = 64;
+                if( velocity_.xVel < accel_.terminalVelocity ) {
+                    velocity_.xVel += accel_.speedUp;
+                    if( velocity_.xVel > accel_.terminalVelocity ) {
+                        velocity_.xVel = accel_.terminalVelocity;
                     }
                 }
             }
             else if( velocity_.xVel > 0){
-                    velocity_.xVel -= 16; 
+                    velocity_.xVel -= accel_.sloDown;
                     if( velocity_.xVel < 0){
                         velocity_.xVel = 0;
                     }
             }
             break;
         
-        case kUp:
-            if( event_array[SDL_SCANCODE_UP] ) {
-                if( velocity_.yVel < 64 ) { 
-                    velocity_.yVel += 8;
-                    if( velocity_.yVel > 64 ) { 
-                        velocity_.yVel = 64;
+        case kDown:
+            if( event_array[SDL_SCANCODE_DOWN] ) {
+                if( velocity_.yVel < accel_.terminalVelocity ) {
+                    velocity_.yVel += accel_.speedUp;
+                    if( velocity_.yVel > accel_.terminalVelocity ) {
+                        velocity_.yVel = accel_.terminalVelocity;
                     }
                 }
             }
             else if( velocity_.yVel > 0){
-                    velocity_.yVel -= 16; 
+                    velocity_.yVel -= accel_.sloDown;
                     if( velocity_.yVel < 0){
                         velocity_.yVel = 0;
                     }
             }
             break;
 
-        case kDown:
-            if( event_array[SDL_SCANCODE_DOWN] ) {
-                if( velocity_.yVel > -64 ) { 
-                    velocity_.yVel -= 8;
-                    if( velocity_.yVel < -64 ) { 
-                        velocity_.yVel = 64;
+        case kUp:
+            if( event_array[SDL_SCANCODE_UP] ) {
+                if( velocity_.yVel > -accel_.terminalVelocity ) {
+                    velocity_.yVel -= accel_.speedUp;
+                    if( velocity_.yVel < -accel_.terminalVelocity ) {
+                        velocity_.yVel = accel_.terminalVelocity;
                     }
                 }
             }
             else if( velocity_.yVel < 0){
-                    velocity_.yVel += 16; 
-                    if( velocity_.yVel > 0){
-                        velocity_.yVel = 0;
-                    }
+                velocity_.yVel += accel_.sloDown;
+                if( velocity_.yVel > 0){
+                    velocity_.yVel = 0;
+                }
             }
             break;
         
@@ -144,4 +156,41 @@ void Protagonist::Move() {
     
     //Move the protag up or down
     position_.y += velocity_.yVel;
+}
+
+void NPC::MoveRoute() {
+    if (moving_ ) {
+        if (route_.empty()) {
+            moving_ = false;
+        }
+        else {
+            Direction direction = route_.back();
+            route_.pop_back();
+            
+            switch (direction) {
+                case kLeft:
+                    position_.x -= 8;
+                    break;
+
+                case kRight:
+                    position_.x += 8;
+                    break;
+                
+                case kUp:
+                    position_.y -= 8;
+                    break;
+                
+                case kDown:
+                    position_.y += 8;
+                    break;
+                
+                case stop:
+                    moving_ = false;
+                    break;
+                
+                default:
+                    break;
+            }
+        }
+    }
 }

@@ -91,12 +91,15 @@ TextureManager::~TextureManager() {
     while(iter != textureMap.end())
     {
         texture = iter->second;
-        delete texture;
+        SDL_DestroyTexture(texture);
         iter++;
     }
 
 
 }
 // Chris here, I might have to add something with Draw, need to check //
+void TextureManager::Draw(std::string id, SDL_Rect src_, SDL_Rect dest_, SDL_Renderer* renderer){
+    SDL_RenderCopy(renderer, textureMap[id], &src_, &dest_);
+} // Not RenderCopyEX, just RenderCopy , still recognizes
 
 
