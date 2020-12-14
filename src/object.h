@@ -24,9 +24,11 @@ class Object {
     Object Copy();
 
     // Allows the player to interact with the object
+    // Will most likely be implemented in the subclasses
+    // that use it
     void InteractButton();
 
-    // Check if the player is colliding with the object
+    // Checks if the player is colliding with the object
     bool InteractCollision(Character character);
 
     // TODO: set texture

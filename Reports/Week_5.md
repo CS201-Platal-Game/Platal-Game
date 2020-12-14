@@ -23,6 +23,7 @@ Next week, I will continue working on this, as I need some help in order to comp
 - This week I implemented NPC remove and add, and had to update my previous implementations for the Class Map (addobject, removeobject, etc).
 
 ## Thomas Tressel
+This week I agreed upon the implementation and uses of the Interact methods for the Object class with my team. I also started working on the Reset and CheckCycle methods for the Dialogue class, but was unable to finish the latter. I plan on continuing to work on it this week.
 
 ## Tuna Yapakçı
 

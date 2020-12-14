@@ -56,6 +56,9 @@ public:
     // Verifies if the graph is cycle-free. Returns true on success.
     bool CheckCycle();
 
+    // Auxiliary function for CheckCycle()
+    bool CheckCycleUtil(DialogueNode* node, bool visited[]);
+
 private:
     DialogueNode* head_;
     int current;

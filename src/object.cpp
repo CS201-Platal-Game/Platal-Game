@@ -41,12 +41,6 @@ Object Object::Copy() {
     return new_object;
 }
 
-void Object::InteractButton() {
-    if (SDL_GetKeyboardState(NULL)[SDL_SCANCODE_E]) {
-        // Have the object be affected, not sure how to do this
-    }
-}
-
 bool Object::InteractCollision(Character character) {
     // Checks if the object is collidable and if the character is currently colliding with it.
 
@@ -56,14 +50,14 @@ bool Object::InteractCollision(Character character) {
     bool height_condition = true; // position_.y < character.position_.y + character.rect_h && character.position_.y < position_.y + height_
     bool x_collision = false;
     bool y_collision = false;
-    if (collidable_) {
-        if (height_condition) {
-            y_collision = true;
-        } else if (width_condition) {
-            x_collision = true;
-        }
+    if (height_condition) {
+        y_collision = true;
+    } else if (width_condition) {
+        x_collision = true;
     }
-    // Might want to prevent the character from moving if there is a collision.
+    if (collidable_ && (y_collision || x_collision)) {
+        // Might want to prevent the character from moving if there is a collision
+    }
     return (x_collision || y_collision);
 }
 
