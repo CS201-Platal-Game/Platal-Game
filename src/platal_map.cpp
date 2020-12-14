@@ -1,9 +1,14 @@
 #include "platal_map.h"
+#include "utils/texture_manager.h"
+#include "game.h"
 
 
 //Chris here changing stuff for the map part, changes still need to be made, 
 // texture1 = TextureManager::LoadTexture("....")
 // Here we will add as many textures as needed, need yet to be determined
+
+// Nina has completely forgotten how to use the texture manager pls help
+// grasstile_oneleaf_ = TextureManager::load("grass1", "grasstile_oneleaf.png", Game::renderer_); //load the element so we are able to reference it later
 
 
 void Map::DrawMap(Position position) {
