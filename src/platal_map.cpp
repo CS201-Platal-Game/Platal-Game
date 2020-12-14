@@ -50,7 +50,7 @@ void Map::DrawMap(Position center){
                 default: name = ""; break;
             }
             if(name != "") 
-                TextureManager::Instance()->Draw(name,src_ , {32*width, 32*height, src_.w, src_.h}, Game::renderer_);
+                TextureManager::Instance()->Draw(name,src_ , {64*height, 64*width, src_.w, src_.h}, Game::renderer_);
             // Here I use TextureManager from texture_manager.cpp
         }
     }

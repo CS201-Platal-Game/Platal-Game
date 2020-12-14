@@ -30,13 +30,11 @@ MapBundle csv2map(const std::string& filename){
             getline(file, line, ',');
             int n = stoi(line);
             tmp.push_back(n);
-            std::cout << n << ", ";
         }
         getline(file, line, '\n'); //by default, the last element of each line doesn't have a comma
         int n = stoi(line);
         tmp.push_back(n);
         aout.push_back(tmp);
-        std::cout << n << "," << std::endl;
     }
-    return {b, a, aout};
+    return {a, b, aout};
 }
