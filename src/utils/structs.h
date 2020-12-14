@@ -23,3 +23,7 @@ struct Position {
         return ((x == other.x) && (y == other.y));
     }
 };
+
+struct Velocity {
+    int xVel, yVel;
+};

@@ -3,6 +3,7 @@
 #include "stats.h"
 #include "utils/structs.h"
 #include <string>
+#include <list>
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
 
@@ -10,7 +11,8 @@ enum Direction {
     kLeft = 0,
     kRight,
     kUp,
-    kDown
+    kDown,
+    stop
 };
 
 class Character {
@@ -18,24 +20,26 @@ class Character {
     Character();
     Character(const std::string& name, const Position& position);
     ~Character();
-
+    int GetCharId();
     std::string GetName();
     Position GetPosition();
-    SDL_Rect rect_{};
+    Position* GetPositionPointer();
+    SDL_Rect rect_;
     void Render();
-    void Update(); //TODO: implement update method
+    void Update();
 
   protected:
     std::string name_;
+    int char_id;
     Position position_{ 0, 0 };
     Direction orientation_; // e.g. protag is facing up/down/etc.
-    // TODO: sprites, draw and load; call texture manager in render method
+    // TODO: sprites
 };
 
 class Protagonist : public Character {
   public:
-    struct Velocity {
-        int xVel, yVel;
+    struct Accel {
+        int terminalVelocity, speedUp, sloDown;
     };
 
     // inherit constructors
@@ -49,9 +53,15 @@ class Protagonist : public Character {
     // We move depending on the state of the velocity 
     void Move();
 
+    void Render();
+
+    Velocity GetVelocity() { return velocity_; }
+
   private:
+    Position viewport_center_;
     Velocity velocity_{ 0, 0 };
     Stats stats_;
+    Accel accel_ = {32, 4, 8};
     // TODO: inventories?
 };
 
@@ -63,6 +73,7 @@ class NPC : public Character {
     void AddDialogue(Dialogue* const dialogue);
 
     // NPC follows a fixed route, or stand still if interrupted / empty route_.
+    // Only functions if moving_ is true, pops last element from route_ and goes in that direction
     void MoveRoute();
 
     // Triggers conversations or actions.
@@ -70,6 +81,7 @@ class NPC : public Character {
     void Interact();
 
   private:
-    std::vector<Direction> route_;     // NPC fixed movements.
+    bool moving_ = false;
+    std::list<Direction> route_;     // NPC fixed movements, the next move is located at the back, to add a new move just push to the front.
     std::vector<Dialogue*> dialogues_; // NPC possible dialogues.
 };
