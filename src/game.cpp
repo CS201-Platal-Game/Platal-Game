@@ -27,6 +27,8 @@ Game::~Game() {
 
 void Game::Init(const char* title, int xpos, int ypos, int width, int height,
                 bool fullscreen) {
+    width_ = width;
+    height_ = height;
     int flags = 0;
     if (fullscreen)
         flags = SDL_WINDOW_FULLSCREEN;
@@ -42,7 +44,7 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height,
 
         renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
         if (renderer_) {
-            SDL_SetRenderDrawColor(renderer_, 255, 255, 255, 255);
+            SDL_SetRenderDrawColor(renderer_, 0, 0, 0, 0);//255, 255, 255, 255);
             std::cout << "renderer created..." << std::endl;
         }
 
@@ -50,6 +52,7 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height,
     } else
         is_running_ = false;
     current_map_ = new Map();
+    current_map_->LoadMap("./maps/room.csv");
 
     // create the game character
     // might need to store that on the heap
@@ -89,7 +92,7 @@ void Game::Render() {
 
     player_->Render();
 
-    FontManager::Instance()->Draw("retganon", "PLATAL GAME!", 250, 250,
+    FontManager::Instance()->Draw("retganon", "PLATAL GAME!", 250, 0,
                                   {200, 50, 50}, renderer_);
 
     SDL_RenderPresent(renderer_);

@@ -25,7 +25,8 @@ Position* Character::GetPositionPointer() {
 }
 
 void Character::Render() {
-    TextureManager::Instance()->draw(name_, position_.x, position_.y, 64, 64, Game::renderer_);
+    TextureManager::Instance()->Draw(name_, {0, 0, 32, 32},
+                                     {position_.x, position_.y, 64, 64}, Game::renderer_);
 }
 
 int Character::GetCharId() {
@@ -40,6 +41,8 @@ Protagonist::Protagonist() {
 Protagonist::Protagonist(const std::string &name, const Position &position)
     : Character(name, position) {
   stats_ = Stats();
+  viewport_center_ = position;
+  position_ = {0,0};
 }
 
 
@@ -157,6 +160,14 @@ void Protagonist::Move() {
     //Move the protag up or down
     position_.y += velocity_.yVel;
 }
+
+void Protagonist::Render() {
+    TextureManager::Instance()->Draw(name_, {0, 0, 32, 32},
+                                     {viewport_center_.x, viewport_center_.y, 64, 64}, Game::renderer_);
+}
+
+
+/********* NPC *********/
 
 void NPC::MoveRoute() {
     if (moving_ ) {

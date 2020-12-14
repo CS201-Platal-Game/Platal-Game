@@ -35,49 +35,16 @@ bool TextureManager::load(std::string id, std::string filename, SDL_Renderer* re
     return true;
 }
 
-void TextureManager::draw(std::string id, int x, int y,
-                          int width, int height,
-                          SDL_Renderer* renderer, SDL_RendererFlip flip) {
-    // creates source and destination rectangles
-    SDL_Rect source;
-    SDL_Rect destination;
-
-    // just setting dimensions and positionxs
-    source.x = 0;
-    source.y = 0;
-    source.x = 0;
-    source.y = 0;
-    source.w = destination.w = width;
-    source.h = destination.h = height;
-    destination.x = x;
-    destination.y = y;
-
+void TextureManager::Draw(std::string id, SDL_Rect src, SDL_Rect dest, SDL_Renderer* renderer, SDL_RendererFlip flip) {
     // this does the same as RenderCopy but has more parameters
     // copies a portion of the texture to current rendering target (w/ rotation and/or flip around a given origin)
-    SDL_RenderCopyEx(renderer, textureMap[id], &source, &destination, 0, 0, flip);
+    SDL_RenderCopyEx(renderer, textureMap[id], &src, &dest, 0, 0, flip);
 }
 
-void TextureManager::drawFrame(std::string id, int x, int y,
-                               int width, int height,
-                               int row, int frame,
-                               SDL_Renderer *renderer,
-                               SDL_RendererFlip flip) {
-
-    // creates source and destination rectangles
-    SDL_Rect source;
-    SDL_Rect destination;
-
-    // just setting dimensions and positions
-    source.x = width * frame;
-    source.y = height * (row - 1);
-    source.w = destination.w = width;
-    source.h = destination.h = height;
-    destination.x = x;
-    destination.y = y;
-
+void TextureManager::DrawFrame(std::string id, SDL_Rect src, SDL_Rect dest, SDL_Renderer *renderer, SDL_RendererFlip flip) {
     // this does the same as RenderCopy but has more parameters
     // copies a portion of the texture to current rendering target (w/ rotation and/or flip around a given origin)
-    SDL_RenderCopyEx(renderer, textureMap[id], &source, &destination, 0, 0, flip);
+    SDL_RenderCopyEx(renderer, textureMap[id], &src, &dest, 0, 0, flip);
 
 }
 
@@ -97,9 +64,5 @@ TextureManager::~TextureManager() {
 
 
 }
-// Chris here, I might have to add something with Draw, need to check //
-void TextureManager::Draw(std::string id, SDL_Rect src_, SDL_Rect dest_, SDL_Renderer* renderer){
-    SDL_RenderCopy(renderer, textureMap[id], &src_, &dest_);
-} // Not RenderCopyEX, just RenderCopy , still recognizes
 
 
