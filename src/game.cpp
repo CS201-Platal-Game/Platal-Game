@@ -14,10 +14,14 @@ Game::Game() {
 }
 
 Game::~Game() {
-    TextureManager::Instance()->exterminate("player");
-    FontManager::Instance()->Exterminate("retganon");
+    TextureManager::Instance()->Clean();//exterminate("player");
+    std::cout << "cleaned textures" << std::endl;
+    FontManager::Instance()->Clean();//->Exterminate("retganon");
+    std::cout << "cleaned fonts" << std::endl;
     SDL_DestroyRenderer(renderer_);
+    std::cout << "freed renderer" << std::endl;
     SDL_DestroyWindow(window_);
+    std::cout << "freed window" << std::endl;
     // need to add the delete map
     TTF_Quit();
     IMG_Quit();

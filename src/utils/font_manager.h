@@ -26,10 +26,13 @@ class FontManager {
 
     void Exterminate(std::string id);
 
-  private:
+    ~FontManager() { myInstance->Clean(); };
+    void Clean();
+
+private:
     std::map<std::string, TTF_Font*> fontMap; // map with all the fonts
     FontManager() = default;
-    ~FontManager();
+
     static FontManager* myInstance;
 };
 

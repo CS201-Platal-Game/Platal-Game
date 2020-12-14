@@ -24,27 +24,21 @@ class Object {
     Object Copy();
 
     // Allows the player to interact with the object
-    // Will most likely be implemented in the subclasses
-    // that use it
     void InteractButton();
 
-    // Checks if the player is colliding with the object
+    // Check if the player is colliding with the object
     bool InteractCollision(Character character);
 
-    // TODO: set texture
+    void Render();
 
   protected:
+    std::string textureId_; // string to link to texture map
     int width_, height_; // dimension in squares
     bool collidable_;
     Position position_; // possibly the up-left position of the object,
                         // subject to changes
-
-    // TODO: obj_id and char_id
-    // GetObjId() and GetCharId() are implemented.  
     int obj_id;
-    
 
-    // TODO: texture
 };
 
 // Object signalling map changes.

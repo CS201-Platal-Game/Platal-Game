@@ -21,6 +21,9 @@ Map::Map() {
 }
 // The void Map::LoadMap I think has already been coded by Carolina, if not I'll do it
 
+
+// Nina has completely forgotten how to use the texture manager pls help
+// grasstile_oneleaf_ = TextureManager::load("grass1", "grasstile_oneleaf.png", Game::renderer_); //load the element so we are able to reference it later
 void Map::LoadMap(char *filename) {
     struct MapBundle tmp;
     tmp = csv2map(filename);
@@ -31,18 +34,14 @@ void Map::LoadMap(char *filename) {
 }
 
 
-void Map::DrawMap(Position center){
-    // type here is for the type of texture, i.e 
+void Map::DrawMap(Position center) {
 
     int type = 0;
-    std::string name = "";
 
-    for(int width = 0; width < width_ ; width +=1)
-    {
-        for(int height=0; height < height_ ; height +=1)
-        {
+    std::string name;
+    for(int width = 0; width < width_ ; width +=1){
+        for(int height=0; height <height_ ; height +=1){
             type = map_array_[width][height];
-
             switch(type) {
                 case 1: name = "dirt" ; break;
                 case 2: name = "grass_1l"; break;
@@ -75,6 +74,7 @@ Object Map::RemoveObject(int obj_id){
     return Object();
 }
 
+
 void Map::AddNpc(Character npc){
     npc_[npc.GetPositionPointer()]= npc;
 }
@@ -89,4 +89,3 @@ Character Map::RemoveNpc(int char_id){
     }
     return Character();
 }
-

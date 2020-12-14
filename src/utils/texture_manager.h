@@ -29,12 +29,13 @@ class TextureManager {
     // delete SDL texture (yes this is a doctor who reference)
     void exterminate(std::string id);
 
+    ~TextureManager() { myInstance->Clean(); };
+    void Clean();
+
 private:
     std::map<std::string, SDL_Texture*> textureMap; // map with all SDL textures
     TextureManager()= default;
-    ~TextureManager();
     static TextureManager* myInstance;
-
 };
 
 // not sure this is 100% necessary but might make things easier
