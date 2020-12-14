@@ -25,6 +25,8 @@ bool Question::checkCorrect() {
 };
 
 void Question::renderQuestion() { // TODO: implement this
+    // since we are using keyboard controls this needs to be done such that
+    // when an option is selected it changes color
 
 };
 

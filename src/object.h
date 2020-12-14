@@ -29,10 +29,10 @@ class Object {
     // Check if the player is colliding with the object
     bool InteractCollision(Character character);
 
-    // TODO: set texture - add a rendering method + load texture
+    void Render();
 
   protected:
-    // TODO: add texture id
+    std::string textureId_; // string to link to texture map
     int width_, height_; // dimension in squares
     bool collidable_;
     Position position_; // possibly the up-left position of the object,
