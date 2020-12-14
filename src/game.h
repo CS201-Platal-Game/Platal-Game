@@ -6,6 +6,14 @@
 
 class Game {
   public:
+    // this stays just in the unlikely case that we wish to make game a singleton
+    /*static Game* Instance(){
+        if (myInstance == 0){
+            myInstance = new Game();
+        }
+        return myInstance;
+    }*/
+
     Game();
     ~Game();
 
@@ -31,4 +39,5 @@ class Game {
     SDL_Window* window_;
     Map* current_map_;
     Protagonist* player_;
+    static Game* myInstance;
 };
