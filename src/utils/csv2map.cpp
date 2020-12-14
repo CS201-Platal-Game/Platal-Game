@@ -3,12 +3,12 @@
 #include <vector>
 using namespace std;
 
-vector<vector<double>> csv2map(string filename){
+vector<vector<int>> csv2map(string filename){
 
     ifstream file;
     file.open(filename);
 
-    vector<vector<double>> aout;
+    vector<vector<int>> aout;
     string line = "0";
     int a, b;
 
@@ -18,15 +18,15 @@ vector<vector<double>> csv2map(string filename){
     b = stoi(line);
     getline(file, line, '\n');
     for (int i =0; i < b; i++){
-        vector<double> tmp;
+        vector<int> tmp;
         for (int j = 0; j < a-1; j++){
             string line = "0";
             getline(file, line, ',');
-            double n = stof(line);
+            int n = stoi(line);
             tmp.push_back(n);
         }
         getline(file, line, '\n'); //by default, the last element of each line doesn't have a comma
-        double n = stof(line);
+        int n = stoi(line);
         tmp.push_back(n);
         aout.push_back(tmp);
     }
