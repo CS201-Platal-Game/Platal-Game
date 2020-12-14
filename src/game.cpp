@@ -50,6 +50,7 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height,
     } else
         is_running_ = false;
     current_map_ = new Map();
+    current_map_->LoadMap("./maps/room.csv");
 
     // create the game character
     // might need to store that on the heap

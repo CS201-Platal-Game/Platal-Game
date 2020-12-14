@@ -1,5 +1,6 @@
 #include "platal_map.h"
 #include "game.h" // added game.h, just in case
+#include "utils/csv2map.h"
 //Chris here changing stuff for the map part, changes still need to be made, 
 
 
@@ -7,17 +8,20 @@
 Map::Map() {
     // The textures we have for the moment are in Platal-Game -> images ->
 
-    TextureManager::Instance()->load("dirt", "maptexture/dirt.png", Game::renderer_);
-    TextureManager::Instance()->load("grass", "maptexture/grass.png", Game::renderer_);
-    TextureManager::Instance()->load("water", "maptexture/water.png", Game::renderer_);
+    TextureManager::Instance()->load("dirt", "./images/maptexture/dirt.png", Game::renderer_);
+    TextureManager::Instance()->load("grass", "./images/maptexture/grass.png", Game::renderer_);
+    TextureManager::Instance()->load("water", "./images/maptexture/water.png", Game::renderer_);
 
      //Here we will add as many textures as needed, need yet to be determined
-
-
-src_.w = src_.h = 32 ; 
+    src_.w = src_.h = 32;
+    width_ = height_ = 0;
 
 }
 // The void Map::LoadMap I think has already been coded by Carolina, if not I'll do it
+
+void Map::LoadMap(char *filename) {
+    map_array_ = csv2map(filename);
+}
 
 
 void Map::DrawMap(Position center){

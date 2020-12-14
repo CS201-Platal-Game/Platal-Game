@@ -85,3 +85,7 @@ bin
 # fonts
 fonts/*.txt
 fonts/*.zip
+
+# valgrind
+vgcore*
+massif.out*
