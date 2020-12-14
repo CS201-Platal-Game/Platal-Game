@@ -14,6 +14,8 @@ Game::Game() {
 }
 
 Game::~Game() {
+    TextureManager::Instance()->exterminate("player");
+    FontManager::Instance()->Exterminate("retganon");
     SDL_DestroyRenderer(renderer_);
     SDL_DestroyWindow(window_);
     // need to add the delete map
@@ -53,6 +55,7 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height,
     // might need to store that on the heap
     player_ = new Protagonist("player", { width/2, height/2 });
     TextureManager::Instance()->load("player", "./images/sprites/littleman1.png", renderer_);
+    FontManager::Instance()->Load("retganon", "./fonts/retganon.ttf", 16);
 }
 
 void Game::HandleEvents() {
@@ -86,12 +89,8 @@ void Game::Render() {
 
     player_->Render();
 
-    // begin font demo
-    FontManager::Instance()->Load("retganon", "./fonts/retganon.ttf", 16);
     FontManager::Instance()->Draw("retganon", "PLATAL GAME!", 250, 250,
                                   {200, 50, 50}, renderer_);
-    FontManager::Instance()->Exterminate("retganon");
-    // end font demo
 
     SDL_RenderPresent(renderer_);
 }
