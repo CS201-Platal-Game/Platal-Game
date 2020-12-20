@@ -1,35 +1,32 @@
-#include "quiz_questions.h"
+#include "quiz.h"
 
-Question::Question(std::string question,
-                   std::string op1,
-                   std::string op2,
-                   std::string op3,
-                   std::string op4,
-                   std::string ans){
-
-    questionText_ = question;
-    option1_ = op1;
-    option2_ = op2;
-    option3_ = op3;
-    option4_ = op4;
-    answer_ = ans;
-    chosen_ = "default";
-
+Question::Question(const std::string& question_text,
+                   const std::string& answer) {
+    question_text_ = question_text;
+    answer_ = answer;
 }
 
-bool Question::checkCorrect() {
-    if (chosen_ == answer_){
+void Question::AddOption(const std::string& option) {
+    options_.push_back(option);
+}
+
+void Question::SetOptions(const std::vector<std::string>& options) {
+    options_ = options;
+}
+
+bool Question::CheckCorrect() {
+    if (chosen_ == answer_) {
         return true;
     }
     return false;
 }
 
-void Question::renderQuestion() { // TODO: implement this
+void Question::RenderQuestion() { // TODO: implement this
     // since we are using keyboard controls this needs to be done such that
     // when an option is selected it changes color
-
 }
 
-void Question::pickOption(){  //TODO: implement this
-    // the idea is that when a person clicks on an option, it sets answer equal to the option clicked.
+void Question::PickOption() { // TODO: implement this
+    // the idea is that when a person clicks on an option, it sets answer equal
+    // to the option clicked.
 }
