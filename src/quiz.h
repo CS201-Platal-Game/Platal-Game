@@ -1,19 +1,44 @@
 #pragma once
+
 #include <string>
-#include "quiz_questions.h"
+#include <vector>
 
-class Quiz{
-    Quiz(); // basic constructor
-    // constructor for 5 questions
-    // not sure if we should leave it like this or create a constructor that works for n questions
+class Question {
+    // constructor
+    // TODO: create list of constant questions.
+    Question(const std::string& question_text, const std::string& answer);
 
-    Quiz(Question *questions, int); //TODO: make this a vector (n qs)
-    void displayScore(); // give total score at the end
-    bool pass(); // condition for completing challenge, eg if at least 3/5 questions correct
+    void AddOption(const std::string& option);
 
-private:
-    int correctAnswers_; // stores number of correct answers
-    int passCondition_; // minimum level of correct answers needed to pass
-    Question *questionArray_; // array of questions
+    void SetOptions(const std::vector<std::string>& options);
 
+    void RenderQuestion();
+
+    bool CheckCorrect();
+
+    void PickOption(); // TODO: think about how to implement this
+
+  private:
+    std::string question_text_;        // question to ask
+    std::vector<std::string> options_; // options available
+    std::string answer_; // correct answer to question [make indexes/pters]
+    std::string chosen_; // answer chosen by user
+};
+
+class Quiz {
+    Quiz(const std::vector<Question>& questions);
+
+    void SetPass(int pass_condition); // optional, should be at 3
+
+    void ExecuteQuiz(); // TODO e.g. runs RenderQuestions for each question.
+
+    void DisplayScore(); // TODO
+
+    // Return the verdict of the Quiz.
+    bool Pass();
+
+  private:
+    int correct_answers_ = 0; // stores number of correct answers
+    int pass_condition_ = 3;  // minimum level of correct answers needed to pass
+    std::vector<Question> questions_;
 };
