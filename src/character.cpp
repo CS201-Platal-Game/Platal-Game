@@ -24,7 +24,7 @@ Position* Character::GetPositionPointer() {
     return &position_;
 }
 
-void Character::Render() {
+void Character::Render(int nFrames, int mSpeed) {
     TextureManager::Instance()->Draw(name_, {0, 0, 32, 32},
                                      {position_.x, position_.y, 64, 64}, Game::renderer_);
 }

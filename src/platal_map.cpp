@@ -10,7 +10,7 @@ Map::Map() {
 
     //Here we will add as many textures as needed, need yet to be determined
     TextureManager::Instance()->load("dirt", "./images/maptexture/dirt.png", Game::renderer_);
-    TextureManager::Instance()->load("water", "./images/maptexture/water.png", Game::renderer_);
+    TextureManager::Instance()->load("water", "./images/maptexture/watertile1.png", Game::renderer_);
     TextureManager::Instance()->load("grass_1l", "./images/maptexture/grasstile_oneleaf.png", Game::renderer_);
 
     // sdl source and dest rects

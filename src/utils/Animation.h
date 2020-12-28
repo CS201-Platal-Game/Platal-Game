@@ -7,20 +7,51 @@
 
 #ifndef PLATAL_GAME_ANIMATION_H
 #define PLATAL_GAME_ANIMATION_H
+#include <string>
 
-struct Animation {
-    int id;
-    int frames; //number of frames
-    int speed; //speed of animation
+// I HAVE NO IDEA IF THIS WORKS (probs not)
+// I CAN'T RUN IT BECAUSE MY COMPUTER WON'T COMPILE THE THING :(
+// PLEASE HELP
 
-    Animation()= default; //default constructor which does nothing
-    Animation(int i, int f, int s){
-        id = i;
-        frames = f;
-        speed = s;
-    };
+class AnimatedTexture{
+public:
+    AnimatedTexture();
+    AnimatedTexture(std::string id, int cFrame, int mFrame,
+                    int w, int h,
+                    int posX, int posY);
+    ~AnimatedTexture();
+    void Render(int posX, int PosY);
+    void loadFile(std::string filename);
+    void Update();
+
+private:
+    int currFrame_;
+    int maxFrame_;
+    SDL_Rect frame_;
+    std::string id_;
+    int x_; // indicates position where obj will be rendered
+    int y_;
+    // currently not immediately necessary
+    // but i'm keeping it here because I suspect it will be necessary when we integrate this
+    // with the controls
+    bool animated_;
 
 };
+
+//Old structure
+//struct Animation {
+    //int id;
+    //int frames; //number of frames
+    //int speed; //speed of animation
+
+    //Animation()= default; //default constructor which does nothing
+    //Animation(int i, int f, int s){
+      //  id = i;
+      //  frames = f;
+      //  speed = s;
+   // };
+
+//};
 
 // when using this, remember that we want the initial position of the sprite, if not animated, to be 0
 

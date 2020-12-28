@@ -33,7 +33,10 @@ class Character {
     int char_id;
     Position position_{ 0, 0 };
     Direction orientation_; // e.g. protag is facing up/down/etc.
-    // TODO: sprites, draw and load; call texture manager in render method
+    bool animated_ = false;
+    int frames_ = 0;
+    int speed_ = 100; //delay between frames, in milliseconds
+
 };
 
 class Protagonist : public Character {
