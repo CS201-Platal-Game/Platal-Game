@@ -6,6 +6,7 @@
 
 // static members definition
 SDL_Renderer* Game::renderer_ = nullptr;
+SDL_Window* Game::window_ = nullptr;
 // this stays just in the unlikely case that we wish to make game a singleton
 //Game* Game::myInstance = 0;
 
@@ -73,6 +74,8 @@ void Game::HandleEvents() {
         is_running_ = false;
         break;
     case SDL_KEYDOWN:
+        if (current_map_->IsLegal(player_->GetPosition(), player_->GetVelocity()))
+            std::cout << "illegal" << std::endl;
         player_->HandleInput(event);
         break;
     case SDL_KEYUP:

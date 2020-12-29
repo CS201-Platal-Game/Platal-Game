@@ -57,6 +57,22 @@ void Map::DrawMap(Position center) {
     }
 }
 
+
+bool Map::IsLegal(Position pos, Velocity vel) {
+    int x, y;
+    x = (pos.x + vel.xVel)/64;
+    y = (pos.y + vel.yVel)/64;
+    std::cout << x << ", " << y << std::endl;
+    int vpwidth, vpheight;
+    SDL_GetWindowSize(Game::window_, &vpwidth, &vpheight);
+    vpwidth /= (2 * 64);
+    vpheight /= (2 * 64);
+    if (/*x>=0 and y>=0 and x<width_+vpwidth and y<height_+vpheight and */(map_array_[y+vpheight][x+vpwidth] != 0))
+        return true;
+    return false;
+}
+
+
 //to check 
 void Map::AddObject(Object item) {
     objects_[item.GetPosition()]= item;

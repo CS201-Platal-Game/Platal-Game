@@ -32,12 +32,12 @@ class Game {
     bool Running() { return is_running_; }
 
     static SDL_Renderer* renderer_;
+    static SDL_Window* window_;
 
-  private:
+private:
     int width_, height_;
     bool is_running_;
     int count_ = 0;
-    SDL_Window* window_;
     Map* current_map_;
     Protagonist* player_;
     static Game* myInstance;
