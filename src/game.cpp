@@ -57,7 +57,8 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height,
     } else
         is_running_ = false;
     current_map_ = new Map();
-    current_map_->LoadMap("./maps/room.csv", {3,7});
+    // for the map positions, the y coordinate is weirdly shifted by -2 when compared to the csv...
+    current_map_->LoadMap("./maps/room.csv", {3,5});
 
     // create the game character
     // might need to store that on the heap
