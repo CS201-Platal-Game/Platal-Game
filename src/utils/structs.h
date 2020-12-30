@@ -31,6 +31,10 @@ struct Velocity {
     int xVel, yVel;
 };
 
+struct Accel {
+    int terminalVelocity, speedUp, sloDown;
+};
+
 struct Event {
     unsigned event_id = 0;   // default: null event
     std::string title;       // "Cours magistral: MAA205".
