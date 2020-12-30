@@ -41,4 +41,8 @@ private:
     Map* current_map_;
     Protagonist* player_;
     static Game* myInstance;
+
+    // to skip control input
+    int skip_ = 1000 / 20; // 1000 divided by number of polls per second
+    int timestamp_;
 };

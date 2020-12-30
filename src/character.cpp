@@ -45,7 +45,7 @@ Protagonist::Protagonist(const std::string &name, const Position &position)
   position_ = {0,0};
 }
 
-
+/*
 void Protagonist::HandleInput(SDL_Event event) {
     switch (event.key.keysym.sym) {
         case SDLK_LEFT:
@@ -160,6 +160,7 @@ void Protagonist::Move() {
     //Move the protag up or down
     position_.y += velocity_.yVel;
 }
+ */
 
 void Protagonist::Render() {
     TextureManager::Instance()->Draw(name_, {0, 0, 32, 32},
