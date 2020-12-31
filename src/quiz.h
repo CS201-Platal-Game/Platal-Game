@@ -1,5 +1,6 @@
 #pragma once
-
+#include "SDL2/SDL.h"
+#include "SDL2/SDL_image.h"
 #include <string>
 #include <vector>
 
@@ -16,13 +17,13 @@ class Question {
 
     bool CheckCorrect();
 
-    void PickOption(); // TODO: think about how to implement this
+    void PickOption(SDL_Event event); // TODO: think about how to implement this
 
   private:
     std::string question_text_;        // question to ask
     std::vector<std::string> options_; // options available
     std::string answer_; // correct answer to question [make indexes/pters]
-    std::string chosen_; // answer chosen by user
+    std::vector<std::string>::iterator chosen_; // answer chosen by user
 };
 
 class Quiz {

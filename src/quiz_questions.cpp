@@ -15,7 +15,7 @@ void Question::SetOptions(const std::vector<std::string>& options) {
 }
 
 bool Question::CheckCorrect() {
-    if (chosen_ == answer_) {
+    if (*chosen_ == answer_) {
         return true;
     }
     return false;
@@ -26,7 +26,18 @@ void Question::RenderQuestion() { // TODO: implement this
     // when an option is selected it changes color
 }
 
-void Question::PickOption() { // TODO: implement this
-    // the idea is that when a person clicks on an option, it sets answer equal
-    // to the option clicked.
+void Question::PickOption(SDL_Event event) {
+    switch (event.key.keysym.sym) {
+        case SDLK_UP:
+            if (chosen_ != options_.begin()) {
+                chosen_ = chosen_.prev();
+            }
+            break;
+        case SDLK_DOWN:
+            if (chosen_ != options_.end()-1) {
+                chosen_ = chosen_.next();
+            }
+        default:
+            break;
+    }
 }
