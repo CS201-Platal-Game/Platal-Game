@@ -9,6 +9,8 @@ SDL_Renderer* Game::renderer_ = nullptr;
 // this stays just in the unlikely case that we wish to make game a singleton
 //Game* Game::myInstance = 0;
 
+bool Game::is_in_dialogue = false;
+
 Game::Game() {
     is_running_ = false;
 }
@@ -62,7 +64,10 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height,
     // might need to store that on the heap
     player_ = new Protagonist("player", { width/2, height/2 });
     TextureManager::Instance()->load("player", "./images/sprites/littleman1.png", renderer_);
-    FontManager::Instance()->Load("retganon", "./fonts/retganon.ttf", 16);
+    FontManager::Instance()->Load("retganon10", "./fonts/retganon.ttf", 10);
+    FontManager::Instance()->Load("retganon", "./fonts/retganon.ttf", 50);
+    is_in_dialogue = true;
+    current_dialogue = new Dialogue("./dialogues/test.txt");
 }
 
 void Game::HandleEvents() {
@@ -73,7 +78,12 @@ void Game::HandleEvents() {
         is_running_ = false;
         break;
     case SDL_KEYDOWN:
-        player_->HandleInput(event);
+        if (is_in_dialogue) {
+            current_dialogue->HandleInput(event);
+        }
+        else {
+            player_->HandleInput(event);
+        }
         break;
     case SDL_KEYUP:
         break;
@@ -98,6 +108,10 @@ void Game::Render() {
 
     FontManager::Instance()->Draw("retganon", "PLATAL GAME!", 250, 0,
                                   {200, 50, 50}, renderer_);
+
+    if (is_in_dialogue) {
+        current_dialogue->Render();
+    }
 
     SDL_RenderPresent(renderer_);
 }

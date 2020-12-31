@@ -1,5 +1,6 @@
 #pragma once
-
+#include "SDL2/SDL.h"
+#include "SDL2/SDL_image.h"
 #include <string>
 #include <utility>
 #include <vector>
@@ -16,8 +17,12 @@ public:
     void PrintLine();
     void PrintResponses();
 
+    std::string getLine();
+    std::vector<std::pair<std::string, DialogueNode*>> getResponses();
+
     // Goes to the next DialogueNode.
     void Next(int response_id);
+
 
 private:
     // Line of NPCs or objects.
@@ -59,9 +64,14 @@ public:
     // Auxiliary function for CheckCycle()
     bool CheckCycleUtil(DialogueNode* node, bool visited[]);
 
+    void Render();
+
+    void HandleInput(SDL_Event key);
+
 private:
     DialogueNode* head_;
-    int current;
+    DialogueNode* current;
+    int selected_response;
     // At the moment, each response is stored twice, one here and
     // one in DialogueNode. Feel free to optimize this.
     std::vector<std::string> response_lines_;

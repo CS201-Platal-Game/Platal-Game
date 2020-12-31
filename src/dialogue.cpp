@@ -1,4 +1,7 @@
 #include "dialogue.h"
+#include "game.h"
+#include "utils/texture_manager.h"
+#include "utils/font_manager.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -19,22 +22,33 @@ void DialogueNode::PrintLine() {
 }
 
 void DialogueNode::PrintResponses() {
-    for (int i = 0; i < responses_.size(); i += 1) {
+    int number_of_responses = responses_.size();
+    for (int i = 0; i < number_of_responses; i += 1) {
         std::cout << std::get<0>(responses_[i]) << std::endl;
     };
 }
 
+std::string DialogueNode::getLine() {
+    return line_;
+}
+
+std::vector<std::pair<std::string, DialogueNode*>> DialogueNode::getResponses() {
+    return responses_;
+}
+
 // Goes to the next DialogueNode.
 void DialogueNode::Next(int response_id) {
-    //TODO
+    //TODO we dont need it anymore (I hope)
 }
 
 Dialogue::Dialogue(const char filename[]) {
     this->Import(filename);
+    selected_response = 0;
 }
 
 Dialogue::~Dialogue() {
-    for (int i = 0; i < nodes_.size(); i += 1) {
+    int number_of_nodes = nodes_.size();
+    for (int i = 0; i < number_of_nodes; i += 1) {
         delete nodes_[i];
     }
 }
@@ -59,6 +73,7 @@ bool Dialogue::Import(const char *filename) {
     std::string line_reader;
     if(!dialogue) {
         std::cout << "Couldn't open file" << std::endl;
+        return false;
     }
     getline(dialogue,line_reader);
     int sample_n = std::stoi(line_reader);
@@ -73,28 +88,93 @@ bool Dialogue::Import(const char *filename) {
         response_lines_.push_back(line_reader);
     };
     getline(dialogue,line_reader);
-    int edge_n = std::stoi(line_reader);
+    //int edge_n = std::stoi(line_reader);
     int from, with, to;
     while (dialogue >> from >> with >> to) {
         this->AddEdge(from, with, to);
     };
     head_ = nodes_[0];
-    current = 0;
+    current = head_;
+    return true;
 }
 
 // Prints the current line and possible responses, then call Next().
 void Dialogue::Advance() {
-    nodes_[current]->PrintLine();
-    nodes_[current]->PrintResponses();
+    //TODO we probably don't need this either
+    current->PrintLine();
+    current->PrintResponses();
 }
 
+void Dialogue::Render() {
+    SDL_Rect dialog_rect = {0, 460, 800, 240};
+    SDL_SetRenderDrawBlendMode(Game::renderer_, SDL_BLENDMODE_BLEND);
+    SDL_SetRenderDrawColor(Game::renderer_, 0, 0, 0, 196);
+    SDL_RenderFillRect(Game::renderer_, &dialog_rect);
+
+    FontManager::Instance()->Draw("retganon", current->getLine(), 20, 480,
+                                  {200, 50, 50}, Game::renderer_);
+    int number_of_responses = current->getResponses().size();
+
+    if (number_of_responses == 0) {
+        FontManager::Instance()->Draw("retganon", "Press Z to continue", 20, 530,
+                                      {100, 100, 100}, Game::renderer_);
+    }
+
+    for (int i = 0; i < number_of_responses; i += 1) {
+        std::string respo = "-" + std::get<0>(current->getResponses()[i]);
+        if (i == selected_response) {
+            FontManager::Instance()->Draw("retganon", respo, 20 + i * respo.length() * 20, 530,
+                                          {175, 175, 255}, Game::renderer_);
+        }
+        else {
+            FontManager::Instance()->Draw("retganon", respo, 20 + i * respo.length() * 20, 530,
+                                          {255, 255, 255}, Game::renderer_);
+        }
+    };
+}
+
+void Dialogue::HandleInput(SDL_Event event) {
+    switch (event.key.keysym.sym) {
+        case SDLK_z:
+            if (current->getResponses().size() == 0) {
+                Game::is_in_dialogue = false;
+                this->Reset();
+                selected_response = 0;
+            }
+            else {
+                current = std::get<1>(current->getResponses()[selected_response]);
+                selected_response = 0;
+                this->Advance();
+            }
+            break;
+        case SDLK_LEFT:
+            if (selected_response > 0) {
+                selected_response += -1;
+            }
+            break;
+        case SDLK_RIGHT: {
+            int number_of_responses = current->getResponses().size();
+
+            if (selected_response < number_of_responses - 1) {
+                selected_response += 1;
+            }
+            break;
+        }
+        default:
+            break;
+    }
+}
 
 // Resets the conversation, e.g. the protag talks to the NPC again.
 void Dialogue::Reset() {
+    current = head_;
     //TODO - implement
 }
 
 // Verifies if the graph is cycle-free. Returns true on success.
 bool Dialogue::CheckCycle() {
     //TODO - implement
+    return false;
 }
+
+
