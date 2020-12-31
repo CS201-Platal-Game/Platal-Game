@@ -80,13 +80,11 @@ void Game::HandleEvents() {
         is_running_ = false;
         break;
     case SDL_KEYDOWN:
-        current_map_->HandleInput(event);
-
         if (is_in_dialogue) {
             current_dialogue->HandleInput(event);
         }
         else {
-            player_->HandleInput(event);
+            current_map_->HandleInput(event);
         }
         break;
     case SDL_KEYUP:
