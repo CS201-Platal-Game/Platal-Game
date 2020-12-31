@@ -32,6 +32,8 @@ class Map {
 
     int map_id_; // the name of the location the map represents
 
+    static Direction protag_orientation_;
+
   private:
     // We will probably have textures here, not yet defined
     int width_, height_; // width and height of the map, in squares
@@ -46,7 +48,6 @@ class Map {
 
     // movement
     Position center_position_;
-    Direction protag_orientation_ = kRight;
     Velocity protag_velocity_{0,0};
     Accel protag_accel_ = {32, 8, 16};
 };

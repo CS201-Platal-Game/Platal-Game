@@ -90,7 +90,7 @@ void Game::Update() {
     // update player
     int tmp = SDL_GetTicks();
     if (tmp - timestamp_ >= skip_) {
-        if (!current_map_->IsLegal())
+        if (!current_map_->IsLegal()) // movement is illegal
             std::cout << "illegal" << std::endl;
         else
             current_map_->Move();

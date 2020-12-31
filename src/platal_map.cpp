@@ -3,7 +3,7 @@
 #include "utils/csv2map.h"
 //Chris here changing stuff for the map part, changes still need to be made, 
 
-
+Direction Map::protag_orientation_ = kDown;
 
 Map::Map() {
     // The textures we have for the moment are in Platal-Game -> images ->
