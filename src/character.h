@@ -25,7 +25,8 @@ class Character {
     Position GetPosition();
     Position* GetPositionPointer();
     SDL_Rect rect_;
-    void Render();
+
+    virtual void Render();
     void Update(); //TODO: implement update method
 
   protected:
@@ -38,10 +39,6 @@ class Character {
 
 class Protagonist : public Character {
   public:
-    struct Accel {
-        int terminalVelocity, speedUp, sloDown;
-    };
-
     // inherit constructors
     Protagonist();
     Protagonist(const std::string& name, const Position& position);
@@ -55,13 +52,13 @@ class Protagonist : public Character {
 
     void Render();
 
-    Velocity GetVelocity() { return velocity_; }
+    //Velocity GetVelocity() { return velocity_; }
 
   private:
     Position viewport_center_;
-    Velocity velocity_{ 0, 0 };
+    //Velocity velocity_{ 0, 0 };
     Stats stats_;
-    Accel accel_ = {32, 4, 8};
+    //Accel accel_ = {1, 1, 1};
     // TODO: inventories?
 };
 
