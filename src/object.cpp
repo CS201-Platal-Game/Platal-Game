@@ -59,19 +59,11 @@ bool Object::InteractCollision(Character character) {
 
     // We haven't yet done the position and width/height attributed for the character class,
     // hence I set them as true for the moment
-    bool width_condition = true;  // position_.x < character.position_.x + character.rect_w && character.position_.x < position_.x + width_
-    bool height_condition = true; // position_.y < character.position_.y + character.rect_h && character.position_.y < position_.y + height_
-    bool x_collision = false;
-    bool y_collision = false;
-    if (height_condition) {
-        y_collision = true;
-    } else if (width_condition) {
-        x_collision = true;
-    }
-    if (collidable_ && (y_collision || x_collision)) {
-        // Might want to prevent the character from moving if there is a collision
-    }
-    return (x_collision || y_collision);
+    if (!collidable_) return false;
+
+    SDL_Rect character_hitbox_ = character.GetHitbox();
+    bool intersection = SDL_HasIntersection(&hitbox_, &character_hitbox_);
+    return intersection;
 }
 
 void Object::Render() {
