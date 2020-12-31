@@ -1,0 +1,12 @@
+4
+Welcome! This is a test dialogue, do you like it?
+Sample Line 1
+Happy to hear that!
+:(
+3
+It's cool!
+No it's bad.
+Response 2
+2
+0 0 2
+0 1 3

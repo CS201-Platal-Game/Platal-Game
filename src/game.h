@@ -34,12 +34,15 @@ class Game {
     static SDL_Renderer* renderer_;
     static SDL_Window* window_;
 
-private:
+    static bool is_in_dialogue;
+
+  private:
     int width_, height_;
     bool is_running_;
     int count_ = 0;
     Map* current_map_;
     Protagonist* player_;
+    Dialogue* current_dialogue;
     static Game* myInstance;
 
     // to skip control input
