@@ -30,12 +30,12 @@ void Question::PickOption(SDL_Event event) {
     switch (event.key.keysym.sym) {
         case SDLK_UP:
             if (chosen_ != options_.begin()) {
-                chosen_ = chosen_.prev();
+                chosen_ = std::prev(chosen_, 1);
             }
             break;
         case SDLK_DOWN:
             if (chosen_ != options_.end()-1) {
-                chosen_ = chosen_.next();
+                chosen_ = std::next(chosen_, 1);
             }
         default:
             break;
