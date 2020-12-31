@@ -14,8 +14,13 @@ class Map {
     Map(); // added empty default constructor, could be changed later
     ~Map(); // the map deconstructor
 
-    void LoadMap(char *filename); // load map from file
-    void DrawMap(Position position); // draw map to screen
+    void LoadMap(char *filename, Position starting_pos); // load map from file
+    void DrawMap(); // draw map to screen
+
+    // player movement
+    bool IsLegal();
+    void HandleInput(SDL_Event event);
+    void Move();
 
     // interactions with the npcs
     void AddNpc(Character npc);
@@ -27,9 +32,12 @@ class Map {
 
     int map_id_; // the name of the location the map represents
 
+    static Direction protag_orientation_;
+
   private:
     // We will probably have textures here, not yet defined
     int width_, height_; // width and height of the map, in squares
+    int vpwidth_, vpheight_; // viewport dimensions
   
     //int** map_array_; // loaded from csv
     std::vector<std::vector<int>> map_array_;
@@ -37,7 +45,10 @@ class Map {
     std::map <Position*, Character> npc_; // map from pointers to position on screen to object
   
     SDL_Rect src_, dest_; // attributes used while rendering
-    // SDL_Texture* texture1
-    // SDL_Texture* texture2 
+
+    // movement
+    Position center_position_;
+    Velocity protag_velocity_{0,0};
+    Accel protag_accel_ = {32, 8, 16};
 };
 

@@ -4,7 +4,7 @@
 // a person is 8 coordinates tall and 8 coordinates wide
 // 1 coord = 4 pixels
 // screen dimension constants
-const int SCREEN_WIDTH = 800;
+const int SCREEN_WIDTH = 896;
 const int SCREEN_HEIGHT = 640;
 
 Game* game = nullptr;
