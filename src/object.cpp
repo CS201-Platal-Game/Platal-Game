@@ -9,20 +9,32 @@ Object::Object(int width, int height, bool collidable) {
     // Initializing all the attributes. We set x = y = 0 for the moment,
     // subject to change depending on whether or not we want it
     // as an argument in the constructor
-    width_ = width;
-    height_ = height;
+    hitbox_.x = 0;
+    hitbox_.y = 0;
+    hitbox_.w = width;
+    hitbox_.h = height;
     collidable_ = collidable;
-    position_ = Position();
-    position_.x = 0;
-    position_.y = 0;
+    position_ = {0, 0};
+}
+
+Object::Object(int width, int height, bool collidable, int x, int y ) {
+    // Initializing all the attributes. We set x = y = 0 for the moment,
+    // subject to change depending on whether or not we want it
+    // as an argument in the constructor
+    hitbox_.x = 0;
+    hitbox_.y = 0;
+    hitbox_.w = width;
+    hitbox_.h = height;
+    collidable_ = collidable;
+    position_ = {x, y};
 }
 
 int Object::GetWidth() {
-    return width_;
+    return hitbox_.w;
 }
 
 int Object::GetHeight() {
-    return height_;
+    return hitbox_.h;
 }
 
 int Object::GetObjId() {
@@ -38,7 +50,7 @@ Position Object::GetPosition() {
 }
 
 Object Object::Copy() {
-    Object new_object(width_, height_, collidable_);
+    Object new_object(hitbox_.w, hitbox_.h, collidable_);
     return new_object;
 }
 
@@ -70,8 +82,8 @@ void Object::Render() {
 }
 
 Portal::Portal(int width, int height, int map_id) {
-    width_ = width;
-    height_ = height;
+    hitbox_.w = width;
+    hitbox_.h = height;
     map_id_ = map_id;
     collidable_ = false;
 }
