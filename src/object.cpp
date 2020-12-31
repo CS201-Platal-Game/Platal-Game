@@ -49,16 +49,19 @@ Position Object::GetPosition() {
     return position_;
 }
 
+SDL_Rect Object::GetHitbox() {
+    hitbox_.x = position_.x;
+    hitbox_.y = position_.y;
+    return hitbox_;
+}
+
 Object Object::Copy() {
     Object new_object(hitbox_.w, hitbox_.h, collidable_);
     return new_object;
 }
 
 bool Object::InteractCollision(Character character) {
-    // Checks if the object is collidable and if the character is currently colliding with it.
-
-    // We haven't yet done the position and width/height attributed for the character class,
-    // hence I set them as true for the moment
+    // Checks if the object is collidable and if the character is currently colliding with it.SS
     if (!collidable_) return false;
 
     SDL_Rect character_hitbox_ = character.GetHitbox();
