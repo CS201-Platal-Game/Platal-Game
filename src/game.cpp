@@ -6,6 +6,7 @@
 
 // static members definition
 SDL_Renderer* Game::renderer_ = nullptr;
+SDL_Window* Game::window_ = nullptr;
 // this stays just in the unlikely case that we wish to make game a singleton
 //Game* Game::myInstance = 0;
 
@@ -56,7 +57,8 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height,
     } else
         is_running_ = false;
     current_map_ = new Map();
-    current_map_->LoadMap("./maps/room.csv");
+    // for the map positions, the y coordinate is weirdly shifted by -2 when compared to the csv...
+    current_map_->LoadMap("./maps/room.csv", {3,5});
 
     // create the game character
     // might need to store that on the heap
@@ -73,7 +75,7 @@ void Game::HandleEvents() {
         is_running_ = false;
         break;
     case SDL_KEYDOWN:
-        player_->HandleInput(event);
+        current_map_->HandleInput(event);
         break;
     case SDL_KEYUP:
         break;
@@ -86,13 +88,20 @@ void Game::HandleEvents() {
 
 void Game::Update() {
     // update player
-    player_->Move();
+    int tmp = SDL_GetTicks();
+    if (tmp - timestamp_ >= skip_) {
+        if (!current_map_->IsLegal()) // movement is illegal
+            std::cout << "illegal" << std::endl;
+        else
+            current_map_->Move();
+        timestamp_ = SDL_GetTicks();
+    }
 }
 
 void Game::Render() {
     SDL_RenderClear(renderer_);
     // where we add stuff to render in rendering order {map -> chars -> menus}
-    current_map_->DrawMap(player_->GetPosition());
+    current_map_->DrawMap();
 
     player_->Render();
 
