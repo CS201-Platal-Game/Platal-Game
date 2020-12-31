@@ -20,6 +20,7 @@ class Object {
     int GetObjId();
     bool IsCollidable();
     Position GetPosition();
+    SDL_Rect GetHitbox();
 
     // Returns a copy of the object.
     Object Copy();
