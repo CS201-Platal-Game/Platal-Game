@@ -9,20 +9,32 @@ Object::Object(int width, int height, bool collidable) {
     // Initializing all the attributes. We set x = y = 0 for the moment,
     // subject to change depending on whether or not we want it
     // as an argument in the constructor
-    width_ = width;
-    height_ = height;
+    hitbox_.x = 0;
+    hitbox_.y = 0;
+    hitbox_.w = width;
+    hitbox_.h = height;
     collidable_ = collidable;
-    position_ = Position();
-    position_.x = 0;
-    position_.y = 0;
+    position_ = {0, 0};
+}
+
+Object::Object(int width, int height, bool collidable, int x, int y ) {
+    // Initializing all the attributes. We set x = y = 0 for the moment,
+    // subject to change depending on whether or not we want it
+    // as an argument in the constructor
+    hitbox_.x = 0;
+    hitbox_.y = 0;
+    hitbox_.w = width;
+    hitbox_.h = height;
+    collidable_ = collidable;
+    position_ = {x, y};
 }
 
 int Object::GetWidth() {
-    return width_;
+    return hitbox_.w;
 }
 
 int Object::GetHeight() {
-    return height_;
+    return hitbox_.h;
 }
 
 int Object::GetObjId() {
@@ -37,29 +49,24 @@ Position Object::GetPosition() {
     return position_;
 }
 
+SDL_Rect Object::GetHitbox() {
+    hitbox_.x = position_.x;
+    hitbox_.y = position_.y;
+    return hitbox_;
+}
+
 Object Object::Copy() {
-    Object new_object(width_, height_, collidable_);
+    Object new_object(hitbox_.w, hitbox_.h, collidable_);
     return new_object;
 }
 
 bool Object::InteractCollision(Character character) {
-    // Checks if the object is collidable and if the character is currently colliding with it.
+    // Checks if the object is collidable and if the character is currently colliding with it.SS
+    if (!collidable_) return false;
 
-    // We haven't yet done the position and width/height attributed for the character class,
-    // hence I set them as true for the moment
-    bool width_condition = true;  // position_.x < character.position_.x + character.rect_w && character.position_.x < position_.x + width_
-    bool height_condition = true; // position_.y < character.position_.y + character.rect_h && character.position_.y < position_.y + height_
-    bool x_collision = false;
-    bool y_collision = false;
-    if (height_condition) {
-        y_collision = true;
-    } else if (width_condition) {
-        x_collision = true;
-    }
-    if (collidable_ && (y_collision || x_collision)) {
-        // Might want to prevent the character from moving if there is a collision
-    }
-    return (x_collision || y_collision);
+    SDL_Rect character_hitbox_ = character.GetHitbox();
+    bool intersection = SDL_HasIntersection(&hitbox_, &character_hitbox_);
+    return intersection;
 }
 
 void Object::Render() {
@@ -70,8 +77,8 @@ void Object::Render() {
 }
 
 Portal::Portal(int width, int height, int map_id) {
-    width_ = width;
-    height_ = height;
+    hitbox_.w = width;
+    hitbox_.h = height;
     map_id_ = map_id;
     collidable_ = false;
 }

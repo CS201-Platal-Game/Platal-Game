@@ -1,9 +1,11 @@
 #pragma once
-
+#include "SDL2/SDL.h"
+#include "SDL2/SDL_image.h"
 #include <string>
 #include <vector>
 
 class Question {
+  public:
     // constructor
     // TODO: create list of constant questions.
     Question(const std::string& question_text, const std::string& answer);
@@ -16,16 +18,17 @@ class Question {
 
     bool CheckCorrect();
 
-    void PickOption(); // TODO: think about how to implement this
+    void PickOption(SDL_Event event); // TODO: think about how to implement this
 
   private:
     std::string question_text_;        // question to ask
     std::vector<std::string> options_; // options available
     std::string answer_; // correct answer to question [make indexes/pters]
-    std::string chosen_; // answer chosen by user
+    std::vector<std::string>::iterator chosen_; // answer chosen by user
 };
 
 class Quiz {
+  public:
     Quiz(const std::vector<Question>& questions);
 
     void SetPass(int pass_condition); // optional, should be at 3
@@ -33,6 +36,8 @@ class Quiz {
     void ExecuteQuiz(); // TODO e.g. runs RenderQuestions for each question.
 
     void DisplayScore(); // TODO
+
+    void HandleInput(SDL_Event event);
 
     // Return the verdict of the Quiz.
     bool Pass();

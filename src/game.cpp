@@ -68,8 +68,8 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height,
     TextureManager::Instance()->load("player", "./images/sprites/littleman1.png", renderer_);
     FontManager::Instance()->Load("retganon10", "./fonts/retganon.ttf", 10);
     FontManager::Instance()->Load("retganon", "./fonts/retganon.ttf", 50);
-    is_in_dialogue = true;
-    current_dialogue = new Dialogue("./dialogues/test.txt");
+    game_state_ = dialogue;
+    current_dialogue_ = new Dialogue("./dialogues/test.txt");
 }
 
 void Game::HandleEvents() {
@@ -80,11 +80,18 @@ void Game::HandleEvents() {
         is_running_ = false;
         break;
     case SDL_KEYDOWN:
-        if (is_in_dialogue) {
-            current_dialogue->HandleInput(event);
-        }
-        else {
-            current_map_->HandleInput(event);
+        switch (game_state_) {
+            case world:
+                current_map_->HandleInput(event);
+                break;
+            case dialogue:
+                current_dialogue_->HandleInput(event);
+                break;
+            case quiz:
+                current_quiz_->HandleInput(event);
+                break;
+            default:
+                break;
         }
         break;
     case SDL_KEYUP:
@@ -98,13 +105,22 @@ void Game::HandleEvents() {
 
 void Game::Update() {
     // update player
-    int tmp = SDL_GetTicks();
-    if (tmp - timestamp_ >= skip_) {
-        if (!current_map_->IsLegal()) // movement is illegal
-            std::cout << "illegal" << std::endl;
-        else
-            current_map_->Move();
-        timestamp_ = SDL_GetTicks();
+    switch (game_state_) {
+        case world: {
+            int tmp = SDL_GetTicks();
+            if (tmp - timestamp_ >= skip_) {
+                if (!current_map_->IsLegal()) { // movement is illegal
+                    std::cout << "illegal" << std::endl;
+                }
+                else {
+                    current_map_->Move();
+                }
+                timestamp_ = SDL_GetTicks();
+            }
+            break;
+        }
+        default:
+            break;
     }
 }
 
@@ -118,8 +134,8 @@ void Game::Render() {
     FontManager::Instance()->Draw("retganon", "PLATAL GAME!", 250, 0,
                                   {200, 50, 50}, renderer_);
 
-    if (is_in_dialogue) {
-        current_dialogue->Render();
+    if (game_state_ == dialogue) {
+        current_dialogue_->Render();
     }
 
     SDL_RenderPresent(renderer_);
