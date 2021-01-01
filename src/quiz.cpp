@@ -10,3 +10,5 @@ void Quiz::SetPass(int pass_condition) {
 }
 
 bool Quiz::Pass() { return correct_answers_ >= pass_condition_; }
+
+void Quiz::HandleInput(SDL_Event event) {}
