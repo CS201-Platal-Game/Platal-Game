@@ -5,6 +5,7 @@
 #include <vector>
 
 class Question {
+  public:
     // constructor
     // TODO: create list of constant questions.
     Question(const std::string& question_text, const std::string& answer);
@@ -27,6 +28,7 @@ class Question {
 };
 
 class Quiz {
+  public:
     Quiz(const std::vector<Question>& questions);
 
     void SetPass(int pass_condition); // optional, should be at 3
@@ -34,6 +36,8 @@ class Quiz {
     void ExecuteQuiz(); // TODO e.g. runs RenderQuestions for each question.
 
     void DisplayScore(); // TODO
+
+    void HandleInput(SDL_Event event);
 
     // Return the verdict of the Quiz.
     bool Pass();
