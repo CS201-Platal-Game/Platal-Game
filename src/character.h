@@ -24,7 +24,7 @@ class Character {
     std::string GetName();
     Position GetPosition();
     Position* GetPositionPointer();
-    SDL_Rect rect_;
+    SDL_Rect GetHitbox();
 
     virtual void Render();
     void Update(); //TODO: implement update method
@@ -33,6 +33,7 @@ class Character {
     std::string name_;
     int char_id;
     Position position_{ 0, 0 };
+    SDL_Rect hitbox_;
     Direction orientation_; // e.g. protag is facing up/down/etc.
     // TODO: sprites, draw and load; call texture manager in render method
 };
