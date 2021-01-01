@@ -204,6 +204,22 @@ void Map::Move() {
 
     //Move the protag up or down
     center_position_.y += protag_velocity_.yVel;
+
+    SDL_Rect new_hitbox_ = {32, 32, center_position_.x, center_position_.y}; 
+
+    std::map<Position, Object>::iterator objects_it;
+    for (objects_it = objects_.begin(); objects_it != objects_.end(); objects_it ++) {
+        Object object_ = objects_it->second;
+        if (!object_.IsCollidable()) continue;
+
+        SDL_Rect obj_hitbox_ = object_.GetHitbox();
+        bool intersection = SDL_HasIntersection(&obj_hitbox_, &new_hitbox_);
+        if (intersection) {
+            center_position_.x -= protag_velocity_.xVel;
+            center_position_.y -= protag_velocity_.yVel;
+            break;
+        }
+    }
 }
 
 

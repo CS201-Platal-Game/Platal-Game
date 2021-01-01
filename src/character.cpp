@@ -8,6 +8,10 @@ Character::Character(const std::string& name, const Position& position) {
     name_ = name;
     position_ = position;
     orientation_ = kDown;
+    hitbox_.h = 32;
+    hitbox_.w = 32;
+    hitbox_.x = position.x;
+    hitbox_.y = position.y;
 }
 
 Character::~Character() {}
@@ -31,6 +35,13 @@ void Character::Render() {
 
 int Character::GetCharId() {
     return char_id;
+}
+
+SDL_Rect Character::GetHitbox() {
+    // Update the hitbox x and y before returning it
+    hitbox_.x = position_.x;
+    hitbox_.y = position_.y;
+    return hitbox_;
 }
 
 /********* PROTAGONIST *********/
