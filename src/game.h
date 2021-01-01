@@ -2,7 +2,14 @@
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
 #include "platal_map.h"
+#include "quiz.h"
 #include <iostream>
+
+enum GameState {
+    world = 0,
+    dialogue,
+    quiz
+};
 
 class Game {
   public:
@@ -42,8 +49,10 @@ class Game {
     int count_ = 0;
     Map* current_map_;
     Protagonist* player_;
-    Dialogue* current_dialogue;
+    Dialogue* current_dialogue_;
+    Quiz* current_quiz_;
     static Game* myInstance;
+    GameState game_state_ = dialogue;
 
     // to skip control input
     int skip_ = 1000 / 20; // 1000 divided by number of polls per second
