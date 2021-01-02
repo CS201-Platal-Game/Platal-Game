@@ -1,14 +1,18 @@
 #pragma once
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
+#include "dialogue.h"
+#include "menu.h"
 #include "platal_map.h"
 #include "quiz.h"
 #include <iostream>
 
 enum GameState {
-    world = 0,
-    dialogue,
-    quiz
+    kWorld = 0,
+    kDialogue,
+    kQuiz,
+    kMenu,
+    kQuit
 };
 
 class Game {
@@ -40,8 +44,7 @@ class Game {
 
     static SDL_Renderer* renderer_;
     static SDL_Window* window_;
-
-    static bool is_in_dialogue;
+    static GameState game_state_;
 
   private:
     int width_, height_;
@@ -51,8 +54,8 @@ class Game {
     Protagonist* player_;
     Dialogue* current_dialogue_;
     Quiz* current_quiz_;
+    Menu* current_menu_;
     static Game* myInstance;
-    GameState game_state_ = dialogue;
 
     // to skip control input
     int skip_ = 1000 / 20; // 1000 divided by number of polls per second
