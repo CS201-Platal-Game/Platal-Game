@@ -7,17 +7,12 @@
 #include "quiz.h"
 #include <iostream>
 
-enum GameState {
-    kWorld = 0,
-    kDialogue,
-    kQuiz,
-    kMenu,
-    kQuit
-};
+enum GameState { kWorld = 0, kDialogue, kQuiz, kMenu, kQuit };
 
 class Game {
   public:
-    // this stays just in the unlikely case that we wish to make game a singleton
+    // this stays just in the unlikely case that we wish to make game a
+    // singleton
     /*static Game* Instance(){
         if (myInstance == 0){
             myInstance = new Game();
@@ -31,14 +26,14 @@ class Game {
     void Init(const char* title,
               int xpos, // x position where the window is initialized
               int ypos, // y position where the window is initialized
-              int width, int height,
-              bool fullscreen);
+              int width, int height, bool fullscreen);
 
     void HandleEvents(); // reacts to user input
     void Update();       // gets the objects to react to user input
     void Render();       // renders all elements to screen
 
-    void ChangeMap(int map_id); // TODO think about how this is gonna be implemented - for later
+    void ChangeMap(int map_id); // TODO think about how this is gonna be
+                                // implemented - for later
 
     bool Running() { return is_running_; }
 
@@ -54,7 +49,7 @@ class Game {
     Protagonist* player_;
     Dialogue* current_dialogue_;
     Quiz* current_quiz_;
-    Menu* current_menu_;
+    MainMenu* main_menu_;
     static Game* myInstance;
 
     // to skip control input

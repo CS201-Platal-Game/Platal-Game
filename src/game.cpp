@@ -56,10 +56,13 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height,
         is_running_ = true;
     } else
         is_running_ = false;
+
     current_map_ = new Map();
     // for the map positions, the y coordinate is weirdly shifted by -2 when
     // compared to the csv...
     current_map_->LoadMap("./maps/room.csv", {3, 5});
+
+    main_menu_ = new MainMenu();
 
     // create the game character
     // might need to store that on the heap
@@ -103,7 +106,7 @@ void Game::HandleEvents() {
             current_quiz_->HandleInput(event);
             break;
         case kMenu:
-            current_menu_->HandleInput(event);
+            main_menu_->HandleInput(event);
         default:
             break;
         }
@@ -153,7 +156,7 @@ void Game::Render() {
     if (game_state_ == kDialogue) {
         current_dialogue_->Render();
     } else if (game_state_ == kMenu) {
-        current_menu_->Render();
+        main_menu_->Render();
     }
 
     SDL_RenderPresent(renderer_);
