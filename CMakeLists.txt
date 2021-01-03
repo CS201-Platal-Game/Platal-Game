@@ -36,7 +36,8 @@ add_library(platal_lib
             src/quiz.cpp
             src/quiz_questions.cpp
             src/utils/font_manager.cpp
-            src/utils/texture_manager.cpp)
+            src/utils/texture_manager.cpp
+            src/menu.cpp)
 
 add_executable(platal src/main.cpp)
 target_link_libraries(platal platal_lib ${SDL2_LIBS})
