@@ -53,6 +53,6 @@ class Game {
     static Game* myInstance;
 
     // to skip control input
-    int skip_ = 1000 / 20; // 1000 divided by number of polls per second
-    int timestamp_;
+    int skip_ = 40;
+    int timestamp_ = SDL_GetTicks();
 };
