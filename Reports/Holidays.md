@@ -1,6 +1,10 @@
 ## Christian Roubert
 
 ## Duong Dac
+- For week 6, I refined the `Clock` and `Event` manager.
+- I made some edit on Carolina's implementation of the `Quiz`.
+- I got to know from others' work how to render and handle inputs, and created a simple `MainMenu`.
+- For next week, I will set up an interface for `Clock` and `Event`.
 
 ## Elouan Gros
 - over the holidays, I set up the map rendering and character movement
