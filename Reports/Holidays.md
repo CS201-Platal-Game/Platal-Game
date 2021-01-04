@@ -1,4 +1,7 @@
 ## Christian Roubert
+- Over the holidays I looked into a "Status" object that would appear showing the status of the character
+- This renders different status similar to the health or mana we see in some games
+- The next week I will work on refining that and then start working on other objects
 
 ## Duong Dac
 - For week 6, I refined the `Clock` and `Event` manager.
