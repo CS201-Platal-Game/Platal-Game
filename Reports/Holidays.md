@@ -23,6 +23,10 @@
 ## Thomas Tressel
 
 ## Tuna Yapakçı
+- during the holidays, I worked on rendering dialogues
+- I added Render() and HandleInput() methods to Dialogue class, and completed the functions necessary to display the dialogue
+- I fixed the font manager so that the width of the text gets computed correctly
+- Next week I'll do the finishing touches on dialogue rendering and start integrating dialogue to other objects
 
 ## Antoine Babu
 
