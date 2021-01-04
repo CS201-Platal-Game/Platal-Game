@@ -26,6 +26,10 @@
 
 ## Nazila Sharifi Amina
 
+- During the holidays I worked on implementing an audio system using SDL.
+
+- Next week will continue to work on this system an finish implementing it.
+
 ## Thomas Tressel
 
 ## Tuna Yapakçı
