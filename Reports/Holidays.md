@@ -18,7 +18,17 @@
 
 ## Remy Seassau
 
+- over the holidays I worked on setting up collision between objects and characters
+
+- I started work on the keyboard controls for the quiz minigame
+
+- I added game states so that controls for different things would not activate simultaneously
+
 ## Nazila Sharifi Amina
+
+- During the holidays I worked on implementing an audio system using SDL.
+
+- Next week will continue to work on this system an finish implementing it.
 
 ## Thomas Tressel
 
