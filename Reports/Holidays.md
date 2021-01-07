@@ -34,6 +34,8 @@
 - Next week will continue to work on this system an finish implementing it.
 
 ## Thomas Tressel
+- Unfortunately, due to a couple issues, I was unable to work much during the holidays.
+- As my old laptop had started malfunctioning, I got a new one and managed to install everything necessary for the project to compile and run. Afterwards, I was able to complete working on the CheckCycle method for the dialogue class.
 
 ## Tuna Yapakçı
 - during the holidays, I worked on rendering dialogues
