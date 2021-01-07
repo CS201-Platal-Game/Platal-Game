@@ -81,12 +81,43 @@ bool Map::IsLegal(Position pos, Velocity vel) {
     return false;
 }*/
 
+/*
 bool Map::IsLegal(){
     int x, y;
     x = (center_position_.x + vpwidth_/2 + protag_velocity_.xVel)/64;
     y = (center_position_.y + vpheight_/2 + protag_velocity_.yVel)/64;
     std::cout << x << ", " << y << "; " ;
     std::cout << map_array_[y][x] << std::endl;
+    return (x >= 0 and y >= 0 and x < width_ and y < height_ and map_array_[y][x] != 0);
+}
+*/
+
+bool Map::IsLegal(){
+    int x, y;
+    switch (protag_orientation_){
+        case kLeft:
+            x = (center_position_.x + vpwidth_/2 + protag_velocity_.xVel)/64;
+            y = (center_position_.y + vpheight_/2)/64;
+            break;
+        case kRight:
+            x = (center_position_.x + vpwidth_/2 + protag_velocity_.xVel + 63)/64;
+            y = (center_position_.y + vpheight_/2)/64;
+            break;
+        case kUp:
+            x = (center_position_.x + vpwidth_/2)/64;
+            y = (center_position_.y + vpheight_/2 + protag_velocity_.yVel)/64;
+            break;
+        case kDown:
+            x = (center_position_.x + vpwidth_/2)/64;
+            y = (center_position_.y + vpheight_/2 + protag_velocity_.yVel + 63)/64;
+            break;
+        default:
+            x = center_position_.x;
+            y = center_position_.y;
+            break;
+    }
+    //std::cout << x << ", " << y << "; " ;
+    //std::cout << map_array_[y][x] << std::endl;
     return (x >= 0 and y >= 0 and x < width_ and y < height_ and map_array_[y][x] != 0);
 }
 
