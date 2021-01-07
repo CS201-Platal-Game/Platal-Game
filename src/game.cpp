@@ -69,11 +69,11 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height,
     player_ = new Protagonist("player", {width / 2, height / 2});
     TextureManager::Instance()->load(
         "player", "./images/sprites/littleman1.png", renderer_);
-    FontManager::Instance()->Load("retganon10", "./fonts/retganon.ttf", 10);
-    FontManager::Instance()->Load("retganon", "./fonts/retganon.ttf", 50);
+    FontManager::Instance()->Load("retganon10", "./fonts/chary___.ttf", 10);
+    FontManager::Instance()->Load("retganon", "./fonts/chary___.ttf", 50);
 
     // dialogue test
-    game_state_ = kDialogue;
+    game_state_ = kWorld;
     current_dialogue_ = new Dialogue("./dialogues/test.txt");
 }
 
@@ -128,7 +128,8 @@ void Game::Update() {
         int tick = SDL_GetTicks();
         if (tick - timestamp_ >= skip_) {
             if (!current_map_->IsLegal()) { // movement is illegal
-                std::cout << "illegal" << std::endl;
+                //std::cout << "illegal" << std::endl;
+                current_map_->ZeroSpeed();
             } else {
                 current_map_->Move();
             }

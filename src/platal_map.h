@@ -21,6 +21,7 @@ class Map {
     bool IsLegal();
     void HandleInput(SDL_Event event);
     void Move();
+    void ZeroSpeed(){ protag_velocity_ = {0,0}; };
 
     // interactions with the npcs
     void AddNpc(Character npc);
