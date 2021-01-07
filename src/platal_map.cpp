@@ -235,23 +235,27 @@ void Map::Move() {
 
     //Move the protag up or down
     center_position_.y += protag_velocity_.yVel;
-    /*
-    SDL_Rect new_hitbox_ = {center_position_.x, center_position_.y, 32, 32}; 
     
-    std::map<Position, Object>::iterator objects_it;
-    for (objects_it = objects_.begin(); objects_it != objects_.end(); objects_it ++) {
-        Object object_ = objects_it->second;
-        if (!object_.IsCollidable()) continue;
+    SDL_Rect new_hitbox_ = {center_position_.x, center_position_.y, 32, 32}; 
+    std::vector<SDL_Rect> tiles_to_check = GetTiles(new_hitbox_);
 
-        SDL_Rect obj_hitbox_ = object_.GetHitbox();
-        bool intersection = SDL_HasIntersection(&obj_hitbox_, &new_hitbox_);
-        if (intersection) {
-            center_position_.x -= protag_velocity_.xVel;
-            center_position_.y -= protag_velocity_.yVel;
-            break;
+    std::vector<SDL_Rect>::iterator it;
+    for (it = tiles_to_check.begin(); it != tiles_to_check.end(); it++) {
+        SDL_Rect rect = *it;
+        std::vector<Object> vec_obj = objects_[rect];
+
+        std::vector<Object>::iterator vec_it;
+        for (vec_it = vec_obj.begin(); vec_it != vec_obj.end(); vec_it++){
+            if (vec_it->IsCollidable()){
+                SDL_Rect obj_hitbox_ = vec_it->GetHitbox();
+                if (SDL_HasIntersection(&obj_hitbox_, &new_hitbox_)) {
+                    center_position_.x -= protag_velocity_.xVel;
+                    center_position_.y -= protag_velocity_.yVel;
+                    return;
+                }
+            }
         }
     }
-    */
 }
 
 
@@ -282,20 +286,6 @@ Object Map::RemoveObject(int obj_id) {// or maybe its name
     }
     return res;
 }
-
-/*
-// return the object if it was found
-Object Map::RemoveObject(int obj_id){
-    for(std::map<Position,Object>::iterator i = objects_.begin(); i != objects_.end(); i++){
-        if ((i->second).GetObjId()==obj_id){
-            Object res = i->second;
-            objects_.erase(i);
-            return res;
-        }
-    }
-    return Object();
-}
-*/
 
 void Map::AddNpc(Character npc){
     npc_[npc.GetPositionPointer()]= npc;
