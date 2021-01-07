@@ -235,9 +235,9 @@ void Map::Move() {
 
     //Move the protag up or down
     center_position_.y += protag_velocity_.yVel;
-
-    SDL_Rect new_hitbox_ = {32, 32, center_position_.x, center_position_.y}; 
-
+    /*
+    SDL_Rect new_hitbox_ = {center_position_.x, center_position_.y, 32, 32}; 
+    
     std::map<Position, Object>::iterator objects_it;
     for (objects_it = objects_.begin(); objects_it != objects_.end(); objects_it ++) {
         Object object_ = objects_it->second;
@@ -251,14 +251,39 @@ void Map::Move() {
             break;
         }
     }
+    */
 }
 
 
 //to check 
 void Map::AddObject(Object item) {
-    objects_[item.GetPosition()]= item;
+    std::vector<SDL_Rect> tiles = GetTiles(item); 
+    std::vector<SDL_Rect>::iterator it;
+    for (it = tiles.begin(); it != tiles.end(); it ++) {
+        if (objects_.find(*it) == objects_.end()) {
+            std::vector<Object> *list = new std::vector<Object>;
+            objects_[*it] = *list;
+        }
+        objects_[*it].push_back(item);
+    }
 }
 
+Object Map::RemoveObject(int obj_id) {// or maybe its name
+    std::map<SDL_Rect, std::vector<Object>>::iterator map_it;
+    Object res = Object();
+    for (map_it = objects_.begin(); map_it != objects_.end(); map_it++){
+        std::vector<Object>::iterator vec_it;
+        for (vec_it = map_it->second.begin(); vec_it != map_it->second.end(); vec_it++){
+            if (vec_it->GetObjId() == obj_id){
+                res = *vec_it;
+                map_it->second.erase(vec_it);
+            }
+        }
+    }
+    return res;
+}
+
+/*
 // return the object if it was found
 Object Map::RemoveObject(int obj_id){
     for(std::map<Position,Object>::iterator i = objects_.begin(); i != objects_.end(); i++){
@@ -270,7 +295,7 @@ Object Map::RemoveObject(int obj_id){
     }
     return Object();
 }
-
+*/
 
 void Map::AddNpc(Character npc){
     npc_[npc.GetPositionPointer()]= npc;
