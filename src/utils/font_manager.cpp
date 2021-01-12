@@ -18,9 +18,9 @@ bool FontManager::Load(std::string id, std::string filename, int ptsize) {
 
 void FontManager::Draw(std::string id, std::string txt, int x, int y,
                        SDL_Color color, SDL_Renderer * renderer) {
-    SDL_Rect dest = { x, y, 300, 50 };
+    //SDL_Rect dest = {x, y, txt.length()*(size/2), size};
 
-    // TODO: compute the appropriate width of the font lol
+    // TODO: compute the appropriate width of the font lol -done
 
     // create the texture
     SDL_Surface* surface;
@@ -28,7 +28,10 @@ void FontManager::Draw(std::string id, std::string txt, int x, int y,
     SDL_Texture* texture;
     texture = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_FreeSurface(surface);
-
+    int width = 0;
+    int height = 0;
+    SDL_QueryTexture(texture, NULL, NULL, &width, &height);
+    SDL_Rect dest = {x, y, width, height};
 
     SDL_RenderCopy(renderer, texture, NULL, &dest);
     SDL_DestroyTexture(texture);
