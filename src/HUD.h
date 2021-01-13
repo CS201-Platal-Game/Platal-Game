@@ -21,9 +21,9 @@ class HUD {
 		~HUD();
 		HUD(double CurrentGPA, double CurrentRest, double CurrentSocial);
 
-	void GetGPA();
-	void GetRest();
-	void GetSocial();
+	double GetGPA();
+	double GetRest();
+	double GetSocial();
 	void Render();
 	void GPAIncrease(double change);
 	void GPADecrease(double change);

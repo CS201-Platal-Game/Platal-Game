@@ -29,7 +29,9 @@ HUD::HUD(double GPA, double Rest, double Social){
 
 }
 
-void HUD::GetGPA(){
+// Here intially the Get functions were void, but changed to double since we need something returned
+
+double HUD::GetGPA(){
 	return CurrentGPA;
 }
 
@@ -57,11 +59,11 @@ void HUD::SocialDecrease(double change){
 	CurrentSocial -= change;
 }
 
-void HUD::GetRest(){
+double HUD::GetRest(){
 	return CurrentRest;
 }
 
-void HUD::GetSocial(){
+double HUD::GetSocial(){
 	return CurrentSocial;
 }
 
@@ -76,9 +78,9 @@ void HUD::Render() {
     SDL_SetRenderDrawColor(Game::renderer_, 0, 0, 0, 196);
     SDL_RenderFillRect(Game::renderer_, &HUD_rect);
 
-    GPA_stat_string = "Admin has declared your GPA to be" + std::to_string(getGPA()) + "out of" + std::to_string(MaxGPA);
-    Rest_stat_string = "Today your body feels" + std::to_string(getRest()) + "rested out of " + std::to_string(MaxRest);
-    Social_stat_string = "Recent Interactions have filled your social bar to" + std::to_string(getSocial()) + "out of" + std::to_string(MaxSocial);
+    GPA_stat_string = "Admin has declared your GPA to be" + std::to_string(GetGPA()) + "out of" + std::to_string(MaxGPA);
+    Rest_stat_string = "Today your body feels" + std::to_string(GetRest()) + "rested out of " + std::to_string(MaxRest);
+    Social_stat_string = "Recent Interactions have filled your social bar to" + std::to_string(GetSocial()) + "out of" + std::to_string(MaxSocial);
 
 
 
