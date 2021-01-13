@@ -1,6 +1,5 @@
 #include "texture_manager.h"
 
-
 // NOTE - This has not been tested yet because of the bugs
 // and because I need help to run it from my linux virtual machine (I've forgotten how to)
 // based on examples seen, will be debugged and further modified to fit our needs once I get a basic thing working

@@ -1,6 +1,8 @@
 #include "character.h"
 #include "game.h"
 #include "utils/texture_manager.h"
+#include <vector>
+#include <string>
 
 Character::Character(){}
 
@@ -24,7 +26,7 @@ Position* Character::GetPositionPointer() {
     return &position_;
 }
 
-void Character::Render(int nFrames, int mSpeed) {
+void Character::Render() {
     TextureManager::Instance()->Draw(name_, {0, 0, 32, 32},
                                      {position_.x, position_.y, 64, 64}, Game::renderer_);
 }
@@ -161,9 +163,32 @@ void Protagonist::Move() {
     position_.y += velocity_.yVel;
 }
 
-void Protagonist::Render() {
+void Protagonist::Render() { // DO ANIMATION STUFF HERE, use array, this should only be one line
+    // do only on protagonist
+
     TextureManager::Instance()->Draw(name_, {0, 0, 32, 32},
                                      {viewport_center_.x, viewport_center_.y, 64, 64}, Game::renderer_);
+}
+
+// test test
+void Protagonist::CreateAnimationArray(vector<string> files, vector<string> ids){
+    // This is meant to create the array of instances of "AnimatedTexture" based on the input of the files to load
+    // and the IDs.
+    // THESE VECTORS NEED !!!! TO BE OF THE SAME LENGTH !!!!
+
+    int length = files.size(); // gives number of elements in map, i.e. nr of files to load
+    AnimatedTexture textureArray[length] // create an array with the number of files to load
+
+    // fill the array w instances of AnimatedTexture
+    for (i = ids.begin(); i != ids.end(); ++i) {
+        //below - id: , curr frame: 0, max frame (fixed): 6, width x height: 32 x 32, posX posY: viewport.x, viewport.y
+        textureArray[i] = AnimatedTexture(ids[i], 0, 6, 32, 32, viewport.x, viewport.y);
+    }
+    
+    // load the image files into the texture map
+    for (i = files.begin(); i != files.end(); ++i){
+        TextureManager::Instance()->Load(ids[i], files[i], Game::renderer_);
+    }
 }
 
 

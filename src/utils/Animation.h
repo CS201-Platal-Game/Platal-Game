@@ -25,16 +25,14 @@ public:
     void Update();
 
 private:
-    int currFrame_;
-    int maxFrame_;
-    SDL_Rect frame_;
-    std::string id_;
+    int currFrame_; // current frame
+    int maxFrame_; // last frame
+    SDL_Rect frame_; // creates sdl rect object for frame to display
+    std::string id_; // id for loading strip / image
     int x_; // indicates position where obj will be rendered
     int y_;
-    // currently not immediately necessary
-    // but i'm keeping it here because I suspect it will be necessary when we integrate this
-    // with the controls
-    bool animated_;
+    // currently not necessary
+    // bool animated_;
 
 };
 

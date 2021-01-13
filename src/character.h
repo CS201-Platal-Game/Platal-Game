@@ -6,12 +6,13 @@
 #include <list>
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
+#include <vector>
 
 enum Direction {
     kLeft = 0,
-    kRight,
-    kUp,
-    kDown,
+    kRight, // 1
+    kUp, // 2
+    kDown, // 3
     stop
 };
 
@@ -33,7 +34,6 @@ class Character {
     int char_id;
     Position position_{ 0, 0 };
     Direction orientation_; // e.g. protag is facing up/down/etc.
-    bool animated_ = false;
     int frames_ = 0;
     int speed_ = 100; //delay between frames, in milliseconds
 
@@ -58,9 +58,12 @@ class Protagonist : public Character {
 
     void Render();
 
+    void CreateAnimationArray(map<string, string> files);
+
     Velocity GetVelocity() { return velocity_; }
 
   private:
+    AnimatedTexture animationArray_;
     Position viewport_center_;
     Velocity velocity_{ 0, 0 };
     Stats stats_;
