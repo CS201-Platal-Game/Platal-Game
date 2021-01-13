@@ -3,6 +3,7 @@
 #include "platal_map.h"
 #include "utils/font_manager.h"
 #include "utils/texture_manager.h"
+#include "utils/sound_manager.h"
 
 // static members definition
 SDL_Renderer* Game::renderer_ = nullptr;
@@ -37,9 +38,10 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height,
     int flags = 0;
     if (fullscreen)
         flags = SDL_WINDOW_FULLSCREEN;
-
+           
     if (SDL_Init(SDL_INIT_EVERYTHING) == 0 &&
-        IMG_Init(IMG_INIT_PNG) == IMG_INIT_PNG && TTF_Init() == 0) {
+        IMG_Init(IMG_INIT_PNG) == IMG_INIT_PNG && TTF_Init() == 0 &&
+        Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ))  {
         std::cout << "subsystem initialized..." << std::endl;
 
         window_ = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
