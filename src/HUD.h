@@ -30,11 +30,11 @@ class HUD {
 
 	private:
 		// Here we can rename the variables accordingly
-		double CurrentGPA
-		double MaxGPA
-		double CurrentRest
-		double MaxRest
-		double CurrentSocial
-		double MaxSocial
+		double CurrentGPA;
+		double MaxGPA;
+		double CurrentRest;
+		double MaxRest;
+		double CurrentSocial;
+		double MaxSocial;
 
 }
