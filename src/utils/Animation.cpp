@@ -26,11 +26,15 @@ void AnimatedTexture::loadFile(std::string filename){
     TextureManager::Instance()->load(id_, filename, Game::renderer_);
 }
 
-void AnimatedTexture::Render(int posX, int posY) {
+void AnimatedTexture::Render(int posX, int posY, bool reset) {
     // draw a frame to the screen
     // put posX and posY just in case but it should (probably) be viewport_center.x and .y 
+    if (reset){ // if you want to "force" the display of the initial frame
+        frame_ = 0;
+    }
     TextureManager::Instance()->DrawFrame(id_, frame_, {posX, posY, 32, 32}, Game::renderer_);
 }
+
 
 void AnimatedTexture::Update() {
     if (currFrame_ >= maxFrame_){

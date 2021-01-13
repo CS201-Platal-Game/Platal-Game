@@ -20,7 +20,7 @@ public:
                     int w, int h,
                     int posX, int posY);
     ~AnimatedTexture();
-    void Render(int posX, int PosY);
+    void Render(int posX, int PosY, bool reset);
     void loadFile(std::string filename);
     void Update();
 
