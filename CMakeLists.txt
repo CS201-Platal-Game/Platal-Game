@@ -32,6 +32,7 @@ add_library(platal_lib
             src/clock.cpp
             src/stats.cpp
             src/utils/texture_manager.cpp 
+            src/utils/HUD.cpp
             src/utils/Animation.h
             src/quiz.cpp
             src/quiz_questions.cpp
