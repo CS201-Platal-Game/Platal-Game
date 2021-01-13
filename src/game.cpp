@@ -1,22 +1,23 @@
 #include "game.h"
-#include "platal_map.h"
-#include "utils/texture_manager.h"
-#include "utils/font_manager.h"
 #include "SDL2/SDL_ttf.h"
+#include "platal_map.h"
+#include "utils/font_manager.h"
+#include "utils/texture_manager.h"
 
 // static members definition
 SDL_Renderer* Game::renderer_ = nullptr;
+SDL_Window* Game::window_ = nullptr;
 // this stays just in the unlikely case that we wish to make game a singleton
-//Game* Game::myInstance = 0;
+// Game* Game::myInstance = 0;
 
-Game::Game() {
-    is_running_ = false;
-}
+GameState Game::game_state_ = GameState::kWorld;
+
+Game::Game() { is_running_ = false; }
 
 Game::~Game() {
-    TextureManager::Instance()->Clean();//exterminate("player");
+    TextureManager::Instance()->Clean(); // exterminate("player");
     std::cout << "cleaned textures" << std::endl;
-    FontManager::Instance()->Clean();//->Exterminate("retganon");
+    FontManager::Instance()->Clean(); //->Exterminate("retganon");
     std::cout << "cleaned fonts" << std::endl;
     SDL_DestroyRenderer(renderer_);
     std::cout << "freed renderer" << std::endl;
@@ -38,8 +39,7 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height,
         flags = SDL_WINDOW_FULLSCREEN;
 
     if (SDL_Init(SDL_INIT_EVERYTHING) == 0 &&
-        IMG_Init(IMG_INIT_PNG) == IMG_INIT_PNG &&
-        TTF_Init() == 0) {
+        IMG_Init(IMG_INIT_PNG) == IMG_INIT_PNG && TTF_Init() == 0) {
         std::cout << "subsystem initialized..." << std::endl;
 
         window_ = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
@@ -48,21 +48,33 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height,
 
         renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
         if (renderer_) {
-            SDL_SetRenderDrawColor(renderer_, 0, 0, 0, 0);//255, 255, 255, 255);
+            SDL_SetRenderDrawColor(renderer_, 0, 0, 0,
+                                   0); // 255, 255, 255, 255);
             std::cout << "renderer created..." << std::endl;
         }
 
         is_running_ = true;
     } else
         is_running_ = false;
+
     current_map_ = new Map();
-    current_map_->LoadMap("./maps/room.csv");
+    // for the map positions, the y coordinate is weirdly shifted by -2 when
+    // compared to the csv...
+    current_map_->LoadMap("./maps/room.csv", {3, 5});
+
+    main_menu_ = new MainMenu();
 
     // create the game character
     // might need to store that on the heap
-    player_ = new Protagonist("player", { width/2, height/2 });
-    TextureManager::Instance()->load("player", "./images/sprites/littleman1.png", renderer_);
-    FontManager::Instance()->Load("retganon", "./fonts/retganon.ttf", 16);
+    player_ = new Protagonist("player", {width / 2, height / 2});
+    TextureManager::Instance()->load(
+        "player", "./images/sprites/littleman1.png", renderer_);
+    FontManager::Instance()->Load("retganon10", "./fonts/chary___.ttf", 10);
+    FontManager::Instance()->Load("retganon", "./fonts/chary___.ttf", 50);
+
+    // dialogue test
+    game_state_ = kWorld;
+    current_dialogue_ = new Dialogue("./dialogues/test.txt");
 }
 
 void Game::HandleEvents() {
@@ -73,31 +85,80 @@ void Game::HandleEvents() {
         is_running_ = false;
         break;
     case SDL_KEYDOWN:
-        player_->HandleInput(event);
+        switch (event.key.keysym.sym) {
+        case SDLK_ESCAPE: {
+            if (game_state_ == kWorld) {
+                game_state_ = kMenu;
+            }
+            break;
+        }
+        default:
+            break;
+        }
+        switch (game_state_) {
+        case kWorld:
+            current_map_->HandleInput(event);
+            break;
+        case kDialogue:
+            current_dialogue_->HandleInput(event);
+            break;
+        case kQuiz:
+            current_quiz_->HandleInput(event);
+            break;
+        case kMenu:
+            main_menu_->HandleInput(event);
+        default:
+            break;
+        }
         break;
     case SDL_KEYUP:
         break;
-    // New case to be added for the implementation of the character interaction with the object
+    // New case to be added for the implementation of the character interaction
+    // with the object
     default:
-        // to be extended once the facilities to handle user input have been created
+        // to be extended once the facilities to handle user input have been
+        // created
         break;
     }
 }
 
 void Game::Update() {
-    // update player
-    player_->Move();
+    switch (game_state_) {
+    case kWorld: {
+        int tick = SDL_GetTicks();
+        if (tick - timestamp_ >= skip_) {
+            if (!current_map_->IsLegal()) { // movement is illegal
+                //std::cout << "illegal" << std::endl;
+                current_map_->ZeroSpeed();
+            } else {
+                current_map_->Move();
+            }
+            timestamp_ = SDL_GetTicks();
+        }
+        break;
+    }
+    case kQuit:
+        is_running_ = false;
+        break;
+    default:
+        break;
+    }
 }
 
 void Game::Render() {
     SDL_RenderClear(renderer_);
     // where we add stuff to render in rendering order {map -> chars -> menus}
-    current_map_->DrawMap(player_->GetPosition());
+    current_map_->DrawMap();
 
     player_->Render();
 
     FontManager::Instance()->Draw("retganon", "PLATAL GAME!", 250, 0,
                                   {200, 50, 50}, renderer_);
+    if (game_state_ == kDialogue) {
+        current_dialogue_->Render();
+    } else if (game_state_ == kMenu) {
+        main_menu_->Render();
+    }
 
     SDL_RenderPresent(renderer_);
 }

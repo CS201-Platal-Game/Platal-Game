@@ -25,14 +25,16 @@ class Character {
     std::string GetName();
     Position GetPosition();
     Position* GetPositionPointer();
-    SDL_Rect rect_;
-    void Render();
+    SDL_Rect GetHitbox();
+
+    virtual void Render();
     void Update(); //TODO: implement update method
 
   protected:
     std::string name_;
     int char_id;
     Position position_{ 0, 0 };
+    SDL_Rect hitbox_;
     Direction orientation_; // e.g. protag is facing up/down/etc.
     int frames_ = 0;
     int speed_ = 100; //delay between frames, in milliseconds
@@ -41,10 +43,6 @@ class Character {
 
 class Protagonist : public Character {
   public:
-    struct Accel {
-        int terminalVelocity, speedUp, sloDown;
-    };
-
     // inherit constructors
     Protagonist();
     Protagonist(const std::string& name, const Position& position);
@@ -58,6 +56,7 @@ class Protagonist : public Character {
 
     void Render();
 
+
     void CreateAnimationArray(map<string, string> files);
 
     Velocity GetVelocity() { return velocity_; }
@@ -65,9 +64,9 @@ class Protagonist : public Character {
   private:
     AnimatedTexture animationArray_;
     Position viewport_center_;
-    Velocity velocity_{ 0, 0 };
+    //Velocity velocity_{ 0, 0 };
     Stats stats_;
-    Accel accel_ = {32, 4, 8};
+    //Accel accel_ = {1, 1, 1};
     // TODO: inventories?
 };
 

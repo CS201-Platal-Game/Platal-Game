@@ -10,6 +10,10 @@ Character::Character(const std::string& name, const Position& position) {
     name_ = name;
     position_ = position;
     orientation_ = kDown;
+    hitbox_.h = 32;
+    hitbox_.w = 32;
+    hitbox_.x = position.x;
+    hitbox_.y = position.y;
 }
 
 Character::~Character() {}
@@ -33,6 +37,13 @@ void Character::Render() {
 
 int Character::GetCharId() {
     return char_id;
+}
+
+SDL_Rect Character::GetHitbox() {
+    // Update the hitbox x and y before returning it
+    hitbox_.x = position_.x;
+    hitbox_.y = position_.y;
+    return hitbox_;
 }
 
 /********* PROTAGONIST *********/
@@ -165,7 +176,6 @@ void Protagonist::Move() {
 
 void Protagonist::Render() { // DO ANIMATION STUFF HERE, use array, this should only be one line
     // do only on protagonist
-
     TextureManager::Instance()->Draw(name_, {0, 0, 32, 32},
                                      {viewport_center_.x, viewport_center_.y, 64, 64}, Game::renderer_);
 }

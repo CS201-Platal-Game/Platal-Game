@@ -10,6 +10,7 @@ class Object {
     
     Object();
     Object(int width, int height, bool collidable);
+    Object(int width, int height, bool collidable, int x, int y);
     ~Object();
     // may want to have a texture sheet as an argument in the constructor,
     // to do once we have a functioning texture manager
@@ -19,6 +20,7 @@ class Object {
     int GetObjId();
     bool IsCollidable();
     Position GetPosition();
+    SDL_Rect GetHitbox();
 
     // Returns a copy of the object.
     Object Copy();
@@ -33,10 +35,9 @@ class Object {
 
   protected:
     std::string textureId_; // string to link to texture map
-    int width_, height_; // dimension in squares
+    SDL_Rect hitbox_;
     bool collidable_;
-    Position position_; // possibly the up-left position of the object,
-                        // subject to changes
+    Position position_; // the up-left position of the object
     int obj_id;
 
 };
