@@ -33,6 +33,30 @@ void HUD::GetGPA(){
 	return CurrentGPA;
 }
 
+void HUD::GPAIncrease(change){
+	CurrentGPA += change;
+}
+
+void HUD::GPADecrease(change){
+	CurrentGPA -= change;
+}
+
+void HUD::RestIncrease(change){
+	CurrentRest += change;
+}
+
+void HUD::RestDecrease(change){
+	CurrentRest -= change;
+}
+
+void HUD::SocialIncrease(change){
+	CurrentSocial += change;
+}
+
+void HUD::SocialDecrease(change){
+	CurrentSocial -= change;
+}
+
 void HUD::GetRest(){
 	return CurrentRest;
 }

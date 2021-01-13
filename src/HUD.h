@@ -25,6 +25,12 @@ class HUD {
 	void getRest();
 	void getSocial();
 	void Render();
+	void GPAIncrease(double change);
+	void GPADecrease(double change);
+	void RestIncrease(double change);
+	void RestDecrease(double change);
+	void SocialIncrease(double change);
+	void SocialDecrease(double change);
 
 
 
