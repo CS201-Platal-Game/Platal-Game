@@ -9,7 +9,7 @@
 //Chris still here making comments for myself and whoever is reading this
 //Here we have a case where we don't precise the stats, can be changed to a specific situation if needed
 
-HUD::HUD() {
+HUD::HUD(){
 	double CurrentGPA = 0;
 	double MaxGPA = 4.2;
 	double CurrentRest = 0;
@@ -74,7 +74,7 @@ void HUD::Render() {
 // In order to get what we want I split the total width into 3 for the 3 stats, with 32 length on the outsides, and between the states rendered
 // Tried combining different strings and transforming a double into a string with to_string, to give essentially one sentence that can then be changed depending on stats or preference
 
-	SDL_Rect HUD_rect = {0, 640, 800, 64};
+	SDL_Rect HUD_rect = {0, 640, 800, 64}
 	SDL_SetRenderDrawBlendMode(Game::renderer_, SDL_BLENDMODE_BLEND);
     SDL_SetRenderDrawColor(Game::renderer_, 0, 0, 0, 196);
     SDL_RenderFillRect(Game::renderer_, &HUD_rect);
