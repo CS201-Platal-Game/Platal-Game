@@ -65,7 +65,7 @@ void HUD::GetSocial(){
 	return CurrentSocial;
 }
 
-void HUD::render() {
+void HUD::Render() {
 // if height = 640 and width = 800, {0 = x position of top left corner, 640 = y position of top left corner, 800 = width rect, 64 = height rect} 
 // The width and height can be changed if needed	
 // In order to get what we want I split the total width into 3 for the 3 stats, with 32 length on the outsides, and between the states rendered
