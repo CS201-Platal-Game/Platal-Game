@@ -9,22 +9,22 @@
 //Here we have a case where we don't precise the stats, can be changed to a specific situation if needed
 
 HUD::HUD();
-	CurrentGPA = 0;
-	MaxGPA = 4.2;
-	CurrentRest = 0;
-	MaxRest = 100;
-	CurrentSocial = 0;
-	MaxSocial = 100;
+	double CurrentGPA = 0;
+	double MaxGPA = 4.2;
+	double CurrentRest = 0;
+	double MaxRest = 100;
+	double CurrentSocial = 0;
+	double MaxSocial = 100;
 
 // Case where the GPA etc... of the character is precised
 
-HUD::HUD(GPA, Rest, Social){
-	CurrentGPA = GPA;
-	MaxGPA = 4.2;
-	CurrentRest = Rest;
-	MaxRest = 100;
-	CurrentSocial = Social;
-	MaxSocial = 100;
+HUD::HUD(double GPA, double Rest, double Social){
+	double CurrentGPA = GPA;
+	double MaxGPA = 4.2;
+	double CurrentRest = Rest;
+	double MaxRest = 100;
+	double CurrentSocial = Social;
+	double MaxSocial = 100;
 
 
 }
@@ -33,27 +33,27 @@ void HUD::GetGPA(){
 	return CurrentGPA;
 }
 
-void HUD::GPAIncrease(change){
+void HUD::GPAIncrease(double change){
 	CurrentGPA += change;
 }
 
-void HUD::GPADecrease(change){
+void HUD::GPADecrease(double change){
 	CurrentGPA -= change;
 }
 
-void HUD::RestIncrease(change){
+void HUD::RestIncrease(double change){
 	CurrentRest += change;
 }
 
-void HUD::RestDecrease(change){
+void HUD::RestDecrease(double change){
 	CurrentRest -= change;
 }
 
-void HUD::SocialIncrease(change){
+void HUD::SocialIncrease(double change){
 	CurrentSocial += change;
 }
 
-void HUD::SocialDecrease(change){
+void HUD::SocialDecrease(double change){
 	CurrentSocial -= change;
 }
 

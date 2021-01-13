@@ -43,4 +43,4 @@ class HUD {
 		double CurrentSocial;
 		double MaxSocial;
 
-}
+};
