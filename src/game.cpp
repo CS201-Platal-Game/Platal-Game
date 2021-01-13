@@ -75,6 +75,9 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height,
     // dialogue test
     game_state_ = kWorld;
     current_dialogue_ = new Dialogue("./dialogues/test.txt");
+
+    // hud test
+    hud_ = new HUD(2.5f, 50.0f, 50.0f);
 }
 
 void Game::HandleEvents() {
@@ -152,8 +155,10 @@ void Game::Render() {
 
     player_->Render();
 
-    FontManager::Instance()->Draw("retganon", "PLATAL GAME!", 250, 0,
-                                  {200, 50, 50}, renderer_);
+    hud_->Render();
+
+    //FontManager::Instance()->Draw("retganon", "PLATAL GAME!", 250, 0,
+    //                              {200, 50, 50}, renderer_);
     if (game_state_ == kDialogue) {
         current_dialogue_->Render();
     } else if (game_state_ == kMenu) {
@@ -161,4 +166,5 @@ void Game::Render() {
     }
 
     SDL_RenderPresent(renderer_);
+    SDL_SetRenderDrawColor(renderer_, 0, 0, 0, 0);
 }
