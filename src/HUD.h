@@ -19,28 +19,28 @@ class HUD {
 	public:
 		HUD();
 		~HUD();
-		HUD(double CurrentGPA, double CurrentRest, double CurrentSocial);
+		HUD(float CurrentGPA, float CurrentRest, float CurrentSocial);
 
-	double GetGPA();
-	double GetRest();
-	double GetSocial();
+    float GetGPA();
+    float GetRest();
+    float GetSocial();
 	void Render();
-	void GPAIncrease(double change);
-	void GPADecrease(double change);
-	void RestIncrease(double change);
-	void RestDecrease(double change);
-	void SocialIncrease(double change);
-	void SocialDecrease(double change);
+	void GPAIncrease(float change);
+	void GPADecrease(float change);
+	void RestIncrease(float change);
+	void RestDecrease(float change);
+	void SocialIncrease(float change);
+	void SocialDecrease(float change);
 
 
 
 	private:
 		// Here we can rename the variables accordingly
-		double CurrentGPA;
-		double MaxGPA;
-		double CurrentRest;
-		double MaxRest;
-		double CurrentSocial;
-		double MaxSocial;
+        float CurrentGPA;
+        float MaxGPA;
+        float CurrentRest;
+        float MaxRest;
+        float CurrentSocial;
+        float MaxSocial;
 
 };
