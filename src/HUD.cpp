@@ -55,11 +55,11 @@ HUD::HUD(){
 
 HUD::HUD(float GPA, float Rest, float Social){
     float CurrentGPA = GPA;
-    float MaxGPA = 4.2;
+    float MaxGPA = 4.2f;
     float CurrentRest = Rest;
-    float MaxRest = 100;
+    float MaxRest = 100f;
     float CurrentSocial = Social;
-    float MaxSocial = 100;
+    float MaxSocial = 100f;
     FontManager::Instance()->Load("hud_font", "./fonts/novem___.ttf", 25);
 }
 
