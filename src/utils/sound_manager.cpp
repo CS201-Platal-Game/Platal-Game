@@ -1,5 +1,7 @@
 #include "sound_manager.h"
 
+SoundManager* SoundManager::myInstance = 0;
+
 bool SoundManager::LoadMusic(std::string id, std::string filename){
     Mix_Music* moosic;
     moosic =  Mix_LoadMUS(filename.c_str());
@@ -32,16 +34,9 @@ void SoundManager::PlayMusic(std::string id){
 }
 void SoundManager::ToggleMusic(){
     if( Mix_PausedMusic() == 1 )
-        {
-            //Resume the music
-            Mix_ResumeMusic();
-        }
-        //If the music is playing
-        else
-        {
-            //Pause the music
-            Mix_PauseMusic();
-        }
+        Mix_ResumeMusic();
+    else
+        Mix_PauseMusic();
 }
 
 void SoundManager::PlayChunk(std::string id){
