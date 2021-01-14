@@ -27,7 +27,7 @@ class Object {
     Object Copy();
 
     // Allows the player to interact with the object
-    void InteractButton();
+    void InteractAction();
 
     // Check if the player is colliding with the object
     bool InteractCollision(Character character);
