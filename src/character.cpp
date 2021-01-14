@@ -69,7 +69,7 @@ Protagonist::Protagonist(const std::string &name, const Position &position,
   for (i = idfiles.begin(); i != idfiles.end(); ++i) {
         //below - id: , curr frame: 0, max frame (fixed): 6, width x height: 32 x 32, posX posY: viewport.x, viewport.y
         animationArray_.push_back(AnimatedTexture(i->first, 0, 6, 32, 32, viewport_center_.x, viewport_center_.y));
-        TextureManager::Instance()->load(i->first, i->second, Game::renderer_);
+        TextureManager::Instance()->Load(i->first, i->second, Game::renderer_);
     } 
 }
 
@@ -85,7 +85,7 @@ void Protagonist::CreateAnimationArray(std::vector<std::pair<std::string, std::s
     for (i = idfiles.begin(); i != idfiles.end(); ++i) {
         //below - id: , curr frame: 0, max frame (fixed): 6, width x height: 32 x 32, posX posY: viewport.x, viewport.y
         textureArray.push_back(AnimatedTexture(i->first, 0, 6, 32, 32, viewport_center_.x, viewport_center_.y));
-        TextureManager::Instance()->load(i->first, i->second, Game::renderer_);
+        TextureManager::Instance()->Load(i->first, i->second, Game::renderer_);
     }
 
     animationArray_ = textureArray; // set attribute
