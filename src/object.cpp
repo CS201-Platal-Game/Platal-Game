@@ -62,7 +62,7 @@ Object Object::Copy() {
     return new_object;
 }
 
-bool Object::InteractCollision(Character character) {
+bool Object::CheckCollision(Character character) {
     // Checks if the object is collidable and if the character is currently colliding with it.SS
     if (!collidable_) return false;
 
@@ -71,11 +71,12 @@ bool Object::InteractCollision(Character character) {
     return intersection;
 }
 
-void Object::CallInteraction(Character character) {
-    // Assumes we are still uring the InteractButton() method
-    if (this->InteractCollision(character) || this->InteractButton()) {
-        Interact();
-    }
+bool Object::CheckCollision(SDL_Rect hitbox) {
+    // Checks if the object is collidable and if the character is currently colliding with it.SS
+    if (!collidable_) return false;
+
+    bool intersection = SDL_HasIntersection(&hitbox_, &hitbox);
+    return intersection;
 }
 
 void Object::Render() {
@@ -84,6 +85,10 @@ void Object::Render() {
                                           Game::renderer_);
 
 }
+
+// Used as placedholders 
+void Object::Action1() {};
+void Object::Action2() {};
 
 Portal::Portal(int width, int height, int map_id) {
     hitbox_.w = width;
@@ -112,4 +117,21 @@ void Switch::SetField(int offset, int height, int width) {
     interact_field_.y = offset;
     interact_field_.h = height;
     interact_field_.w = width;
+}
+
+void Switch::KeyInteraction(Character character) {
+    SDL_Rect character_hitbox_ = character.GetHitbox();
+    bool intersection = SDL_HasIntersection(&interact_field_, &character_hitbox_);
+    const Uint8* event_array = SDL_GetKeyboardState(nullptr);
+    if (event_array[SDL_SCANCODE_E] && intersection) {
+        Action2();
+    }
+}
+
+void Switch::KeyInteraction(SDL_Rect hitbox) {
+    bool intersection = SDL_HasIntersection(&interact_field_, &hitbox);
+    const Uint8* event_array = SDL_GetKeyboardState(nullptr);
+    if (event_array[SDL_SCANCODE_E] && intersection) {
+        Action2();
+    }
 }
