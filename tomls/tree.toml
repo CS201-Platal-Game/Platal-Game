@@ -1,0 +1,14 @@
+[tree.toml]
+
+[name.position] 	
+x = numberhere
+y = numberhere
+
+[name.hitbox]
+x = numberhere
+y = numberhere
+w = numberhere
+h = numberhere
+
+
+Chara
