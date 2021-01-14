@@ -26,10 +26,17 @@ class Object {
     Object Copy();
 
     // Allows the player to interact with the object
-    void InteractButton();
+    bool InteractButton();
 
     // Check if the player is colliding with the object
     bool InteractCollision(Character character);
+
+    // Calls an interaction method if applicable
+    void CallInteraction(Character character);
+
+    // A method that calls an interaction if a sufficient condition is met
+    // To be defined in the subclasses
+    void Interact();
 
     void Render();
 
