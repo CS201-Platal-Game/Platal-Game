@@ -21,6 +21,7 @@ class Object {
     bool IsCollidable();
     Position GetPosition();
     SDL_Rect GetHitbox();
+    void SetHitbox(int width, int height);
 
     // Returns a copy of the object.
     Object Copy();
@@ -49,4 +50,16 @@ class Portal : public Object {
 
   private:
     int map_id_;
+};
+
+class Switch : public Object {
+  public:
+
+    Switch(int width, int height, bool collidable, int x, int y,
+    int offset, int interact_width, int interact_height);
+    SDL_Rect GetField();
+    void SetField(int offset, int height, int width);
+  
+  private:
+    SDL_Rect interact_field_;
 };
