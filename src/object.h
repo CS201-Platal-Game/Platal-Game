@@ -27,13 +27,17 @@ class Object {
     Object Copy();
 
     // Allows the player to interact with the object
-    void InteractAction();
+    void Action1();
+    void Action2();
 
     // Check if the player is colliding with the object
-    bool InteractCollision(Character character);
-
-    // Calls an interaction method if applicable
-    void CallInteraction(Character character);
+    bool CheckCollision(Character character);
+    bool CheckCollision(SDL_Rect hitbox);
+    template <typename T> void CollideInterract(T item){
+      if (CheckCollision(item)) {
+        Action1();
+      }
+    }
 
     // A method that calls an interaction if a sufficient condition is met
     // To be defined in the subclasses
@@ -66,7 +70,9 @@ class Switch : public Object {
     int offset, int interact_width, int interact_height);
     SDL_Rect GetField();
     void SetField(int offset, int width, int height);
-  
+    void KeyInteraction(Character character);
+    void KeyInteraction(SDL_Rect hitbox);
+
   private:
     SDL_Rect interact_field_;
 };
