@@ -40,8 +40,10 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height,
         flags = SDL_WINDOW_FULLSCREEN;
            
     if (SDL_Init(SDL_INIT_EVERYTHING) == 0 &&
-        IMG_Init(IMG_INIT_PNG) == IMG_INIT_PNG && TTF_Init() == 0 &&
-        Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ))  {
+        IMG_Init(IMG_INIT_PNG) == IMG_INIT_PNG &&
+        TTF_Init() == 0 &&
+        Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) == 0
+        )  {
         std::cout << "subsystem initialized..." << std::endl;
 
         window_ = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
@@ -56,30 +58,37 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height,
         }
 
         is_running_ = true;
-    } else
+
+
+        current_map_ = new Map();
+        // for the map positions, the y coordinate is weirdly shifted by -2 when
+        // compared to the csv...
+        current_map_->LoadMap("./maps/room.csv", {3, 5});
+
+        main_menu_ = new MainMenu();
+
+        // create the game character
+        // might need to store that on the heap
+        player_ = new Protagonist("player", {width / 2, height / 2});
+        TextureManager::Instance()->Load("player", "./images/sprites/littleman1.png", renderer_);
+
+        FontManager::Instance()->Load("retganon10", "./fonts/chary___.ttf", 10);
+        FontManager::Instance()->Load("retganon", "./fonts/chary___.ttf", 50);
+
+        SoundManager::Instance()->LoadMusic("ilym", "./sound/music/ILYM_sample.wav");
+        SoundManager::Instance()->PlayMusic("ilym");
+        SoundManager::Instance()->SetVolume(MIX_MAX_VOLUME/2);
+
+        // dialogue test
+        game_state_ = kWorld;
+        current_dialogue_ = new Dialogue("./dialogues/test.txt");
+
+        // hud test
+        hud_ = new HUD(2.5f, 50.0f, 50.0f);
+    } else {
+        std::cout << "SDL_ERROR: \t" << SDL_GetError() << std::endl;
         is_running_ = false;
-
-    current_map_ = new Map();
-    // for the map positions, the y coordinate is weirdly shifted by -2 when
-    // compared to the csv...
-    current_map_->LoadMap("./maps/room.csv", {3, 5});
-
-    main_menu_ = new MainMenu();
-
-    // create the game character
-    // might need to store that on the heap
-    player_ = new Protagonist("player", {width / 2, height / 2});
-    TextureManager::Instance()->load(
-        "player", "./images/sprites/littleman1.png", renderer_);
-    FontManager::Instance()->Load("retganon10", "./fonts/chary___.ttf", 10);
-    FontManager::Instance()->Load("retganon", "./fonts/chary___.ttf", 50);
-
-    // dialogue test
-    game_state_ = kWorld;
-    current_dialogue_ = new Dialogue("./dialogues/test.txt");
-
-    // hud test
-    hud_ = new HUD(2.5f, 50.0f, 50.0f);
+    }
 }
 
 void Game::HandleEvents() {
