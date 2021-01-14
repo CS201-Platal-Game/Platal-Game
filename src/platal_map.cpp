@@ -81,12 +81,43 @@ bool Map::IsLegal(Position pos, Velocity vel) {
     return false;
 }*/
 
+/*
 bool Map::IsLegal(){
     int x, y;
     x = (center_position_.x + vpwidth_/2 + protag_velocity_.xVel)/64;
     y = (center_position_.y + vpheight_/2 + protag_velocity_.yVel)/64;
     std::cout << x << ", " << y << "; " ;
     std::cout << map_array_[y][x] << std::endl;
+    return (x >= 0 and y >= 0 and x < width_ and y < height_ and map_array_[y][x] != 0);
+}
+*/
+
+bool Map::IsLegal(){
+    int x, y;
+    switch (protag_orientation_){
+        case kLeft:
+            x = (center_position_.x + vpwidth_/2 + protag_velocity_.xVel)/64;
+            y = (center_position_.y + vpheight_/2)/64;
+            break;
+        case kRight:
+            x = (center_position_.x + vpwidth_/2 + protag_velocity_.xVel + 63)/64;
+            y = (center_position_.y + vpheight_/2)/64;
+            break;
+        case kUp:
+            x = (center_position_.x + vpwidth_/2)/64;
+            y = (center_position_.y + vpheight_/2 + protag_velocity_.yVel)/64;
+            break;
+        case kDown:
+            x = (center_position_.x + vpwidth_/2)/64;
+            y = (center_position_.y + vpheight_/2 + protag_velocity_.yVel + 63)/64;
+            break;
+        default:
+            x = center_position_.x;
+            y = center_position_.y;
+            break;
+    }
+    //std::cout << x << ", " << y << "; " ;
+    //std::cout << map_array_[y][x] << std::endl;
     return (x >= 0 and y >= 0 and x < width_ and y < height_ and map_array_[y][x] != 0);
 }
 
@@ -204,20 +235,25 @@ void Map::Move() {
 
     //Move the protag up or down
     center_position_.y += protag_velocity_.yVel;
+    
+    SDL_Rect new_hitbox_ = {center_position_.x, center_position_.y, 32, 32}; 
+    std::vector<SDL_Rect> tiles_to_check = GetTiles(new_hitbox_);
 
-    SDL_Rect new_hitbox_ = {32, 32, center_position_.x, center_position_.y}; 
+    std::vector<SDL_Rect>::iterator it;
+    for (it = tiles_to_check.begin(); it != tiles_to_check.end(); it++) {
+        SDL_Rect rect = *it;
+        std::vector<Object> vec_obj = objects_[rect];
 
-    std::map<Position, Object>::iterator objects_it;
-    for (objects_it = objects_.begin(); objects_it != objects_.end(); objects_it ++) {
-        Object object_ = objects_it->second;
-        if (!object_.IsCollidable()) continue;
-
-        SDL_Rect obj_hitbox_ = object_.GetHitbox();
-        bool intersection = SDL_HasIntersection(&obj_hitbox_, &new_hitbox_);
-        if (intersection) {
-            center_position_.x -= protag_velocity_.xVel;
-            center_position_.y -= protag_velocity_.yVel;
-            break;
+        std::vector<Object>::iterator vec_it;
+        for (vec_it = vec_obj.begin(); vec_it != vec_obj.end(); vec_it++){
+            if (vec_it->IsCollidable()){
+                SDL_Rect obj_hitbox_ = vec_it->GetHitbox();
+                if (SDL_HasIntersection(&obj_hitbox_, &new_hitbox_)) {
+                    center_position_.x -= protag_velocity_.xVel;
+                    center_position_.y -= protag_velocity_.yVel;
+                    return;
+                }
+            }
         }
     }
 }
@@ -225,21 +261,31 @@ void Map::Move() {
 
 //to check 
 void Map::AddObject(Object item) {
-    objects_[item.GetPosition()]= item;
+    std::vector<SDL_Rect> tiles = GetTiles(item); 
+    std::vector<SDL_Rect>::iterator it;
+    for (it = tiles.begin(); it != tiles.end(); it ++) {
+        if (objects_.find(*it) == objects_.end()) {
+            std::vector<Object> *list = new std::vector<Object>;
+            objects_[*it] = *list;
+        }
+        objects_[*it].push_back(item);
+    }
 }
 
-// return the object if it was found
-Object Map::RemoveObject(int obj_id){
-    for(std::map<Position,Object>::iterator i = objects_.begin(); i != objects_.end(); i++){
-        if ((i->second).GetObjId()==obj_id){
-            Object res = i->second;
-            objects_.erase(i);
-            return res;
+Object Map::RemoveObject(int obj_id) {// or maybe its name
+    std::map<SDL_Rect, std::vector<Object>>::iterator map_it;
+    Object res = Object();
+    for (map_it = objects_.begin(); map_it != objects_.end(); map_it++){
+        std::vector<Object>::iterator vec_it;
+        for (vec_it = map_it->second.begin(); vec_it != map_it->second.end(); vec_it++){
+            if (vec_it->GetObjId() == obj_id){
+                res = *vec_it;
+                map_it->second.erase(vec_it);
+            }
         }
     }
-    return Object();
+    return res;
 }
-
 
 void Map::AddNpc(Character npc){
     npc_[npc.GetPositionPointer()]= npc;
