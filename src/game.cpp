@@ -3,6 +3,7 @@
 #include "platal_map.h"
 #include "utils/font_manager.h"
 #include "utils/texture_manager.h"
+#include "utils/sound_manager.h"
 
 // static members definition
 SDL_Renderer* Game::renderer_ = nullptr;
@@ -37,9 +38,10 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height,
     int flags = 0;
     if (fullscreen)
         flags = SDL_WINDOW_FULLSCREEN;
-
+           
     if (SDL_Init(SDL_INIT_EVERYTHING) == 0 &&
-        IMG_Init(IMG_INIT_PNG) == IMG_INIT_PNG && TTF_Init() == 0) {
+        IMG_Init(IMG_INIT_PNG) == IMG_INIT_PNG && TTF_Init() == 0 &&
+        Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ))  {
         std::cout << "subsystem initialized..." << std::endl;
 
         window_ = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
@@ -75,6 +77,9 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height,
     // dialogue test
     game_state_ = kWorld;
     current_dialogue_ = new Dialogue("./dialogues/test.txt");
+
+    // hud test
+    hud_ = new HUD(2.5f, 50.0f, 50.0f);
 }
 
 void Game::HandleEvents() {
@@ -152,8 +157,10 @@ void Game::Render() {
 
     player_->Render();
 
-    FontManager::Instance()->Draw("retganon", "PLATAL GAME!", 250, 0,
-                                  {200, 50, 50}, renderer_);
+    hud_->Render();
+
+    //FontManager::Instance()->Draw("retganon", "PLATAL GAME!", 250, 0,
+    //                              {200, 50, 50}, renderer_);
     if (game_state_ == kDialogue) {
         current_dialogue_->Render();
     } else if (game_state_ == kMenu) {
@@ -161,4 +168,5 @@ void Game::Render() {
     }
 
     SDL_RenderPresent(renderer_);
+    SDL_SetRenderDrawColor(renderer_, 0, 0, 0, 0);
 }
