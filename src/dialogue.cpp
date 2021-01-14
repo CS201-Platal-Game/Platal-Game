@@ -193,31 +193,32 @@ void Dialogue::Reset() {
 // Verifies if the graph is cycle-free. Returns true on success.
 bool Dialogue::CheckCycle() {
     for (std::vector<DialogueNode*>::iterator i = nodes_.begin(); i != nodes_.end(); i++) {
-        *i.SetVisited(false);
-        *i.SetStack(false);
+        (*i)->SetVisited(false);
+        (*i)->SetStack(false);
     }
     for (std::vector<DialogueNode*>::iterator i = nodes_.begin(); i != nodes_.end(); i++) {
-        if (this->CheckCycleUtil(*i)) {
+        if ((*i)->CheckCycleUtil()) {
             return true;
         }
     }
     return false; 
 }
 
-bool Dialogue::CheckCycleUtil(DialogueNode* node) {
-    if (!node.GetVisited()) {
-        node.SetVisited(true);
-        node.SetStack(true);
-        for(std::vector<std::pair<std::string, DialogueNode*>>::iterator i = responses_.begin(); i != responses_.end(); i++) {
-            DialogueNode* temp_node = *i.second;
-            if (!temp_node.GetVisited() && CheckCycleUtil(temp_node)) {
+bool DialogueNode::CheckCycleUtil() {
+    if (!GetVisited()) {
+        SetVisited(true);
+        SetStack(true);
+        std::vector<std::pair<std::string, DialogueNode*>>::iterator i;
+        for( i = responses_.begin(); i != responses_.end(); i++) {
+            DialogueNode* temp_node = i->second;
+            if (!temp_node->GetVisited() && temp_node->CheckCycleUtil()) {
                 return true;
             }
-            else if (temp_node.GetStack()) { 
+            else if (temp_node->GetStack()) { 
                 return true;
             }
         }
     }
-    node.SetStack(false);
+    SetStack(false);
     return false;
 }

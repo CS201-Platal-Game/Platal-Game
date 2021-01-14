@@ -31,6 +31,9 @@ public:
     void SetVisited(bool visited);
     void SetStack(bool stack);
 
+    // Auxiliary function for CheckCycle()
+    bool CheckCycleUtil();
+
 private:
     // Line of NPCs or objects.
     std::string line_;
@@ -71,9 +74,6 @@ public:
 
     // Verifies if the graph is cycle-free. Returns true on success.
     bool CheckCycle();
-
-    // Auxiliary function for CheckCycle()
-    bool CheckCycleUtil(DialogueNode* node);
 
     void Render();
 
