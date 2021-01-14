@@ -51,47 +51,41 @@ Protagonist::Protagonist() { // default constructor
   stats_ = Stats();
 }
 
-// constructor - dunno if this is too messy, contact Nina if that's the case
-Protagonist::Protagonist(const std::string &name, const Position &position,
- std::vector<std::string> files, std::vector<std::string> ids) {
+Protagonist::Protagonist(const std::string &name, const Position &position) {
   stats_ = Stats();
   viewport_center_ = position;
   position_ = {0,0};
-  animFiles_ = files;
-  animIds_ = ids;
-
-  // the following is my fancy scheme to fill the animation array w/ instances of animations
-  std::vector<std::string>::iterator i;
-  for (i = ids.begin(); i != ids.end(); ++i) {
-        //below - id: , curr frame: 0, max frame (fixed): 6, width x height: 32 x 32, posX posY: viewport.x, viewport.y
-        animationArray_.push_back(AnimatedTexture(*i, 0, 6, 32, 32, viewport_center_.x, viewport_center_.y));
-    } 
-    // load the image files into the texture map
-    for (i = files.begin(); i != files.end(); ++i){
-        TextureManager::Instance()->load(*i, files[i], Game::renderer_);
-    }
 }
 
+// constructor - dunno if this is too messy, contact Nina if that's the case
+Protagonist::Protagonist(const std::string &name, const Position &position,
+ std::vector<std::pair<std::string, std::string>> idfiles) {
+  stats_ = Stats();
+  viewport_center_ = position;
+  position_ = {0,0};
 
-void Protagonist::CreateAnimationArray(std::vector<std::string> files, std::vector<std::string> ids){
+  // the following is my fancy scheme to fill the animation array w/ instances of animations
+  std::vector<std::pair<std::string, std::string>>::iterator i;
+  for (i = idfiles.begin(); i != idfiles.end(); ++i) {
+        //below - id: , curr frame: 0, max frame (fixed): 6, width x height: 32 x 32, posX posY: viewport.x, viewport.y
+        animationArray_.push_back(AnimatedTexture(i->first, 0, 6, 32, 32, viewport_center_.x, viewport_center_.y));
+        TextureManager::Instance()->load(i->first, i->second, Game::renderer_);
+    } 
+}
+
+void Protagonist::CreateAnimationArray(std::vector<std::pair<std::string, std::string>> idfiles){
     // function to fill animation array
     // This is meant to create the array of instances of "AnimatedTexture" based on the input of the files to load
     // and the IDs.
     // THESE VECTORS NEED !!!! TO BE OF THE SAME LENGTH !!!!
 
-    int length = files.size(); // gives number of elements in map, i.e. nr of files to load
     std::vector<AnimatedTexture> textureArray; // create an array with the number of files to load
-
     // fill the array w instances of AnimatedTexture
-    std::vector<std::string>::iterator i;
-    for (i = ids.begin(); i != ids.end(); ++i) {
+    std::vector<std::pair<std::string, std::string>>::iterator i;
+    for (i = idfiles.begin(); i != idfiles.end(); ++i) {
         //below - id: , curr frame: 0, max frame (fixed): 6, width x height: 32 x 32, posX posY: viewport.x, viewport.y
-        textureArray.push_back(AnimatedTexture(*i, 0, 6, 32, 32, viewport_center_.x, viewport_center_.y));
-    }
-    
-    // load the image files into the texture map
-    for (i = files.begin(); i != files.end(); ++i){
-        TextureManager::Instance()->load(*i, files[i], Game::renderer_);
+        textureArray.push_back(AnimatedTexture(i->first, 0, 6, 32, 32, viewport_center_.x, viewport_center_.y));
+        TextureManager::Instance()->load(i->first, i->second, Game::renderer_);
     }
 
     animationArray_ = textureArray; // set attribute

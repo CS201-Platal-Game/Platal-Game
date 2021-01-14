@@ -1,12 +1,12 @@
 #pragma once
-#include "dialogue.h"
-#include "stats.h"
-#include "utils/structs.h"
-#include <string>
-#include <list>
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
+#include "utils/structs.h"
 #include "utils/Animation.h"
+#include "dialogue.h"
+#include "stats.h"
+#include <string>
+#include <list>
 #include <vector>
 #include <map>
 
@@ -47,9 +47,9 @@ class Protagonist : public Character {
   public:
     // inherit constructors
     Protagonist();
+    Protagonist(const std::string& name, const Position& position);
     Protagonist(const std::string& name, const Position& position,
-     std::vector<std::string> files, std::vector<std::string> ids);
-
+     std::vector<std::pair<std::string, std::string>> idfiles);
     //Takes key presses and adjusts the protag's orientation
     void HandleInput(SDL_Event key);
 
@@ -59,15 +59,12 @@ class Protagonist : public Character {
 
     void Render();
 
-    void CreateAnimationArray(std::vector<std::string> files, std::vector<std::string> ids);
+    void CreateAnimationArray(std::vector<std::pair<std::string, std::string>> idfiles);
 
   private:
     std::vector<AnimatedTexture> animationArray_;
     Position viewport_center_;
     Stats stats_;
-    std::vector<std::string> animFiles_;
-    std::vector<std::string> animIds_;
-    
 };
 
 class NPC : public Character {
