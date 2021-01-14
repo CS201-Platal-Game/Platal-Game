@@ -5,6 +5,7 @@
 #include "object.h"
 #include "utils/structs.h"
 #include "utils/texture_manager.h"
+#include "utils/tiles.h"
 #include <vector>
 #include <map>
 // Chris here working on platal_map objects, Since textures are not yet defined the outcome can't be tested, so I am coding for a general idea.
@@ -42,7 +43,7 @@ class Map {
   
     //int** map_array_; // loaded from csv
     std::vector<std::vector<int>> map_array_;
-    std::map <Position, Object> objects_; // map from position on screen to object
+    std::map <SDL_Rect, std::vector<Object>, SDLRectCompare> objects_; // map from position on screen to object
     std::map <Position*, Character> npc_; // map from pointers to position on screen to object
   
     SDL_Rect src_, dest_; // attributes used while rendering
