@@ -43,6 +43,22 @@ void DialogueNode::Next(int response_id) {
     // TODO we dont need it anymore (I hope)
 }
 
+bool DialogueNode::GetVisited() {
+    return visited_;
+}
+
+bool DialogueNode::GetStack() {
+    return in_stack_;
+}
+
+void DialogueNode::SetVisited(bool visited) {
+    visited_ = visited;
+}
+
+void DialogueNode::SetStack(bool stack) {
+    in_stack_ = stack;
+}
+
 Dialogue::Dialogue(const char filename[]) {
     this->Import(filename);
     selected_response = 0;
@@ -171,11 +187,38 @@ void Dialogue::HandleInput(SDL_Event event) {
 // Resets the conversation, e.g. the protag talks to the NPC again.
 void Dialogue::Reset() {
     current = head_;
-    // TODO - implement
+    // Given the current implementation of the dialogue this should be sufficient
 }
 
 // Verifies if the graph is cycle-free. Returns true on success.
 bool Dialogue::CheckCycle() {
-    // TODO - implement
+    for (std::vector<DialogueNode*>::iterator i = nodes_.begin(); i != nodes_.end(); i++) {
+        (*i)->SetVisited(false);
+        (*i)->SetStack(false);
+    }
+    for (std::vector<DialogueNode*>::iterator i = nodes_.begin(); i != nodes_.end(); i++) {
+        if ((*i)->CheckCycleUtil()) {
+            return true;
+        }
+    }
+    return false; 
+}
+
+bool DialogueNode::CheckCycleUtil() {
+    if (!GetVisited()) {
+        SetVisited(true);
+        SetStack(true);
+        std::vector<std::pair<std::string, DialogueNode*>>::iterator i;
+        for( i = responses_.begin(); i != responses_.end(); i++) {
+            DialogueNode* temp_node = i->second;
+            if (!temp_node->GetVisited() && temp_node->CheckCycleUtil()) {
+                return true;
+            }
+            else if (temp_node->GetStack()) { 
+                return true;
+            }
+        }
+    }
+    SetStack(false);
     return false;
 }

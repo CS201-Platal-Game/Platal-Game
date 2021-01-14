@@ -21,15 +21,27 @@ class Object {
     bool IsCollidable();
     Position GetPosition();
     SDL_Rect GetHitbox();
+    void SetHitbox(int width, int height);
 
     // Returns a copy of the object.
     Object Copy();
 
     // Allows the player to interact with the object
-    void InteractButton();
+    void Action1();
+    void Action2();
 
     // Check if the player is colliding with the object
-    bool InteractCollision(Character character);
+    bool CheckCollision(Character character);
+    bool CheckCollision(SDL_Rect hitbox);
+    template <typename T> void CollideInterract(T item){
+      if (CheckCollision(item)) {
+        Action1();
+      }
+    }
+
+    // A method that calls an interaction if a sufficient condition is met
+    // To be defined in the subclasses
+    void Interact();
 
     void Render();
 
@@ -49,4 +61,18 @@ class Portal : public Object {
 
   private:
     int map_id_;
+};
+
+class Switch : public Object {
+  public:
+
+    Switch(int width, int height, bool collidable, int x, int y,
+    int offset, int interact_width, int interact_height);
+    SDL_Rect GetField();
+    void SetField(int offset, int width, int height);
+    void KeyInteraction(Character character);
+    void KeyInteraction(SDL_Rect hitbox);
+
+  private:
+    SDL_Rect interact_field_;
 };
