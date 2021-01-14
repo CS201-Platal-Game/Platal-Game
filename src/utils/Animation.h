@@ -6,6 +6,9 @@
 //The only difference between struct (literally 'data structure') and class
 // is that here all the attributes will be public (relevant in this situation)
 
+
+#include <string>
+
 // I HAVE NO IDEA IF THIS WORKS (probs not)
 // I CAN'T RUN IT BECAUSE MY COMPUTER WON'T COMPILE THE THING :(
 // PLEASE HELP
