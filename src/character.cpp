@@ -117,37 +117,37 @@ void Protagonist::Render() { // DO ANIMATION STUFF HERE, use array, this should 
         break;
         
         case kRight: {
-            AnimatedTexture leftAnimate = animationArray_[1]; 
+            AnimatedTexture rightAnimate = animationArray_[1]; 
             if( event_array[SDL_SCANCODE_RIGHT] ){ 
-               leftAnimate.Render(viewport_center_.x, viewport_center_.y, false);
-               leftAnimate.Update();
+               rightAnimate.Render(viewport_center_.x, viewport_center_.y, false);
+               rightAnimate.Update();
             }
             else{
-                leftAnimate.Render(viewport_center_.x, viewport_center_.y, true);
+                rightAnimate.Render(viewport_center_.x, viewport_center_.y, true);
             }
         }
         break;
         
         case kUp: {
-            AnimatedTexture leftAnimate = animationArray_[2]; 
+            AnimatedTexture upAnimate = animationArray_[2]; 
             if( event_array[SDL_SCANCODE_UP] ){ 
-               leftAnimate.Render(viewport_center_.x, viewport_center_.y, false);
-               leftAnimate.Update();
+               upAnimate.Render(viewport_center_.x, viewport_center_.y, false);
+               upAnimate.Update();
             }
             else{
-                leftAnimate.Render(viewport_center_.x, viewport_center_.y, true);
+                upAnimate.Render(viewport_center_.x, viewport_center_.y, true);
             }
         }
         break;
         
         case kDown: {
-            AnimatedTexture leftAnimate = animationArray_[3]; 
+            AnimatedTexture downAnimate = animationArray_[3]; 
             if( event_array[SDL_SCANCODE_DOWN] ){ 
-               leftAnimate.Render(viewport_center_.x, viewport_center_.y, false);
-               leftAnimate.Update();
+               downAnimate.Render(viewport_center_.x, viewport_center_.y, false);
+               downAnimate.Update();
             }
             else{
-                leftAnimate.Render(viewport_center_.x, viewport_center_.y, true);
+                downAnimate.Render(viewport_center_.x, viewport_center_.y, true);
             }
         }
         break;
