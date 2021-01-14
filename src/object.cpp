@@ -16,8 +16,9 @@ Object::Object(int width, int height, bool collidable) {
     position_ = {0, 0};
 }
 
-Object::Object(int width, int height, bool collidable, int x, int y ) {
+Object::Object(std::string texture_id, int width, int height, bool collidable, int x, int y ) {
     SetHitbox(width, height);
+    textureId_ = texture_id;
     hitbox_.w = width;
     hitbox_.h = height;
     collidable_ = collidable;
