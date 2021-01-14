@@ -14,7 +14,6 @@ AnimatedTexture::AnimatedTexture(std::string id, int cFrame, int mFrame,
     x_ = posX;
     y_ = posY;
     id_ = id;
-    // animated_ = true; // this is probably not useful
 
     frame_.w = w; // sets the size of the rectangle
     frame_.h = h;

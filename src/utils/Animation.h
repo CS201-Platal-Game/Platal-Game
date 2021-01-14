@@ -5,8 +5,6 @@
 // is that here all the attributes will be public (relevant in this situation)
 
 
-#ifndef PLATAL_GAME_ANIMATION_H
-#define PLATAL_GAME_ANIMATION_H
 #include <string>
 
 // I HAVE NO IDEA IF THIS WORKS (probs not)
