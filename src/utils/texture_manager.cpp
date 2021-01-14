@@ -1,6 +1,5 @@
 #include "texture_manager.h"
 
-
 // NOTE - This has not been tested yet because of the bugs
 // and because I need help to run it from my linux virtual machine (I've forgotten how to)
 // based on examples seen, will be debugged and further modified to fit our needs once I get a basic thing working
@@ -45,9 +44,10 @@ void TextureManager::Draw(std::string id, SDL_Rect src, SDL_Rect dest, SDL_Rende
 void TextureManager::DrawFrame(std::string id, SDL_Rect src, SDL_Rect dest, SDL_Renderer *renderer, SDL_RendererFlip flip) {
     // this does the same as RenderCopy but has more parameters
     // copies a portion of the texture to current rendering target (w/ rotation and/or flip around a given origin)
-    SDL_RenderCopyEx(renderer, textureMap[id], &src, &dest, 0, 0, flip);
 
+    SDL_RenderCopyEx(renderer, textureMap[id], &src, &dest, 0, 0, flip);
 }
+
 
 void TextureManager::exterminate(std::string id) {
     //SDL_DestroyTexture(textureMap[id]);

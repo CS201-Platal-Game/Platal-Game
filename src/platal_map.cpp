@@ -9,9 +9,10 @@ Map::Map() {
     // The textures we have for the moment are in Platal-Game -> images ->
 
     //Here we will add as many textures as needed, need yet to be determined
-    TextureManager::Instance()->Load("dirt", "./images/maptexture/dirt.png", Game::renderer_);
-    TextureManager::Instance()->Load("water", "./images/maptexture/water.png", Game::renderer_);
-    TextureManager::Instance()->Load("grass_1l", "./images/maptexture/grasstile_oneleaf.png", Game::renderer_);
+
+    TextureManager::Instance()->load("dirt", "./images/maptexture/dirt.png", Game::renderer_);
+    TextureManager::Instance()->load("water", "./images/maptexture/water.png", Game::renderer_);
+    TextureManager::Instance()->load("grass_1l", "./images/maptexture/grasstile_oneleaf.png", Game::renderer_);
 
     // sdl source and dest rects
     src_ = dest_ = {0, 0, 64, 64};
