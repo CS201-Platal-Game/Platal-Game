@@ -18,9 +18,11 @@ class SoundManager {
 
     void PlayMusic(std::string id);
     void ToggleMusic();
-    void IsPlaying(){ Mix_PlayingMusic() != 0; };
+    bool IsPlaying(){ return Mix_PlayingMusic() != 0; };
     void PlayChunk(std::string id);
 
+    int GetVolume() { return Mix_VolumeMusic(-1); }
+    void SetVolume(int8_t vol) { Mix_VolumeMusic(vol); }
 
     void ExterminateMusic(std::string id);
     void ExterminateChunk(std::string id);

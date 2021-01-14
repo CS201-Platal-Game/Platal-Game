@@ -22,7 +22,7 @@ AnimatedTexture::AnimatedTexture(std::string id, int cFrame, int mFrame,
 }
 
 void AnimatedTexture::loadFile(std::string filename){
-    TextureManager::Instance()->load(id_, filename, Game::renderer_);
+    TextureManager::Instance()->Load(id_, filename, Game::renderer_);
 }
 
 void AnimatedTexture::Render(int posX, int posY, bool reset) {
