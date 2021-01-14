@@ -1,17 +1,20 @@
 #pragma once
-#include "dialogue.h"
-#include "stats.h"
-#include "utils/structs.h"
-#include <string>
-#include <list>
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
+#include "utils/structs.h"
+#include "utils/Animation.h"
+#include "dialogue.h"
+#include "stats.h"
+#include <string>
+#include <list>
+#include <vector>
+#include <map>
 
 enum Direction {
     kLeft = 0,
-    kRight,
-    kUp,
-    kDown,
+    kRight, // 1
+    kUp, // 2
+    kDown, // 3
     stop
 };
 
@@ -35,7 +38,9 @@ class Character {
     Position position_{ 0, 0 };
     SDL_Rect hitbox_;
     Direction orientation_; // e.g. protag is facing up/down/etc.
-    // TODO: sprites, draw and load; call texture manager in render method
+    int frames_ = 0;
+    int speed_ = 100; //delay between frames, in milliseconds
+
 };
 
 class Protagonist : public Character {
@@ -43,7 +48,8 @@ class Protagonist : public Character {
     // inherit constructors
     Protagonist();
     Protagonist(const std::string& name, const Position& position);
-
+    Protagonist(const std::string& name, const Position& position,
+     std::vector<std::pair<std::string, std::string>> idfiles);
     //Takes key presses and adjusts the protag's orientation
     void HandleInput(SDL_Event key);
 
@@ -53,14 +59,12 @@ class Protagonist : public Character {
 
     void Render();
 
-    //Velocity GetVelocity() { return velocity_; }
+    void CreateAnimationArray(std::vector<std::pair<std::string, std::string>> idfiles);
 
   private:
+    std::vector<AnimatedTexture> animationArray_;
     Position viewport_center_;
-    //Velocity velocity_{ 0, 0 };
     Stats stats_;
-    //Accel accel_ = {1, 1, 1};
-    // TODO: inventories?
 };
 
 class NPC : public Character {

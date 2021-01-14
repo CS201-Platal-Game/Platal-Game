@@ -16,7 +16,7 @@ class TextureManager {
     }
       
     //initialiser
-    bool load(std::string id, std::string filename, SDL_Renderer* renderer); //load the element so we are able to reference it later
+    bool Load(std::string id, std::string filename, SDL_Renderer* renderer); //load the element so we are able to reference it later
 
     // for drawing static objects like the background image
     // takes an id, position rendered (x,y), width, height and orientation

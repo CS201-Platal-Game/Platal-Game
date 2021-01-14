@@ -1,5 +1,4 @@
 #pragma once
-#include "dialogue.h"
 #include "character.h"
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
