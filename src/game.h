@@ -5,6 +5,7 @@
 #include "menu.h"
 #include "platal_map.h"
 #include "quiz.h"
+#include "HUD.h"
 #include <iostream>
 
 enum GameState { kWorld = 0, kDialogue, kQuiz, kMenu, kQuit };
@@ -46,6 +47,7 @@ class Game {
     bool is_running_;
     int count_ = 0;
     Map* current_map_;
+    HUD* hud_;
     Protagonist* player_;
     Dialogue* current_dialogue_;
     Quiz* current_quiz_;
