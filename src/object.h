@@ -58,7 +58,7 @@ class Switch : public Object {
     Switch(int width, int height, bool collidable, int x, int y,
     int offset, int interact_width, int interact_height);
     SDL_Rect GetField();
-    void SetField(int offset, int height, int width);
+    void SetField(int offset, int width, int height);
   
   private:
     SDL_Rect interact_field_;

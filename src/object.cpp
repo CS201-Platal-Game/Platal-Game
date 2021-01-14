@@ -9,8 +9,7 @@ Object::Object(int width, int height, bool collidable) {
     // Initializing all the attributes. We set x = y = 0 for the moment,
     // subject to change depending on whether or not we want it
     // as an argument in the constructor
-    hitbox_.x = 0;
-    hitbox_.y = 0;
+    SetHitbox(0, 0);
     hitbox_.w = width;
     hitbox_.h = height;
     collidable_ = collidable;
@@ -18,11 +17,7 @@ Object::Object(int width, int height, bool collidable) {
 }
 
 Object::Object(int width, int height, bool collidable, int x, int y ) {
-    // Initializing all the attributes. We set x = y = 0 for the moment,
-    // subject to change depending on whether or not we want it
-    // as an argument in the constructor
-    hitbox_.x = 0;
-    hitbox_.y = 0;
+    SetHitbox(width, height);
     hitbox_.w = width;
     hitbox_.h = height;
     collidable_ = collidable;
@@ -55,6 +50,13 @@ SDL_Rect Object::GetHitbox() {
     return hitbox_;
 }
 
+void Object::SetHitbox(int width, int height) {
+    hitbox_.x = position_.x;
+    hitbox_.y = position_.y;
+    hitbox_.h = height;
+    hitbox_.w = width;
+}
+
 Object Object::Copy() {
     Object new_object(hitbox_.w, hitbox_.h, collidable_);
     return new_object;
@@ -81,4 +83,26 @@ Portal::Portal(int width, int height, int map_id) {
     hitbox_.h = height;
     map_id_ = map_id;
     collidable_ = false;
+}
+
+Switch::Switch(int width, int height, bool collidable, int x, int y, 
+int offset, int interact_width, int interact_height) {
+    SetHitbox(width, height);
+    hitbox_.w = width;
+    hitbox_.h = height;
+    collidable_ = collidable;
+    position_ = {x, y};
+
+    SetField(offset, width, height);
+}
+
+SDL_Rect Switch::GetField() {
+   return interact_field_;
+}
+
+void Switch::SetField(int offset, int height, int width) {
+    interact_field_.x = offset;
+    interact_field_.y = offset;
+    interact_field_.h = height;
+    interact_field_.w = width;
 }
