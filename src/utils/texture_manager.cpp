@@ -6,7 +6,7 @@
 // based on examples seen, will be debugged and further modified to fit our needs once I get a basic thing working
 TextureManager* TextureManager::myInstance = 0;
 
-bool TextureManager::load(std::string id, std::string filename, SDL_Renderer* renderer){
+bool TextureManager::Load(std::string id, std::string filename, SDL_Renderer* renderer){
     // I could use const char* here but I've decided this is easier since my input filename is a string
     SDL_Surface* TempSurface = IMG_Load(filename.c_str());
 
@@ -25,6 +25,7 @@ bool TextureManager::load(std::string id, std::string filename, SDL_Renderer* re
     //exception handlers:
     if (texture == 0){
         std::cout << "Error creating texture, filename:" << filename << std::endl;
+        std::cout << SDL_GetError() << std::endl;
         return false;
     }
 
@@ -49,7 +50,7 @@ void TextureManager::DrawFrame(std::string id, SDL_Rect src, SDL_Rect dest, SDL_
 }
 
 void TextureManager::exterminate(std::string id) {
-    delete textureMap[id];
+    //SDL_DestroyTexture(textureMap[id]);
     textureMap.erase(id);
 }
 
