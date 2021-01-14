@@ -23,6 +23,16 @@ public:
     // Goes to the next DialogueNode.
     void Next(int response_id);
 
+    // Accesses the visited_ and in_stack_ attributes
+    bool GetVisited();
+    bool GetStack();
+
+    // Sets the visited_ and in_stack_ attributes
+    void SetVisited(bool visited);
+    void SetStack(bool stack);
+
+    // Auxiliary function for CheckCycle()
+    bool CheckCycleUtil();
 
 private:
     // Line of NPCs or objects.
@@ -31,6 +41,10 @@ private:
     // Vector of responses and corresponding DialogueNode.
     // The dialogue ends when responses_ is empty.
     std::vector<std::pair<std::string, DialogueNode*>> responses_;
+
+    // Used for the CheckCycle() method of the Dialogue class
+    bool visited_;
+    bool in_stack_;
 };
 
 // Dialogues for NPCs or objects.
@@ -60,9 +74,6 @@ public:
 
     // Verifies if the graph is cycle-free. Returns true on success.
     bool CheckCycle();
-
-    // Auxiliary function for CheckCycle()
-    bool CheckCycleUtil(DialogueNode* node, bool visited[]);
 
     void Render();
 

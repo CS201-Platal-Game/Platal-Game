@@ -71,6 +71,13 @@ bool Object::InteractCollision(Character character) {
     return intersection;
 }
 
+void Object::CallInteraction(Character character) {
+    // Assumes we are still uring the InteractButton() method
+    if (this->InteractCollision(character) || this->InteractButton()) {
+        Interact();
+    }
+}
+
 void Object::Render() {
     TextureManager::Instance()->DrawFrame(textureId_, {32, 0, 32, 32},
                                           {position_.x, position_.y, 32, 32},
