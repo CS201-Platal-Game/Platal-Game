@@ -12,7 +12,7 @@
 // specific situation if needed
 
 std::string sleep_flavor_text(float current, float max) {
-    double ratio = current / max;
+    float ratio = current / max;
     if (ratio < .25)
         return ("exhausted");
     if (ratio < .5)
@@ -23,7 +23,7 @@ std::string sleep_flavor_text(float current, float max) {
 }
 
 std::string social_flavor_text(float current, float max) {
-    double ratio = current / max;
+    float ratio = current / max;
     if (ratio < .25)
         return ("shit");
     if (ratio < .5)
@@ -34,7 +34,7 @@ std::string social_flavor_text(float current, float max) {
 }
 
 std::string quartile(float current, float max) {
-    double ratio = current / max;
+    float ratio = current / max;
     if (ratio < .25)
         return "4";
     if (ratio < .5)
