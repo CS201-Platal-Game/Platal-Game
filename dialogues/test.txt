@@ -1,12 +1,13 @@
 4
-Welcome! This is a test dialogue, do you like it?
-Sample Line 1
+Welcome! This is a test dialogue, do you like it? What happens if this is longer? How about very, extremely and unnecessarily long text?
+Sample line 1
 Happy to hear that!
 :(
 3
-It's cool!
+I think it's perfect!
 No it's bad.
-Response 2
-2
+Here is a third option.
+3
 0 0 2
 0 1 3
+0 2 1

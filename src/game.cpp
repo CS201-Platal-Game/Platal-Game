@@ -73,17 +73,17 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height,
         TextureManager::Instance()->Load("player", "./images/sprites/littleman1.png", renderer_);
 
         FontManager::Instance()->Load("retganon10", "./fonts/chary___.ttf", 10);
-        FontManager::Instance()->Load("retganon", "./fonts/chary___.ttf", 50);
+        FontManager::Instance()->Load("retganon", "./fonts/chary___.ttf", 32);
 
         SoundManager::Instance()->LoadMusic("ilym", "./sound/music/ILYM_sample.wav");
         SoundManager::Instance()->LoadMusic("hop", "./sound/music/hophophop.wav");
         SoundManager::Instance()->PlayMusic("hop");
         SoundManager::Instance()->SetVolume(MIX_MAX_VOLUME/2);
 
-        // dialogue test
-        game_state_ = kWorld;
-        current_dialogue_ = new Dialogue("./dialogues/test.txt");
 
+        // dialogue test
+        game_state_ = kDialogue;
+        current_dialogue_ = new Dialogue("./dialogues/test.txt");
         // hud test
         hud_ = new HUD(2.5f, 50.0f, 50.0f);
 
