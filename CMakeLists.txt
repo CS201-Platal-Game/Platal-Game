@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.10)
 project(platal_game)
 
 set(CMAKE_CXX_STANDARD 17)
-add_compile_options(-Wall -pedantic)
+add_compile_options(-Wall -pedantic -Os)
 
 # Directories setup.
 set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/bin)

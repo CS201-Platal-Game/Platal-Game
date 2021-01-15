@@ -88,8 +88,8 @@ void Object::Render() {
 }
 
 // Used as placedholders 
-void Object::Action1() {};
-void Object::Action2() {};
+void Object::Action1() {}
+void Object::Action2() {}
 
 Portal::Portal(int width, int height, int map_id) {
     hitbox_.w = width;
