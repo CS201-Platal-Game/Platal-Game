@@ -36,7 +36,7 @@ std::string social_flavor_text(float current, float max) {
 std::string quartile(float current, float max) {
     double ratio = current / max;
     if (ratio < .25)
-        return ("4");
+        return "4";
     if (ratio < .5)
         return "3";
     if (ratio < .75)
