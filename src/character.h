@@ -1,6 +1,8 @@
 #pragma once
 #include "dialogue.h"
 #include "stats.h"
+#include "utils/structs.h"
+#include "utils/Animation.h"
 #include <string>
 #include <list>
 #include <vector>
@@ -40,7 +42,8 @@ class Protagonist : public Character {
     // inherit constructors
     Protagonist();
     // files and ids are for animation purposes
-    Protagonist(const std::string& name, const Position& position, vector<string> files, vector<string> ids);
+    Protagonist(const std::string& name, const Position& position,
+                std::vector<std::string> files, std::vector<std::string> ids);
 
     //Takes key presses and adjusts the protag's orientation
     void HandleInput(SDL_Event key);
@@ -53,19 +56,14 @@ class Protagonist : public Character {
 
     //void CreateAnimationArray(vector<string> files, vector<string> ids);
 
-    Velocity GetVelocity() { return velocity_; }
-
   private:
     // initially size of array shouldn't matter since we're going
     // to overwrite it anyway
     Position viewport_center_;
-    //Velocity velocity_{ 0, 0 };
     Stats stats_;
-    //Accel accel_ = {1, 1, 1};
-    // TODO: inventories?
-    std::vector<string> animFiles_; // vector of animation strips
-    std::vector<string> animIds_; // vector of IDs of animation strips
-    AnimatedTexture animationArray_[animFiles.size()]; // array has to be same length as nr of files
+    std::vector<std::string> animFiles_; // vector of animation strips
+    std::vector<std::string> animIds_; // vector of IDs of animation strips
+    AnimatedTexture animationArray_[animFiles_.size()]; // array has to be same length as nr of files
 };
 
 class NPC : public Character {
