@@ -72,10 +72,10 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height,
     TextureManager::Instance()->load(
         "player", "./images/sprites/littleman1.png", renderer_);
     FontManager::Instance()->Load("retganon10", "./fonts/chary___.ttf", 10);
-    FontManager::Instance()->Load("retganon", "./fonts/chary___.ttf", 50);
+    FontManager::Instance()->Load("retganon", "./fonts/chary___.ttf", 32);
 
     // dialogue test
-    game_state_ = kWorld;
+    game_state_ = kDialogue;
     current_dialogue_ = new Dialogue("./dialogues/test.txt");
 
     // hud test

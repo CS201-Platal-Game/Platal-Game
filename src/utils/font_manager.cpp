@@ -31,10 +31,25 @@ void FontManager::Draw(std::string id, std::string txt, int x, int y,
     int width = 0;
     int height = 0;
     SDL_QueryTexture(texture, NULL, NULL, &width, &height);
-    SDL_Rect dest = {x, y, width, height};
 
-    SDL_RenderCopy(renderer, texture, NULL, &dest);
-    SDL_DestroyTexture(texture);
+    if (x + width > 896) {
+        int letterwidth = width/txt.length();
+        int i = 7;
+        int spacepos = txt.find(" ", (896-x)/letterwidth - i);
+        while (spacepos > (896-x)/letterwidth) {
+            i += 1;
+            spacepos = txt.find(" ", (896-x)/letterwidth - i);
+        }
+        FontManager::Draw(id, txt.substr(0,spacepos), x, y, color, renderer);
+        if (spacepos < txt.length()) {
+            FontManager::Draw(id, txt.substr(spacepos + 1), x, y + height, color, renderer);
+        }
+    }
+    else {
+        SDL_Rect dest = {x, y, width, height};
+        SDL_RenderCopy(renderer, texture, NULL, &dest);
+        SDL_DestroyTexture(texture);
+    }
 }
 
 void FontManager::DrawBold(std::string id, std::string txt, int x, int y,
