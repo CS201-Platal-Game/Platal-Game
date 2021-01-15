@@ -10,7 +10,7 @@ class Question {
     // constructor
     // TODO: create list of constant questions.
     Question(const std::string& question_text, const std::string& answer);
-
+    Question(const std::vector<std::string>& options);
     void AddOption(const std::string& option);
 
     void SetOptions(const std::vector<std::string>& options);
@@ -36,7 +36,9 @@ class Quiz {
 
     void ExecuteQuiz(); // TODO e.g. runs RenderQuestions for each question.
 
-    void DisplayScore(); // TODO
+    void DisplayScore(); //  Says whether you passed or failed
+    //compares correct answers with the passed condition
+
 
     void HandleInput(SDL_Event event);
 

@@ -5,7 +5,10 @@ Question::Question(const std::string& question_text,
     question_text_ = question_text;
     answer_ = answer;
 }
-
+Question::Question(const std::vector<std::string>& options){
+      options_ = options;
+      chosen_ = options_.begin();
+}
 void Question::AddOption(const std::string& option) {
     options_.push_back(option);
 }
