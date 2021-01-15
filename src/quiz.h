@@ -42,6 +42,8 @@ class Quiz {
     // Return the verdict of the Quiz.
     bool Pass();
 
+    void RenderQuestions();
+
   private:
     int correct_answers_ = 0; // stores number of correct answers
     int pass_condition_ = 3;  // minimum level of correct answers needed to pass
