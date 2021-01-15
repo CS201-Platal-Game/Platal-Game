@@ -108,10 +108,15 @@ void HUD::Render() {
     std::string Social_stat_string =
         "Life is " + social_flavor_text(GetSocial(), MaxSocial);
 
-    FontManager::Instance()->Draw("hud_font", GPA_stat_string, 32, 20,
+    int gpax, restx, socialx;
+    gpax = (300 - FontManager::Instance()->RenderWidth("hud_font", GPA_stat_string))/2;
+    restx = 300 + (300 -FontManager::Instance()->RenderWidth("hud_font", Rest_stat_string))/2;
+    socialx = 600 + (FontManager::Instance()->RenderWidth("hud_font", Social_stat_string))/2;
+
+    FontManager::Instance()->Draw("hud_font", GPA_stat_string, gpax, 20, // x=32
                                   {16, 100, 16}, Game::renderer_);
-    FontManager::Instance()->Draw("hud_font", Rest_stat_string, 288, 20,
+    FontManager::Instance()->Draw("hud_font", Rest_stat_string, restx, 20, // x= 288
                                   {16, 16, 100}, Game::renderer_);
-    FontManager::Instance()->Draw("hud_font", Social_stat_string, 620, 20,
+    FontManager::Instance()->Draw("hud_font", Social_stat_string, socialx, 20, // x=620
                                   {100, 16, 16}, Game::renderer_);
 }
