@@ -85,6 +85,12 @@ void FontManager::DrawIt(std::string id, std::string txt, int x, int y,
     TTF_SetFontStyle(fontMap[id], TTF_STYLE_NORMAL);
 }
 
+int FontManager::RenderWidth(std::string font_id, std::string txt) {
+    int w, h;
+    TTF_SizeText(fontMap[font_id], txt.c_str(), &w, &h);
+    return w;
+}
+
 void FontManager::Exterminate(std::string id) {
     //TTF_CloseFont(fontMap[id]);
     fontMap.erase(id);
