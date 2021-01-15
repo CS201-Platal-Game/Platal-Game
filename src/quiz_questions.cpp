@@ -53,51 +53,15 @@ void Question::RenderQuestion() { // TODO: implement this
     std::vector<std::pair<std::string, int>> colorChangeAssistant; //for later
     std::vector<std::string>::iterator i;
     for (i = options_.begin(); i != options_.end(); ++i) {
-        FontManager::Instance()->Draw("answerFont", *i, 150, yPos,
-                                  {56, 56, 56}, Game::renderer_); // color: dark grey
-        colorChangeAssistant.push_back({*i, yPos});
+        if (i == chosen_)
+            FontManager::Instance()->Draw("answerFont", *i, 150, yPos,
+                                          {255, 209, 73}, Game::renderer_);
+        else
+            FontManager::Instance()->Draw("answerFont", *i, 150, yPos,
+                                          {255, 209, 73}, Game::renderer_);
+
         yPos = yPos - 17; //spacing = 5, font size = 12
-
-        if (yPos < 100){ // if text passes the bottom of the box
-        // i.e. if you have too many options to fit on the screen
-            FontManager::Clean(); //clear text from screen
-            colorChangeAssistant.clear();
-            std::cout << "Error - text overflow, too may options" << std::endl;
-        }
     }
-
-    // idea of how to implement with controls: number the options, and as you press the down key
-    // the option corresponding to the current number you are at will change color
-    int currentOption = 0;
-
-    switch (event.key.keysym.sym) {
-        case SDLK_UP:
-            if (currentOption > 0){
-                currentOption--; // go back one
-            }
-            else{ // if somehow less than 0
-                currentOption = 0;
-            }
-            FontManager::Instance()->Draw("answerFont", colorChangeAssistant[currentOption->first],
-                                 150, colorChangeAssistant[currentOption->second],
-                                  {255, 209, 73}, Game::renderer_); //color: bright orange
-            break;
-        case SDLK_DOWN:
-            if (currentOption < options_.size()) {
-                currentOption++; // go forward one
-                
-            }
-            else{ // if somehow greater than the number of options available
-                currentOption = options_.size()-1;
-            }
-            FontManager::Instance()->Draw("answerFont", colorChangeAssistant[currentOption->first],
-                                 150, colorChangeAssistant[currentOption->second],
-                                  {255, 209, 73}, Game::renderer_); //color: bright orange
-        default:
-            break;
-    }
-    
-
 }
 
 void Question::PickOption(SDL_Event event) {
