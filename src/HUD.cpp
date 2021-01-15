@@ -96,7 +96,8 @@ void HUD::Render() {
     // essentially one sentence that can then be changed depending on stats or
     // preference
 
-    SDL_Rect HUD_rect = {0, 580, 900, 64};
+    //SDL_Rect HUD_rect = {0, 580, 900, 64};
+    SDL_Rect HUD_rect = {0, 0, 900, 64};
     SDL_SetRenderDrawBlendMode(Game::renderer_, SDL_BLENDMODE_BLEND);
     SDL_SetRenderDrawColor(Game::renderer_, 180, 180, 180, 100);
     SDL_RenderFillRect(Game::renderer_, &HUD_rect);
@@ -107,10 +108,10 @@ void HUD::Render() {
     std::string Social_stat_string =
         "Life is " + social_flavor_text(GetSocial(), MaxSocial);
 
-    FontManager::Instance()->Draw("hud_font", GPA_stat_string, 32, 600,
+    FontManager::Instance()->Draw("hud_font", GPA_stat_string, 32, 20,
                                   {16, 100, 16}, Game::renderer_);
-    FontManager::Instance()->Draw("hud_font", Rest_stat_string, 288, 600,
+    FontManager::Instance()->Draw("hud_font", Rest_stat_string, 288, 20,
                                   {16, 16, 100}, Game::renderer_);
-    FontManager::Instance()->Draw("hud_font", Social_stat_string, 620, 600,
+    FontManager::Instance()->Draw("hud_font", Social_stat_string, 620, 20,
                                   {100, 16, 16}, Game::renderer_);
 }
