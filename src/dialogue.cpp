@@ -125,7 +125,7 @@ void Dialogue::Advance() {
 }
 
 void Dialogue::Render() {
-    SDL_Rect dialog_rect = {0, 460, 800, 240};
+    SDL_Rect dialog_rect = {0, 460, 896, 240};
     SDL_SetRenderDrawBlendMode(Game::renderer_, SDL_BLENDMODE_BLEND);
     SDL_SetRenderDrawColor(Game::renderer_, 0, 0, 0, 196);
     SDL_RenderFillRect(Game::renderer_, &dialog_rect);
@@ -135,27 +135,58 @@ void Dialogue::Render() {
     int number_of_responses = current->getResponses().size();
 
     if (number_of_responses == 0) {
-        FontManager::Instance()->Draw("retganon", "Press Z to continue", 20,
+        FontManager::Instance()->Draw("retganon", "Press Z or [Enter] to continue", 20,
                                       530, {100, 100, 100}, Game::renderer_);
     }
 
     for (int i = 0; i < number_of_responses; i += 1) {
         std::string respo = "-" + std::get<0>(current->getResponses()[i]);
-        if (i == selected_response) {
-            FontManager::Instance()->Draw("retganon", respo,
-                                          20 + i * respo.length() * 20, 530,
-                                          {175, 175, 255}, Game::renderer_);
-        } else {
-            FontManager::Instance()->Draw("retganon", respo,
-                                          20 + i * respo.length() * 20, 530,
-                                          {255, 255, 255}, Game::renderer_);
+        int spacepos = 18;
+        int j = 7;
+        if (respo.length() > 18) {
+            spacepos = respo.find(" ", 18 - j);
+            while (spacepos > 18) {
+                j += 1;
+                spacepos = respo.find(" ", 18 - j);
+            }
         }
+        if (i == selected_response) {
+            FontManager::Instance()->Draw("retganon", respo.substr(0,spacepos),
+                                          10 + i * (896 / 3), 570,
+                                          {175, 175, 255}, Game::renderer_);
+            if (respo.length() > 18) {
+                FontManager::Instance()->Draw("retganon", " " + respo.substr(spacepos + 1),
+                                              10 + i * (896 / 3), 600,
+                                              {175, 175, 255}, Game::renderer_);
+            }
+
+        } else {
+            FontManager::Instance()->Draw("retganon", respo.substr(0,spacepos),
+                                          10 + i * (896 / 3), 570,
+                                          {255, 255, 255}, Game::renderer_);
+            if (respo.length() > 18) {
+                FontManager::Instance()->Draw("retganon", " " + respo.substr(spacepos + 1),
+                                              10 + i * (896 / 3), 600,
+                                              {255, 255, 255}, Game::renderer_);
+            }
+        };
     };
 }
 
 void Dialogue::HandleInput(SDL_Event event) {
     switch (event.key.keysym.sym) {
     case SDLK_z:
+        if (current->getResponses().size() == 0) {
+            Game::game_state_ = kWorld;
+            this->Reset();
+            selected_response = 0;
+        } else {
+            current = std::get<1>(current->getResponses()[selected_response]);
+            selected_response = 0;
+            this->Advance();
+        }
+        break;
+    case SDLK_RETURN:
         if (current->getResponses().size() == 0) {
             Game::game_state_ = kWorld;
             this->Reset();
