@@ -39,18 +39,23 @@ void Quiz::ExecuteQuiz(){
 }
 
 void Quiz::DisplayScore(){
-    SDL_Rect HUD_rect = {0, 580, 900, 64}; // tochange (size)
+    SDL_Rect score_rect = {350, 300, 290, 50}; // tochange (size)
     SDL_SetRenderDrawBlendMode(Game::renderer_, SDL_BLENDMODE_BLEND);
-    SDL_SetRenderDrawColor(Game::renderer_, 180, 180, 180, 100); // color
-    SDL_RenderFillRect(Game::renderer_, &HUD_rect);
+    SDL_SetRenderDrawColor(Game::renderer_, 0, 0, 0, 200); // color
+    SDL_RenderFillRect(Game::renderer_, &score_rect);
     if (correct_answers_ >= pass_condition_){
-        
-        FontManager::Instance()->Draw("quiz_font", "You passed!", 32, 600,
-                                  {16, 100, 16}, Game::renderer_);
+        int w = FontManager::Instance()->RenderWidth("quiz_font", "You passed!");
+
+        FontManager::Instance()->Draw("quiz_font", "You passed!",
+                                      350 + (290 - w)/2, 300,
+                                      {16, 200, 16}, Game::renderer_);
     }
     else{
-        FontManager::Instance()->Draw("quiz_font", "You FAILED!", 32, 600,
-                                  {100, 16, 16}, Game::renderer_);   
+        int w = FontManager::Instance()->RenderWidth("quiz_font", "You passed!");
+
+        FontManager::Instance()->Draw("quiz_font", "You FAILED!",
+                                      350 + (290 - w)/2, 300,
+                                      {200, 16, 16}, Game::renderer_);
     }
 }
 
