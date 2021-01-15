@@ -3,6 +3,7 @@
 #include "SDL2/SDL_image.h"
 #include <string>
 #include <vector>
+#include "utils/font_manager.h"
 
 class Question {
   public:
@@ -42,7 +43,7 @@ class Quiz {
 
 
     void HandleInput(SDL_Event event);
-
+    void MoveOn();
     // Return the verdict of the Quiz.
     bool Pass();
 
@@ -50,4 +51,5 @@ class Quiz {
     int correct_answers_ = 0; // stores number of correct answers
     int pass_condition_ = 3;  // minimum level of correct answers needed to pass
     std::vector<Question> questions_;
+    std::vector<Question>::iterator current_question;
 };

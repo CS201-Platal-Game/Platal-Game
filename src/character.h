@@ -42,9 +42,9 @@ class Protagonist : public Character {
     // inherit constructors
     Protagonist();
     // files and ids are for animation purposes
-    Protagonist(const std::string& name, const Position& position,
-                std::vector<std::string> files, std::vector<std::string> ids);
-
+    Protagonist(const std::string &name, const Position &position);
+    Protagonist(const std::string &name, const Position &position,
+ std::vector<std::pair<std::string, std::string>> idfiles);
     //Takes key presses and adjusts the protag's orientation
     void HandleInput(SDL_Event key);
 
@@ -54,16 +54,13 @@ class Protagonist : public Character {
 
     void Render();
 
-    //void CreateAnimationArray(vector<string> files, vector<string> ids);
-
+    void CreateAnimationArray(std::vector<std::pair<std::string, std::string>> idfiles);
   private:
     // initially size of array shouldn't matter since we're going
     // to overwrite it anyway
     Position viewport_center_;
     Stats stats_;
-    std::vector<std::string> animFiles_; // vector of animation strips
-    std::vector<std::string> animIds_; // vector of IDs of animation strips
-    AnimatedTexture animationArray_[animFiles_.size()]; // array has to be same length as nr of files
+    std::vector<AnimatedTexture> animationArray_;
 };
 
 class NPC : public Character {

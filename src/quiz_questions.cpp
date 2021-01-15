@@ -1,11 +1,12 @@
 #include "quiz.h"
+#include "game.h"
 
 Question::Question(const std::string& question_text,
                    const std::string& answer) {
     question_text_ = question_text;
     answer_ = answer;
-    FontManager::Instance()->Load("questionFont", "./fonts/novem___.ttf", 15;
-    FontManager::Instance()->Load("answerFont", "./fonts/novem___.ttf", 12;
+    FontManager::Instance()->Load("questionFont", "./fonts/novem___.ttf", 15);
+    FontManager::Instance()->Load("answerFont", "./fonts/novem___.ttf", 12);
 }
 Question::Question(const std::vector<std::string>& options){
       options_ = options;
@@ -47,7 +48,7 @@ void Question::RenderQuestion() { // TODO: implement this
 
     // TODO: deal with the issue of overflowing text (off the side)
     // do we want a box for each or do we just draw the text? 
-    int yPos = 630 // starting y, will then decrease
+    int yPos = 630; // starting y, will then decrease
 
     std::vector<std::pair<std::string, int>> colorChangeAssistant; //for later
     std::vector<std::string>::iterator i;
@@ -55,7 +56,7 @@ void Question::RenderQuestion() { // TODO: implement this
         FontManager::Instance()->Draw("answerFont", *i, 150, yPos,
                                   {56, 56, 56}, Game::renderer_); // color: dark grey
         colorChangeAssistant.push_back({*i, yPos});
-        yPos = yPos - 17 //spacing = 5, font size = 12
+        yPos = yPos - 17; //spacing = 5, font size = 12
 
         if (yPos < 100){ // if text passes the bottom of the box
         // i.e. if you have too many options to fit on the screen
@@ -67,7 +68,7 @@ void Question::RenderQuestion() { // TODO: implement this
 
     // idea of how to implement with controls: number the options, and as you press the down key
     // the option corresponding to the current number you are at will change color
-    int currentOption = 0
+    int currentOption = 0;
 
     switch (event.key.keysym.sym) {
         case SDLK_UP:

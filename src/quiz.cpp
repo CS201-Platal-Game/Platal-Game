@@ -3,6 +3,7 @@
 
 Quiz::Quiz(const std::vector<Question>& questions) { 
     questions_ = questions; 
+    current_question = questions_.begin();
     FontManager::Instance()->Load("quiz_font", "./fonts/chary___.ttf", 50);
 
 }
@@ -30,7 +31,12 @@ void Quiz::HandleInput(SDL_Event event) {
             break;
     }
 }
-void Quiz::ExecuteQuiz(){}
+void Quiz::ExecuteQuiz(){
+    std::vector<Question>::iterator it;
+    for(it = questions_.begin();it != questions_.end();it++){
+        it->RenderQuestion();
+    }
+}
 
 void Quiz::DisplayScore(){
     SDL_Rect HUD_rect = {0, 580, 900, 64}; // tochange (size)
