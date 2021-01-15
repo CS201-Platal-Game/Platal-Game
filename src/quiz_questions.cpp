@@ -38,8 +38,9 @@ void Question::RenderQuestion() { // TODO: implement this
                                   {56, 56, 56}, Game::renderer_); // color: dark grey
     
     // display basic instructions
-    FontManager::Instance()->Draw("answerFont", "press up or down, enter to select", 150, 730,
+    FontManager::Instance()->Draw("answerFont", "press up or down", 150, 730,
                                   {56, 56, 56}, Game::renderer_); // color: dark grey
+
 
     // TODO: deal with the issue of overflowing text (off the side)
     // do we want a box for each or do we just draw the text? 
