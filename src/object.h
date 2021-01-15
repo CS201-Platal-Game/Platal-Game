@@ -9,7 +9,7 @@ class Object {
     
     Object();
     Object(int width, int height, bool collidable);
-    Object(int width, int height, bool collidable, int x, int y);
+    Object(std::string texture_id, int width, int height, bool collidable, int x, int y);
     ~Object();
     // may want to have a texture sheet as an argument in the constructor,
     // to do once we have a functioning texture manager
