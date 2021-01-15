@@ -20,6 +20,7 @@ void Quiz::HandleInput(SDL_Event event) {
     switch (event.key.keysym.sym) {
         case SDLK_KP_ENTER:
             current_question->CheckCorrect();
+            MoveOn();
             break;
 
         case SDLK_UP:
@@ -32,10 +33,7 @@ void Quiz::HandleInput(SDL_Event event) {
     }
 }
 void Quiz::ExecuteQuiz(){
-    std::vector<Question>::iterator it;
-    for(it = questions_.begin();it != questions_.end();it++){
-        it->RenderQuestion();
-    }
+    current_question->RenderQuestion();
 }
 
 void Quiz::DisplayScore(){
