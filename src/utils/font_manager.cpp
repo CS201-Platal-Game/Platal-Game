@@ -20,8 +20,6 @@ void FontManager::Draw(std::string id, std::string txt, int x, int y,
                        SDL_Color color, SDL_Renderer * renderer) {
     //SDL_Rect dest = {x, y, txt.length()*(size/2), size};
 
-    // TODO: compute the appropriate width of the font lol -done
-
     // create the texture
     SDL_Surface* surface;
     surface = TTF_RenderText_Solid(fontMap[id], txt.c_str(), color);
