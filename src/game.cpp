@@ -75,7 +75,7 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height,
     FontManager::Instance()->Load("retganon", "./fonts/chary___.ttf", 32);
 
     // dialogue test
-    game_state_ = kDialogue;
+    game_state_ = kWorld;
     current_dialogue_ = new Dialogue("./dialogues/test.txt");
 
     // hud test
