@@ -85,6 +85,11 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height,
 
         // hud test
         hud_ = new HUD(2.5f, 50.0f, 50.0f);
+
+        //quiz failed test 
+        std::vector<Question> tmp;
+        current_quiz_= new Quiz(tmp);
+
     } else {
         std::cout << "SDL_ERROR: \t" << SDL_GetError() << std::endl;
         is_running_ = false;
@@ -126,6 +131,7 @@ void Game::HandleEvents() {
         }
         break;
     case SDL_KEYUP:
+
         break;
     // New case to be added for the implementation of the character interaction
     // with the object
@@ -167,7 +173,7 @@ void Game::Render() {
     player_->Render();
 
     hud_->Render();
-
+    current_quiz_->DisplayScore();
     //FontManager::Instance()->Draw("retganon", "PLATAL GAME!", 250, 0,
     //                              {200, 50, 50}, renderer_);
     if (game_state_ == kDialogue) {
