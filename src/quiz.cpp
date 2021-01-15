@@ -1,24 +1,6 @@
 #include "quiz.h"
 #include "game.h"
 
-// TODO: finish implementation
-Question::Question(const std::string& question_text, const std::string& answer) {
-    question_text_ = question_text;
-    answer_ = answer;
-}
-
-void Question::AddOption(const std::string& option) {
-    options_.push_back(option);
-}
-
-void Question::SetOptions(const std::vector<std::string>& options) {
-    options_ = options;
-}
-
-bool Question::CheckCorrect() {
-    return (*chosen_ == answer_);
-}
-
 Quiz::Quiz(const std::vector<Question>& questions) { questions_ = questions; }
 
 void Quiz::SetPass(int pass_condition) {
@@ -35,19 +17,21 @@ void Quiz::HandleInput(SDL_Event event) {
             current_question->CheckCorrect();
             break;
 
-        case SDLK_LEFT:
+        case SDLK_UP:
             current_question->PickOption(event);
             break;
 
-        case SDLK_RIGHT:
+        case SDLK_DOWN:
             current_question->PickOption(event);
             break;
     }
 }
+void Quiz::ExecuteQuiz(){}
+void Quiz::DisplayScore(){}
 
-void:: Quiz::MoveOn(){
+void Quiz::MoveOn(){
     if (current_question== questions_.end()-1){
-        (*myInstance) = kWorld; // End the game, change its state to not 
+        Game::game_state_ = kWorld; // End the game, change its state to not 
     }
     else{
         current_question++;
