@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 
+
 class Question {
   public:
     // constructor
@@ -42,10 +43,13 @@ class Quiz {
     // Return the verdict of the Quiz.
     bool Pass();
 
-    void RenderQuestions();
+    // Move on from a question to another
+    // if at the end of the questions, end quiz.
+    void MoveOn();
 
   private:
     int correct_answers_ = 0; // stores number of correct answers
     int pass_condition_ = 3;  // minimum level of correct answers needed to pass
     std::vector<Question> questions_;
+    std::vector<Question>::iterator current_question = questions_.begin();
 };
