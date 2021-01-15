@@ -135,7 +135,7 @@ void Dialogue::Render() {
     int number_of_responses = current->getResponses().size();
 
     if (number_of_responses == 0) {
-        FontManager::Instance()->Draw("retganon", "Press Z to continue", 20,
+        FontManager::Instance()->Draw("retganon", "Press Z or [Enter] to continue", 20,
                                       530, {100, 100, 100}, Game::renderer_);
     }
 
@@ -176,6 +176,17 @@ void Dialogue::Render() {
 void Dialogue::HandleInput(SDL_Event event) {
     switch (event.key.keysym.sym) {
     case SDLK_z:
+        if (current->getResponses().size() == 0) {
+            Game::game_state_ = kWorld;
+            this->Reset();
+            selected_response = 0;
+        } else {
+            current = std::get<1>(current->getResponses()[selected_response]);
+            selected_response = 0;
+            this->Advance();
+        }
+        break;
+    case SDLK_RETURN:
         if (current->getResponses().size() == 0) {
             Game::game_state_ = kWorld;
             this->Reset();

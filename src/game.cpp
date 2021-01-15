@@ -82,7 +82,7 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height,
 
 
         // dialogue test
-        game_state_ = kWorld;
+        game_state_ = kDialogue;
         current_dialogue_ = new Dialogue("./dialogues/test.txt");
         // hud test
         hud_ = new HUD(2.5f, 50.0f, 50.0f);
