@@ -76,7 +76,8 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height,
         FontManager::Instance()->Load("retganon", "./fonts/chary___.ttf", 50);
 
         SoundManager::Instance()->LoadMusic("ilym", "./sound/music/ILYM_sample.wav");
-        SoundManager::Instance()->PlayMusic("ilym");
+        SoundManager::Instance()->LoadMusic("hop", "./sound/music/hophophop.wav");
+        SoundManager::Instance()->PlayMusic("hop");
         SoundManager::Instance()->SetVolume(MIX_MAX_VOLUME/2);
 
         // dialogue test
