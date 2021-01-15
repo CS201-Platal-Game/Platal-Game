@@ -80,9 +80,18 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height,
         SoundManager::Instance()->PlayMusic("hop");
         SoundManager::Instance()->SetVolume(MIX_MAX_VOLUME/2);
 
+
         // dialogue test
         game_state_ = kWorld;
         current_dialogue_ = new Dialogue("./dialogues/test.txt");
+
+    // create the game character
+    // might need to store that on the heap
+    player_ = new Protagonist("player", {width / 2, height / 2});
+    TextureManager::Instance()->Load(
+        "player", "./images/sprites/littleman1.png", renderer_);
+    FontManager::Instance()->Load("retganon10", "./fonts/chary___.ttf", 10);
+    FontManager::Instance()->Load("retganon", "./fonts/chary___.ttf", 32);
 
         // hud test
         hud_ = new HUD(2.5f, 50.0f, 50.0f);
