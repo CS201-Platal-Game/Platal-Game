@@ -20,11 +20,21 @@ Game::~Game() {
     std::cout << "cleaned textures" << std::endl;
     FontManager::Instance()->Clean(); //->Exterminate("retganon");
     std::cout << "cleaned fonts" << std::endl;
+    SoundManager::Instance()->Clean();
+    std::cout << "cleaned sounds" << std::endl;
+
+    delete hud_;
+    delete current_dialogue_;
+    delete clock_;
+    delete synapses_;
+    delete main_menu_;
+    delete current_map_;
+
     SDL_DestroyRenderer(renderer_);
     std::cout << "freed renderer" << std::endl;
     SDL_DestroyWindow(window_);
     std::cout << "freed window" << std::endl;
-    // need to add the delete map
+
     TTF_Quit();
     IMG_Quit();
     SDL_Quit();
@@ -58,9 +68,7 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height,
         is_running_ = true;
 
         current_map_ = new Map();
-        // for the map positions, the y coordinate is weirdly shifted by -2 when
-        // compared to the csv...
-        current_map_->LoadMap("./maps/room.csv", {3, 5});
+        current_map_->LoadMap("./maps/room.csv", {6, 8});
 
         // create the game character
         // might need to store that on the heap
@@ -83,7 +91,7 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height,
         clock_->synapses_ = synapses_;
 
         // dialogue test
-        game_state_ = kDialogue;
+        game_state_ = kWorld;
         current_dialogue_ = new Dialogue("./dialogues/test.txt");
 
         // hud test
