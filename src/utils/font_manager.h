@@ -28,6 +28,8 @@ class FontManager {
     void DrawIt(std::string id, std::string txt, int x, int y,
               SDL_Color, SDL_Renderer*);
 
+    int RenderWidth(std::string font_id, std::string txt);
+
     void Exterminate(std::string id);
 
     ~FontManager() { myInstance->Clean(); };

@@ -73,18 +73,24 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height,
         TextureManager::Instance()->Load("player", "./images/sprites/littleman1.png", renderer_);
 
         FontManager::Instance()->Load("retganon10", "./fonts/chary___.ttf", 10);
-        FontManager::Instance()->Load("retganon", "./fonts/chary___.ttf", 50);
+        FontManager::Instance()->Load("retganon", "./fonts/chary___.ttf", 32);
 
         SoundManager::Instance()->LoadMusic("ilym", "./sound/music/ILYM_sample.wav");
-        SoundManager::Instance()->PlayMusic("ilym");
+        SoundManager::Instance()->LoadMusic("hop", "./sound/music/hophophop.wav");
+        SoundManager::Instance()->PlayMusic("hop");
         SoundManager::Instance()->SetVolume(MIX_MAX_VOLUME/2);
 
-        // dialogue test
-        game_state_ = kWorld;
-        current_dialogue_ = new Dialogue("./dialogues/test.txt");
 
+        // dialogue test
+        game_state_ = kDialogue;
+        current_dialogue_ = new Dialogue("./dialogues/test.txt");
         // hud test
         hud_ = new HUD(2.5f, 50.0f, 50.0f);
+
+        //quiz failed test 
+        //std::vector<Question> tmp;
+        //current_quiz_= new Quiz(tmp);
+
     } else {
         std::cout << "SDL_ERROR: \t" << SDL_GetError() << std::endl;
         is_running_ = false;
@@ -126,6 +132,7 @@ void Game::HandleEvents() {
         }
         break;
     case SDL_KEYUP:
+
         break;
     // New case to be added for the implementation of the character interaction
     // with the object
@@ -167,9 +174,8 @@ void Game::Render() {
     player_->Render();
 
     hud_->Render();
+    //current_quiz_->DisplayScore();
 
-    //FontManager::Instance()->Draw("retganon", "PLATAL GAME!", 250, 0,
-    //                              {200, 50, 50}, renderer_);
     if (game_state_ == kDialogue) {
         current_dialogue_->Render();
     } else if (game_state_ == kMenu) {

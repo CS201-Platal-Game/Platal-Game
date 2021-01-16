@@ -1,11 +1,17 @@
 #include "quiz.h"
+#include "game.h"
 
 Question::Question(const std::string& question_text,
                    const std::string& answer) {
     question_text_ = question_text;
     answer_ = answer;
+    FontManager::Instance()->Load("questionFont", "./fonts/novem___.ttf", 15);
+    FontManager::Instance()->Load("answerFont", "./fonts/novem___.ttf", 12);
 }
-
+Question::Question(const std::vector<std::string>& options){
+      options_ = options;
+      chosen_ = options_.begin();
+}
 void Question::AddOption(const std::string& option) {
     options_.push_back(option);
 }
@@ -21,9 +27,41 @@ bool Question::CheckCorrect() {
     return false;
 }
 
+
 void Question::RenderQuestion() { // TODO: implement this
     // since we are using keyboard controls this needs to be done such that
     // when an option is selected it changes color
+
+    SDL_Rect quizBackground = {100, 800, 800, 800}; // x, y (of top left), width, height
+	SDL_SetRenderDrawBlendMode(Game::renderer_, SDL_BLENDMODE_BLEND);
+    SDL_SetRenderDrawColor(Game::renderer_, 209, 207, 198, 100); // light grey
+    SDL_RenderFillRect(Game::renderer_, &quizBackground); // fill 
+    
+    // display the question at the top
+    FontManager::Instance()->Draw("questionFont", question_text_, 150, 750,
+                                  {56, 56, 56}, Game::renderer_); // color: dark grey
+    
+    // display basic instructions
+    FontManager::Instance()->Draw("answerFont", "press up or down", 150, 730,
+                                  {56, 56, 56}, Game::renderer_); // color: dark grey
+
+
+    // TODO: deal with the issue of overflowing text (off the side)
+    // do we want a box for each or do we just draw the text? 
+    int yPos = 630; // starting y, will then decrease
+
+    std::vector<std::pair<std::string, int>> colorChangeAssistant; //for later
+    std::vector<std::string>::iterator i;
+    for (i = options_.begin(); i != options_.end(); ++i) {
+        if (i == chosen_)
+            FontManager::Instance()->Draw("answerFont", *i, 150, yPos,
+                                          {255, 209, 73}, Game::renderer_);
+        else
+            FontManager::Instance()->Draw("answerFont", *i, 150, yPos,
+                                          {255, 209, 73}, Game::renderer_);
+
+        yPos = yPos - 17; //spacing = 5, font size = 12
+    }
 }
 
 void Question::PickOption(SDL_Event event) {

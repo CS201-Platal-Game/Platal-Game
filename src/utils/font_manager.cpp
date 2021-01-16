@@ -20,8 +20,6 @@ void FontManager::Draw(std::string id, std::string txt, int x, int y,
                        SDL_Color color, SDL_Renderer * renderer) {
     //SDL_Rect dest = {x, y, txt.length()*(size/2), size};
 
-    // TODO: compute the appropriate width of the font lol -done
-
     // create the texture
     SDL_Surface* surface;
     surface = TTF_RenderText_Solid(fontMap[id], txt.c_str(), color);
@@ -31,10 +29,25 @@ void FontManager::Draw(std::string id, std::string txt, int x, int y,
     int width = 0;
     int height = 0;
     SDL_QueryTexture(texture, NULL, NULL, &width, &height);
-    SDL_Rect dest = {x, y, width, height};
 
-    SDL_RenderCopy(renderer, texture, NULL, &dest);
-    SDL_DestroyTexture(texture);
+    if (x + width > 896) {
+        int letterwidth = width/txt.length();
+        int i = 7;
+        int spacepos = txt.find(" ", (896-x)/letterwidth - i);
+        while (spacepos > (896-x)/letterwidth) {
+            i += 1;
+            spacepos = txt.find(" ", (896-x)/letterwidth - i);
+        }
+        FontManager::Draw(id, txt.substr(0,spacepos), x, y, color, renderer);
+        if (spacepos < txt.length()) {
+            FontManager::Draw(id, txt.substr(spacepos + 1), x, y + height, color, renderer);
+        }
+    }
+    else {
+        SDL_Rect dest = {x, y, width, height};
+        SDL_RenderCopy(renderer, texture, NULL, &dest);
+        SDL_DestroyTexture(texture);
+    }
 }
 
 void FontManager::DrawBold(std::string id, std::string txt, int x, int y,
@@ -83,6 +96,12 @@ void FontManager::DrawIt(std::string id, std::string txt, int x, int y,
     SDL_RenderCopy(renderer, texture, NULL, &dest);
     SDL_DestroyTexture(texture);
     TTF_SetFontStyle(fontMap[id], TTF_STYLE_NORMAL);
+}
+
+int FontManager::RenderWidth(std::string font_id, std::string txt) {
+    int w, h;
+    TTF_SizeText(fontMap[font_id], txt.c_str(), &w, &h);
+    return w;
 }
 
 void FontManager::Exterminate(std::string id) {

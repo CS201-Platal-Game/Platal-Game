@@ -1,14 +1,11 @@
 #pragma once
-#include "SDL2/SDL.h"
-#include "SDL2/SDL_image.h"
-#include "utils/structs.h"
-#include "utils/Animation.h"
 #include "dialogue.h"
 #include "stats.h"
+#include "utils/structs.h"
+#include "utils/Animation.h"
 #include <string>
 #include <list>
 #include <vector>
-#include <map>
 
 enum Direction {
     kLeft = 0,
@@ -38,18 +35,16 @@ class Character {
     Position position_{ 0, 0 };
     SDL_Rect hitbox_;
     Direction orientation_; // e.g. protag is facing up/down/etc.
-    int frames_ = 0;
-    int speed_ = 100; //delay between frames, in milliseconds
-
 };
 
 class Protagonist : public Character {
   public:
     // inherit constructors
     Protagonist();
-    Protagonist(const std::string& name, const Position& position);
-    Protagonist(const std::string& name, const Position& position,
-     std::vector<std::pair<std::string, std::string>> idfiles);
+    // files and ids are for animation purposes
+    Protagonist(const std::string &name, const Position &position);
+    Protagonist(const std::string &name, const Position &position,
+ std::vector<std::pair<std::string, std::string>> idfiles);
     //Takes key presses and adjusts the protag's orientation
     void HandleInput(SDL_Event key);
 
@@ -60,11 +55,12 @@ class Protagonist : public Character {
     void Render();
 
     void CreateAnimationArray(std::vector<std::pair<std::string, std::string>> idfiles);
-
   private:
-    std::vector<AnimatedTexture> animationArray_;
+    // initially size of array shouldn't matter since we're going
+    // to overwrite it anyway
     Position viewport_center_;
     Stats stats_;
+    std::vector<AnimatedTexture> animationArray_;
 };
 
 class NPC : public Character {

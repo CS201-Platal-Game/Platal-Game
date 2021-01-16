@@ -9,7 +9,7 @@ class Object {
     
     Object();
     Object(int width, int height, bool collidable);
-    Object(int width, int height, bool collidable, int x, int y);
+    Object(std::string texture_id, int width, int height, bool collidable, int x, int y);
     ~Object();
     // may want to have a texture sheet as an argument in the constructor,
     // to do once we have a functioning texture manager
@@ -64,14 +64,19 @@ class Portal : public Object {
 
 class Switch : public Object {
   public:
-
+    using Object::Object;
     Switch(int width, int height, bool collidable, int x, int y,
-    int offset, int interact_width, int interact_height);
+    int offset, int interact_width, int interact_height, bool state);
     SDL_Rect GetField();
     void SetField(int offset, int width, int height);
     void KeyInteraction(Character character);
     void KeyInteraction(SDL_Rect hitbox);
+    void ToggleState();
+    void SetState(bool state);
+    bool GetState();
 
   private:
     SDL_Rect interact_field_;
+    bool active_ = true;
+    bool state_;
 };

@@ -1,0 +1,8 @@
+[object.toml]
+
+[object.tree]
+width = 1
+height = 1
+collidable = 0
+x = 1
+y = 1

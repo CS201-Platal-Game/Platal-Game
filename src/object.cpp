@@ -16,8 +16,9 @@ Object::Object(int width, int height, bool collidable) {
     position_ = {0, 0};
 }
 
-Object::Object(int width, int height, bool collidable, int x, int y ) {
+Object::Object(std::string texture_id, int width, int height, bool collidable, int x, int y ) {
     SetHitbox(width, height);
+    textureId_ = texture_id;
     hitbox_.w = width;
     hitbox_.h = height;
     collidable_ = collidable;
@@ -87,8 +88,8 @@ void Object::Render() {
 }
 
 // Used as placedholders 
-void Object::Action1() {};
-void Object::Action2() {};
+void Object::Action1() {}
+void Object::Action2() {}
 
 Portal::Portal(int width, int height, int map_id) {
     hitbox_.w = width;
@@ -98,7 +99,7 @@ Portal::Portal(int width, int height, int map_id) {
 }
 
 Switch::Switch(int width, int height, bool collidable, int x, int y, 
-int offset, int interact_width, int interact_height) {
+int offset, int interact_width, int interact_height, bool state) {
     SetHitbox(width, height);
     hitbox_.w = width;
     hitbox_.h = height;
@@ -123,7 +124,7 @@ void Switch::KeyInteraction(Character character) {
     SDL_Rect character_hitbox_ = character.GetHitbox();
     bool intersection = SDL_HasIntersection(&interact_field_, &character_hitbox_);
     const Uint8* event_array = SDL_GetKeyboardState(nullptr);
-    if (event_array[SDL_SCANCODE_E] && intersection) {
+    if (active_ && event_array[SDL_SCANCODE_E] && intersection) {
         Action2();
     }
 }
@@ -131,7 +132,25 @@ void Switch::KeyInteraction(Character character) {
 void Switch::KeyInteraction(SDL_Rect hitbox) {
     bool intersection = SDL_HasIntersection(&interact_field_, &hitbox);
     const Uint8* event_array = SDL_GetKeyboardState(nullptr);
-    if (event_array[SDL_SCANCODE_E] && intersection) {
+    if (active_ && event_array[SDL_SCANCODE_E] && intersection) {
         Action2();
+        ToggleState();
+    }
+}
+
+void Switch::SetState(bool state){
+    state_ = state;
+}
+
+bool Switch::GetState(){
+    return state_;
+}
+
+void Switch::ToggleState(){
+    if(state_ == true){
+        state_ = false;
+    }
+    else {
+        state_ = true;
     }
 }
