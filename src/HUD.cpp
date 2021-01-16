@@ -12,7 +12,7 @@
 // specific situation if needed
 
 std::string sleep_flavor_text(float current, float max) {
-    double ratio = current / max;
+    float ratio = current / max;
     if (ratio < .25)
         return ("exhausted");
     if (ratio < .5)
@@ -23,7 +23,7 @@ std::string sleep_flavor_text(float current, float max) {
 }
 
 std::string social_flavor_text(float current, float max) {
-    double ratio = current / max;
+    float ratio = current / max;
     if (ratio < .25)
         return ("shit");
     if (ratio < .5)
@@ -34,9 +34,9 @@ std::string social_flavor_text(float current, float max) {
 }
 
 std::string quartile(float current, float max) {
-    double ratio = current / max;
+    float ratio = current / max;
     if (ratio < .25)
-        return ("4");
+        return "4";
     if (ratio < .5)
         return "3";
     if (ratio < .75)
@@ -96,7 +96,8 @@ void HUD::Render() {
     // essentially one sentence that can then be changed depending on stats or
     // preference
 
-    SDL_Rect HUD_rect = {0, 580, 900, 64};
+    //SDL_Rect HUD_rect = {0, 580, 900, 64};
+    SDL_Rect HUD_rect = {0, 0, 900, 64};
     SDL_SetRenderDrawBlendMode(Game::renderer_, SDL_BLENDMODE_BLEND);
     SDL_SetRenderDrawColor(Game::renderer_, 180, 180, 180, 100);
     SDL_RenderFillRect(Game::renderer_, &HUD_rect);
@@ -107,10 +108,15 @@ void HUD::Render() {
     std::string Social_stat_string =
         "Life is " + social_flavor_text(GetSocial(), MaxSocial);
 
-    FontManager::Instance()->Draw("hud_font", GPA_stat_string, 32, 600,
+    int gpax, restx, socialx;
+    gpax = (300 - FontManager::Instance()->RenderWidth("hud_font", GPA_stat_string))/2;
+    restx = 300 + (300 -FontManager::Instance()->RenderWidth("hud_font", Rest_stat_string))/2;
+    socialx = 600 + (FontManager::Instance()->RenderWidth("hud_font", Social_stat_string))/2;
+
+    FontManager::Instance()->Draw("hud_font", GPA_stat_string, gpax, 20, // x=32
                                   {16, 100, 16}, Game::renderer_);
-    FontManager::Instance()->Draw("hud_font", Rest_stat_string, 288, 600,
+    FontManager::Instance()->Draw("hud_font", Rest_stat_string, restx, 20, // x= 288
                                   {16, 16, 100}, Game::renderer_);
-    FontManager::Instance()->Draw("hud_font", Social_stat_string, 620, 600,
+    FontManager::Instance()->Draw("hud_font", Social_stat_string, socialx, 20, // x=620
                                   {100, 16, 16}, Game::renderer_);
 }

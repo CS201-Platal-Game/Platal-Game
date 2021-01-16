@@ -88,8 +88,8 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height,
         hud_ = new HUD(2.5f, 50.0f, 50.0f);
 
         //quiz failed test 
-        std::vector<Question> tmp;
-        current_quiz_= new Quiz(tmp);
+        //std::vector<Question> tmp;
+        //current_quiz_= new Quiz(tmp);
 
     } else {
         std::cout << "SDL_ERROR: \t" << SDL_GetError() << std::endl;
@@ -174,9 +174,8 @@ void Game::Render() {
     player_->Render();
 
     hud_->Render();
-    current_quiz_->DisplayScore();
-    //FontManager::Instance()->Draw("retganon", "PLATAL GAME!", 250, 0,
-    //                              {200, 50, 50}, renderer_);
+    //current_quiz_->DisplayScore();
+
     if (game_state_ == kDialogue) {
         current_dialogue_->Render();
     } else if (game_state_ == kMenu) {
