@@ -92,65 +92,67 @@ void Protagonist::CreateAnimationArray(std::vector<std::pair<std::string, std::s
 }
 
 void Protagonist::Render() { // DO ANIMATION STUFF HERE, use array, this should only be one line
-    // do only on protagonist
-    const Uint8* event_array = SDL_GetKeyboardState(nullptr);
-    // the array will work as follows (by index): 0: left, 1: right, 2: up, 4: down
-    switch (orientation_){
-        case kLeft: {
-            AnimatedTexture leftAnimate = animationArray_[0]; // creates this variable for clarity
-            if( event_array[SDL_SCANCODE_LEFT] ){ // if key is being pressed
-            // QUESTION: should this a while loop?
-               leftAnimate.Render(viewport_center_.x, viewport_center_.y, false);
-               leftAnimate.Update(); // run through the frames
+    if (animationArray_.empty()){
+        TextureManager::Instance()->Draw("player", {0, 0, 32, 32},
+                                         {viewport_center_.x, viewport_center_.y, 64, 64},
+                                         Game::renderer_);
+    } else {
+        // do only on protagonist
+        const Uint8* event_array = SDL_GetKeyboardState(nullptr);
+        // the array will work as follows (by index): 0: left, 1: right, 2: up, 4: down
+        switch (orientation_) {
+            case kLeft: {
+                AnimatedTexture leftAnimate = animationArray_[0]; // creates this variable for clarity
+                if (event_array[SDL_SCANCODE_LEFT]) { // if key is being pressed
+                    // QUESTION: should this a while loop?
+                    leftAnimate.Render(viewport_center_.x, viewport_center_.y, false);
+                    leftAnimate.Update(); // run through the frames
+                } else {
+                    // when not pressed show only first frame (static)
+                    leftAnimate.Render(viewport_center_.x, viewport_center_.y, true);
+                }
             }
-            else{
-                // when not pressed show only first frame (static)
-                leftAnimate.Render(viewport_center_.x, viewport_center_.y, true);
+                break;
+
+            case kRight: {
+                AnimatedTexture rightAnimate = animationArray_[1];
+                if (event_array[SDL_SCANCODE_RIGHT]) {
+                    rightAnimate.Render(viewport_center_.x, viewport_center_.y, false);
+                    rightAnimate.Update();
+                } else {
+                    rightAnimate.Render(viewport_center_.x, viewport_center_.y, true);
+                }
             }
+                break;
+
+            case kUp: {
+                AnimatedTexture upAnimate = animationArray_[2];
+                if (event_array[SDL_SCANCODE_UP]) {
+                    upAnimate.Render(viewport_center_.x, viewport_center_.y, false);
+                    upAnimate.Update();
+                } else {
+                    upAnimate.Render(viewport_center_.x, viewport_center_.y, true);
+                }
+            }
+                break;
+
+            case kDown: {
+                AnimatedTexture downAnimate = animationArray_[3];
+                if (event_array[SDL_SCANCODE_DOWN]) {
+                    downAnimate.Render(viewport_center_.x, viewport_center_.y, false);
+                    downAnimate.Update();
+                } else {
+                    downAnimate.Render(viewport_center_.x, viewport_center_.y, true);
+                }
+            }
+                break;
+
+            default: // default is to just render the static image
+                // I can either do it like this or using the animation class
+                // don't know - which is better?
+                TextureManager::Instance()->Draw(name_, {0, 0, 32, 32},
+                                                 {viewport_center_.x, viewport_center_.y, 64, 64}, Game::renderer_);
         }
-        break;
-        
-        case kRight: {
-            AnimatedTexture rightAnimate = animationArray_[1]; 
-            if( event_array[SDL_SCANCODE_RIGHT] ){ 
-               rightAnimate.Render(viewport_center_.x, viewport_center_.y, false);
-               rightAnimate.Update();
-            }
-            else{
-                rightAnimate.Render(viewport_center_.x, viewport_center_.y, true);
-            }
-        }
-        break;
-        
-        case kUp: {
-            AnimatedTexture upAnimate = animationArray_[2]; 
-            if( event_array[SDL_SCANCODE_UP] ){ 
-               upAnimate.Render(viewport_center_.x, viewport_center_.y, false);
-               upAnimate.Update();
-            }
-            else{
-                upAnimate.Render(viewport_center_.x, viewport_center_.y, true);
-            }
-        }
-        break;
-        
-        case kDown: {
-            AnimatedTexture downAnimate = animationArray_[3]; 
-            if( event_array[SDL_SCANCODE_DOWN] ){ 
-               downAnimate.Render(viewport_center_.x, viewport_center_.y, false);
-               downAnimate.Update();
-            }
-            else{
-                downAnimate.Render(viewport_center_.x, viewport_center_.y, true);
-            }
-        }
-        break;
-        
-        default: // default is to just render the static image
-            // I can either do it like this or using the animation class
-            // don't know - which is better?
-             TextureManager::Instance()->Draw(name_, {0, 0, 32, 32},
-                                     {viewport_center_.x, viewport_center_.y, 64, 64}, Game::renderer_);
     }
 }
 

@@ -11,7 +11,7 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR})
 set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR})
 
 # Options.
-option(PLATAL_BUILD_DEMO "Build map_demo." ON)
+option(PLATAL_BUILD_DEMO "Build map_demo." OFF)
 
 # SDL2.
 find_package(SDL2 REQUIRED)
