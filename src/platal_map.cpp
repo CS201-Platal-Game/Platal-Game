@@ -35,15 +35,15 @@ void Map::LoadMap(char *filename, Position starting_pos) {
     width_ = tmp.width;
     height_ = tmp.height;
     map_array_ = tmp.map_array;
-    music_ = music;
+    music_ = tmp.music;
 
     // We now load and play the music
-    std::string music = tmp.music;
-    std::string music_file = "./sound/music/";
-    music_file.append(music).append(".wav");
-    if (music != "None") {
-        SoundManager::Instance()->LoadMusic(music, music_file);
-        SoundManager::Instance()->PlayMusic(music);
+    
+    if (music_ != "None") {
+        std::string music_file = "./sound/music/";
+        music_file.append(music_).append(".wav");
+        SoundManager::Instance()->LoadMusic(music_, music_file);
+        SoundManager::Instance()->PlayMusic(music_);
     }
     
     center_position_ = {starting_pos.x*64 - vpwidth_/2,
