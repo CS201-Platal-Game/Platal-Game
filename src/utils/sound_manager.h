@@ -3,6 +3,9 @@
 #include <iostream>
 #include <map>
 
+#ifndef PLATAL_GAME_SOUND_MANAGER_H
+#define PLATAL_GAME_SOUND_MANAGER_H
+
 class SoundManager {
   public:
     static SoundManager* Instance(){
@@ -37,3 +40,5 @@ private:
 
     static SoundManager* myInstance;
 };
+
+#endif // PLATAL_GAME_SOUND_MANAGER_H

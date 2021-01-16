@@ -1,10 +1,6 @@
 #include "Animation.h"
 #include "../game.h" 
 
-AnimatedTexture::AnimatedTexture() {
-    //default does nothing
-}
-AnimatedTexture::~AnimatedTexture(){}
 
 AnimatedTexture::AnimatedTexture(std::string id, int cFrame, int mFrame,
                                  int w, int h,

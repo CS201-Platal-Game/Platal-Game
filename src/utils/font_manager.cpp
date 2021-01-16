@@ -15,11 +15,8 @@ bool FontManager::Load(std::string id, std::string filename, int ptsize) {
     return true;
 }
 
-
 void FontManager::Draw(std::string id, std::string txt, int x, int y,
                        SDL_Color color, SDL_Renderer * renderer) {
-    //SDL_Rect dest = {x, y, txt.length()*(size/2), size};
-
     // create the texture
     SDL_Surface* surface;
     surface = TTF_RenderText_Solid(fontMap[id], txt.c_str(), color);
@@ -52,10 +49,6 @@ void FontManager::Draw(std::string id, std::string txt, int x, int y,
 
 void FontManager::DrawBold(std::string id, std::string txt, int x, int y,
                        SDL_Color color, SDL_Renderer * renderer) {
-    //SDL_Rect dest = {x, y, txt.length()*(size/2), size};
-
-    // TODO: compute the appropriate width of the font lol -done
-
     // create the texture
     SDL_Surface* surface;
 
@@ -76,10 +69,6 @@ void FontManager::DrawBold(std::string id, std::string txt, int x, int y,
 
 void FontManager::DrawIt(std::string id, std::string txt, int x, int y,
                            SDL_Color color, SDL_Renderer * renderer) {
-    //SDL_Rect dest = {x, y, txt.length()*(size/2), size};
-
-    // TODO: compute the appropriate width of the font lol -done
-
     // create the texture
     SDL_Surface* surface;
 
@@ -105,10 +94,8 @@ int FontManager::RenderWidth(std::string font_id, std::string txt) {
 }
 
 void FontManager::Exterminate(std::string id) {
-    //TTF_CloseFont(fontMap[id]);
     fontMap.erase(id);
 }
-
 
 void FontManager::Clean() {
     TTF_Font* font;
