@@ -7,7 +7,15 @@
 
 ## Build
 
-Prerequisites: `cmake`, `sdl2`, `sdl2_image`, `sdl2_ttf`.
+Prerequisites: `cmake`, `sdl2`, `sdl2_image`, `sdl2_ttf`, `sdl2_mixer`.
+
+#### Installing prerequisites
+
+```
+sudo apt-get install g++ cmake libsdl2-dev libsdl2-image-dev libsdl2-ttf-dev libsdl2-mixer-dev
+```
+
+#### Building the project from inside the root directory
 
 ```
 mkdir build && cd build && cmake .. && make -j
