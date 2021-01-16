@@ -6,15 +6,10 @@
 Direction Map::protag_orientation_ = kDown;
 
 Map::Map() {
-    // The textures we have for the moment are in Platal-Game -> images ->
-
-    //Here we will add as many textures as needed, need yet to be determined
-
     TextureManager::Instance()->Load("dirt", "./images/maptexture/dirt.png", Game::renderer_);
     TextureManager::Instance()->Load("water", "./images/maptexture/water.png", Game::renderer_);
     TextureManager::Instance()->Load("grass_1l", "./images/maptexture/grasstile_oneleaf.png", Game::renderer_);
 
-    // sdl source and dest rects
     src_ = dest_ = {0, 0, 64, 64};
 
     // width and height of the map in squares
@@ -24,11 +19,7 @@ Map::Map() {
     SDL_GetWindowSize(Game::window_, &vpwidth_, &vpheight_);
     std::cout << vpwidth_ << ", " << vpheight_ << std::endl << std::endl;
 }
-// The void Map::LoadMap I think has already been coded by Carolina, if not I'll do it
 
-
-// Nina has completely forgotten how to use the texture manager pls help
-// grasstile_oneleaf_ = TextureManager::load("grass1", "grasstile_oneleaf.png", Game::renderer_); //load the element so we are able to reference it later
 void Map::LoadMap(char *filename, Position starting_pos) {
     struct MapBundle tmp;
     tmp = csv2map(filename);
@@ -38,7 +29,6 @@ void Map::LoadMap(char *filename, Position starting_pos) {
     music_ = tmp.music;
 
     // We now load and play the music
-    
     if (music_ != "None") {
         std::string music_file = "./sound/music/";
         music_file.append(music_).append(".wav");
@@ -49,7 +39,6 @@ void Map::LoadMap(char *filename, Position starting_pos) {
     center_position_ = {starting_pos.x*64 - vpwidth_/2,
                         starting_pos.y*64 - vpheight_/2};
 }
-
 
 void Map::DrawMap() {
 
@@ -69,11 +58,9 @@ void Map::DrawMap() {
                 TextureManager::Instance()->Draw(name,src_ ,
                                                  {64*width - center_position_.x, 64*height - center_position_.y, src_.w, src_.h},
                                                  Game::renderer_);
-            // Here I use TextureManager from texture_manager.cpp
         }
     }
 }
-
 
 bool Map::IsLegal(){
     int x, y;
@@ -99,8 +86,6 @@ bool Map::IsLegal(){
             y = center_position_.y;
             break;
     }
-    //std::cout << x << ", " << y << "; " ;
-    //std::cout << map_array_[y][x] << std::endl;
     return (x >= 0 and y >= 0 and x < width_ and y < height_ and map_array_[y][x] != 0);
 }
 
@@ -109,24 +94,20 @@ void Map::HandleInput(SDL_Event event) {
         case SDLK_LEFT:
             protag_orientation_ = kLeft;
             protag_velocity_.yVel = 0;
-            //velocity_.xVel = 0;
             break;
 
         case SDLK_RIGHT:
             protag_orientation_ = kRight;
             protag_velocity_.yVel = 0;
-            //velocity_.xVel = 0;
             break;
 
         case SDLK_UP:
             protag_orientation_ = kUp;
-            //velocity_.yVel = 0;
             protag_velocity_.xVel = 0;
             break;
 
         case SDLK_DOWN:
             protag_orientation_ = kDown;
-            //velocity_.yVel = 0;
             protag_velocity_.xVel = 0;
             break;
         
@@ -160,7 +141,7 @@ void Map::Move() {
         case kLeft:
             // update the velocities so they increase if a key is being pressed or fall back to zero when a key isn't being pressed
             if( event_array[SDL_SCANCODE_LEFT] ) {
-                if( protag_velocity_.xVel > -protag_accel_.terminalVelocity ) { // We want to limit the velocity in any direction; originally at 64
+                if( protag_velocity_.xVel > -protag_accel_.terminalVelocity ) {
                     protag_velocity_.xVel -= protag_accel_.speedUp;
                     if( protag_velocity_.xVel < -protag_accel_.terminalVelocity ) { // We check after increasing that we are not above the limit
                         protag_velocity_.xVel = protag_accel_.terminalVelocity;
@@ -168,7 +149,7 @@ void Map::Move() {
                 }
             }
             else if( protag_velocity_.xVel < 0){
-                protag_velocity_.xVel += protag_accel_.sloDown; // value subject to change
+                protag_velocity_.xVel += protag_accel_.sloDown;
                 // we now treat the case where we overshoot 0
                 if( protag_velocity_.xVel > 0){
                     protag_velocity_.xVel = 0;
@@ -259,8 +240,6 @@ void Map::Move() {
     }
 }
 
-
-//to check 
 void Map::AddObject(Object item) {
     std::vector<SDL_Rect> tiles = GetTiles(item); 
     std::vector<SDL_Rect>::iterator it;
