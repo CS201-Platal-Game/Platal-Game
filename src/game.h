@@ -1,14 +1,15 @@
 #pragma once
+#include "HUD.h"
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
+#include "clock.h"
 #include "dialogue.h"
 #include "menu.h"
 #include "platal_map.h"
 #include "quiz.h"
-#include "HUD.h"
 #include <iostream>
 
-enum GameState { kWorld = 0, kDialogue, kQuiz, kMenu, kQuit };
+enum GameState { kWorld = 0, kDialogue, kSynapses, kQuiz, kMenu, kQuit };
 
 class Game {
   public:
@@ -52,6 +53,8 @@ class Game {
     Dialogue* current_dialogue_;
     Quiz* current_quiz_;
     MainMenu* main_menu_;
+    Synapses* synapses_;
+    Clock* clock_;
     static Game* myInstance;
 
     // to skip control input

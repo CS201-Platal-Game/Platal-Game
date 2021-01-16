@@ -2,8 +2,8 @@
 #include "SDL2/SDL_ttf.h"
 #include "platal_map.h"
 #include "utils/font_manager.h"
-#include "utils/texture_manager.h"
 #include "utils/sound_manager.h"
+#include "utils/texture_manager.h"
 
 // static members definition
 SDL_Renderer* Game::renderer_ = nullptr;
@@ -38,12 +38,10 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height,
     int flags = 0;
     if (fullscreen)
         flags = SDL_WINDOW_FULLSCREEN;
-           
+
     if (SDL_Init(SDL_INIT_EVERYTHING) == 0 &&
-        IMG_Init(IMG_INIT_PNG) == IMG_INIT_PNG &&
-        TTF_Init() == 0 &&
-        Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) == 0
-        )  {
+        IMG_Init(IMG_INIT_PNG) == IMG_INIT_PNG && TTF_Init() == 0 &&
+        Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) == 0) {
         std::cout << "subsystem initialized..." << std::endl;
 
         window_ = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
@@ -59,34 +57,41 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height,
 
         is_running_ = true;
 
-
         current_map_ = new Map();
         // for the map positions, the y coordinate is weirdly shifted by -2 when
         // compared to the csv...
         current_map_->LoadMap("./maps/room.csv", {3, 5});
 
-        main_menu_ = new MainMenu();
-
         // create the game character
         // might need to store that on the heap
         player_ = new Protagonist("player", {width / 2, height / 2});
-        TextureManager::Instance()->Load("player", "./images/sprites/littleman1.png", renderer_);
+        TextureManager::Instance()->Load(
+            "player", "./images/sprites/littleman1.png", renderer_);
 
         FontManager::Instance()->Load("retganon10", "./fonts/chary___.ttf", 10);
         FontManager::Instance()->Load("retganon", "./fonts/chary___.ttf", 32);
 
         SoundManager::Instance()->SetVolume(MIX_MAX_VOLUME/2);
 
+        // main menu
+        main_menu_ = new MainMenu();
+
+        // event manager
+        synapses_ = new Synapses();
+        clock_ = new Clock();
+        synapses_->clock_ = clock_;
+        clock_->synapses_ = synapses_;
 
         // dialogue test
         game_state_ = kDialogue;
         current_dialogue_ = new Dialogue("./dialogues/test.txt");
+
         // hud test
         hud_ = new HUD(2.5f, 50.0f, 50.0f);
 
-        //quiz failed test 
-        //std::vector<Question> tmp;
-        //current_quiz_= new Quiz(tmp);
+        // quiz failed test
+        // std::vector<Question> tmp;
+        // current_quiz_= new Quiz(tmp);
 
     } else {
         std::cout << "SDL_ERROR: \t" << SDL_GetError() << std::endl;
@@ -124,6 +129,10 @@ void Game::HandleEvents() {
             break;
         case kMenu:
             main_menu_->HandleInput(event);
+            break;
+        case kSynapses:
+            synapses_->HandleInput(event);
+            break;
         default:
             break;
         }
@@ -146,7 +155,7 @@ void Game::Update() {
         int tick = SDL_GetTicks();
         if (tick - timestamp_ >= skip_) {
             if (!current_map_->IsLegal()) { // movement is illegal
-                //std::cout << "illegal" << std::endl;
+                // std::cout << "illegal" << std::endl;
                 current_map_->ZeroSpeed();
             } else {
                 current_map_->Move();
@@ -171,12 +180,15 @@ void Game::Render() {
     player_->Render();
 
     hud_->Render();
-    //current_quiz_->DisplayScore();
+    // current_quiz_->DisplayScore();
 
+    // optional elements
     if (game_state_ == kDialogue) {
         current_dialogue_->Render();
     } else if (game_state_ == kMenu) {
         main_menu_->Render();
+    } else if (game_state_ == kSynapses) {
+        synapses_->Render();
     }
 
     SDL_RenderPresent(renderer_);

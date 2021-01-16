@@ -5,6 +5,10 @@ MainMenu::MainMenu() {}
 
 void MainMenu::Continue() { Game::game_state_ = kWorld; }
 
+void MainMenu::DialogueDemo() { Game::game_state_ = kDialogue; }
+
+void MainMenu::Synapses() { Game::game_state_ = kSynapses; }
+
 void MainMenu::Quit() { Game::game_state_ = kQuit; }
 
 void MainMenu::HandleInput(SDL_Event event) {
@@ -15,6 +19,12 @@ void MainMenu::HandleInput(SDL_Event event) {
             Continue();
             break;
         case 1:
+            DialogueDemo();
+            break;
+        case 2:
+            Synapses();
+            break;
+        case 3:
             Quit();
             break;
         default:
@@ -26,13 +36,15 @@ void MainMenu::HandleInput(SDL_Event event) {
         break;
     case SDLK_RIGHT:
         selected_option_ += (selected_option_ < options_.size() - 1);
+        break;
     default:
         break;
     }
 }
 
 void MainMenu::Render() {
-    SDL_Rect menu_rect = {0, 460, 800, 240};
+    SDL_Rect menu_rect = {0, 460, 896, 240};
+
     SDL_SetRenderDrawBlendMode(Game::renderer_, SDL_BLENDMODE_BLEND);
     SDL_SetRenderDrawColor(Game::renderer_, 0, 0, 0, 196);
     SDL_RenderFillRect(Game::renderer_, &menu_rect);
@@ -44,6 +56,8 @@ void MainMenu::Render() {
         draw_x += 20;
 
         std::string current_option = options_[i];
+
+        // Highlighting.
         SDL_Color color = {255, 255, 255};
         if (i == selected_option_) {
             color = {175, 175, 255};
@@ -52,6 +66,7 @@ void MainMenu::Render() {
         FontManager::Instance()->Draw("retganon", current_option, draw_x,
                                       draw_y, color, Game::renderer_);
 
-        draw_x += current_option.size() * 20;
+        // Spacing for next option.
+        draw_x += current_option.size() * 15 + 50;
     }
 }

@@ -30,6 +30,7 @@ add_library(platal_lib
             src/platal_map.cpp
             src/object.cpp
             src/clock.cpp
+            src/clock_synapses.cpp
             src/stats.cpp
             src/HUD.cpp
             src/utils/Animation.cpp
