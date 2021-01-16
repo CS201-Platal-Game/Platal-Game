@@ -6,7 +6,7 @@
 #include <vector>
 
 class DialogueNode {
-public:
+  public:
     DialogueNode();
     DialogueNode(const std::string& line);
     ~DialogueNode();
@@ -31,7 +31,7 @@ public:
     // Auxiliary function for CheckCycle()
     bool CheckCycleUtil();
 
-private:
+  private:
     // Line of NPCs or objects.
     std::string line_;
 
@@ -47,7 +47,7 @@ private:
 // Dialogues for NPCs or objects.
 // Contains a directed graph, represented by an adjacency list.
 class Dialogue {
-public:
+  public:
     Dialogue();
     Dialogue(const char filename[]);
     ~Dialogue();
@@ -76,7 +76,7 @@ public:
 
     void HandleInput(SDL_Event key);
 
-private:
+  private:
     DialogueNode* head_;
     DialogueNode* current;
     int selected_response;

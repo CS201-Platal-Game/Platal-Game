@@ -1,13 +1,12 @@
 #pragma once
-#include "character.h"
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
+#include "character.h"
 #include "utils/structs.h"
 #include <string>
 
 class Object {
   public:
-    
     Object();
     Object(int width, int height, bool collidable);
     Object(std::string texture_id, int width, int height, bool collidable, int x, int y);
@@ -31,10 +30,11 @@ class Object {
     // Check if the player is colliding with the object
     bool CheckCollision(Character character);
     bool CheckCollision(SDL_Rect hitbox);
-    template <typename T> void CollideInteract(T item){
-      if (CheckCollision(item)) {
-        Action1();
-      }
+    template <typename T>
+    void CollideInteract(T item) {
+        if (CheckCollision(item)) {
+            Action1();
+        }
     }
 
     // A method that calls an interaction if a sufficient condition is met
@@ -49,7 +49,6 @@ class Object {
     bool collidable_;
     Position position_; // the up-left position of the object
     int obj_id;
-
 };
 
 // Object signalling map changes.
@@ -69,7 +68,7 @@ class Switch : public Object {
   public:
     using Object::Object;
     Switch(int width, int height, bool collidable, int x, int y,
-    int offset, int interact_width, int interact_height, bool state);
+           int offset, int interact_width, int interact_height, bool state);
     SDL_Rect GetField();
     void SetField(int offset, int width, int height);
     void KeyInteraction(Character character);

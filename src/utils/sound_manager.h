@@ -8,7 +8,7 @@
 
 class SoundManager {
   public:
-    static SoundManager* Instance(){
+    static SoundManager* Instance() {
         if (myInstance == 0)
             myInstance = new SoundManager();
         return myInstance;
@@ -16,12 +16,12 @@ class SoundManager {
 
     // loads a font element
     bool LoadMusic(std::string id, std::string filename);
-    
+
     bool LoadChunk(std::string id, std::string filename);
 
     void PlayMusic(std::string id);
     void ToggleMusic();
-    bool IsPlaying(){ return Mix_PlayingMusic() != 0; };
+    bool IsPlaying() { return Mix_PlayingMusic() != 0; };
     void PlayChunk(std::string id);
 
     int GetVolume() { return Mix_VolumeMusic(-1); }
@@ -33,7 +33,7 @@ class SoundManager {
     ~SoundManager() { myInstance->Clean(); };
     void Clean();
 
-private:
+  private:
     std::map<std::string, Mix_Chunk*> ChunkMap;
     std::map<std::string, Mix_Music*> MusicMap;
     SoundManager() = default;

@@ -9,7 +9,12 @@
 #include "quiz.h"
 #include <iostream>
 
-enum GameState { kWorld = 0, kDialogue, kSynapses, kQuiz, kMenu, kQuit };
+enum GameState { kWorld = 0,
+                 kDialogue,
+                 kSynapses,
+                 kQuiz,
+                 kMenu,
+                 kQuit };
 
 class Game {
   public:
@@ -40,7 +45,6 @@ class Game {
     static SDL_Window* window_;
     static GameState game_state_;
     static Map* current_map_;
-
 
   private:
     int width_, height_;

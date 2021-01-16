@@ -1,5 +1,5 @@
-#include "quiz.h"
 #include "game.h"
+#include "quiz.h"
 
 Question::Question(const std::string& question_text,
                    const std::string& answer) {
@@ -9,9 +9,9 @@ Question::Question(const std::string& question_text,
     FontManager::Instance()->Load("answerFont", "./fonts/novem___.ttf", 12);
 }
 
-Question::Question(const std::vector<std::string>& options){
-      options_ = options;
-      chosen_ = options_.begin();
+Question::Question(const std::vector<std::string>& options) {
+    options_ = options;
+    chosen_ = options_.begin();
 }
 
 void Question::AddOption(const std::string& option) {
@@ -29,13 +29,12 @@ bool Question::CheckCorrect() {
     return false;
 }
 
-
 void Question::RenderQuestion() {
-    SDL_Rect quizBackground = {100, 800, 800, 800}; 
-	SDL_SetRenderDrawBlendMode(Game::renderer_, SDL_BLENDMODE_BLEND);
+    SDL_Rect quizBackground = {100, 800, 800, 800};
+    SDL_SetRenderDrawBlendMode(Game::renderer_, SDL_BLENDMODE_BLEND);
     SDL_SetRenderDrawColor(Game::renderer_, 209, 207, 198, 100); // light grey
-    SDL_RenderFillRect(Game::renderer_, &quizBackground); // fill 
-    
+    SDL_RenderFillRect(Game::renderer_, &quizBackground);        // fill
+
     // display the question at the top
     FontManager::Instance()->Draw("questionFont", question_text_, 150, 750,
                                   {56, 56, 56}, Game::renderer_); // color: dark grey
@@ -61,16 +60,16 @@ void Question::RenderQuestion() {
 
 void Question::PickOption(SDL_Event event) {
     switch (event.key.keysym.sym) {
-        case SDLK_UP:
-            if (chosen_ != options_.begin()) {
-                chosen_ = std::prev(chosen_, 1);
-            }
-            break;
-        case SDLK_DOWN:
-            if (chosen_ != options_.end()-1) {
-                chosen_ = std::next(chosen_, 1);
-            }
-        default:
-            break;
+    case SDLK_UP:
+        if (chosen_ != options_.begin()) {
+            chosen_ = std::prev(chosen_, 1);
+        }
+        break;
+    case SDLK_DOWN:
+        if (chosen_ != options_.end() - 1) {
+            chosen_ = std::next(chosen_, 1);
+        }
+    default:
+        break;
     }
 }

@@ -4,7 +4,8 @@
 
 std::vector<SDL_Rect> GetTiles(SDL_Rect hitbox);
 
-template <typename T> std::vector<SDL_Rect> GetTiles(T item) {
+template <typename T>
+std::vector<SDL_Rect> GetTiles(T item) {
     std::vector<SDL_Rect> out;
     SDL_Rect hitbox = item.GetHitbox();
     for (int x = 0; x < hitbox.w; x += 64) {

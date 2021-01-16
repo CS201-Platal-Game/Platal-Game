@@ -141,7 +141,7 @@ void Dialogue::Render() {
             }
         }
         if (i == selected_response) {
-            FontManager::Instance()->Draw("retganon", respo.substr(0,spacepos),
+            FontManager::Instance()->Draw("retganon", respo.substr(0, spacepos),
                                           10 + i * (896 / 3), 570,
                                           {175, 175, 255}, Game::renderer_);
             if (respo.length() > 18) {
@@ -150,7 +150,7 @@ void Dialogue::Render() {
                                               {175, 175, 255}, Game::renderer_);
             }
         } else {
-            FontManager::Instance()->Draw("retganon", respo.substr(0,spacepos),
+            FontManager::Instance()->Draw("retganon", respo.substr(0, spacepos),
                                           10 + i * (896 / 3), 570,
                                           {255, 255, 255}, Game::renderer_);
             if (respo.length() > 18) {
@@ -221,7 +221,7 @@ bool Dialogue::CheckCycle() {
             return true;
         }
     }
-    return false; 
+    return false;
 }
 
 bool DialogueNode::CheckCycleUtil() {
@@ -229,12 +229,11 @@ bool DialogueNode::CheckCycleUtil() {
         SetVisited(true);
         SetStack(true);
         std::vector<std::pair<std::string, DialogueNode*>>::iterator i;
-        for( i = responses_.begin(); i != responses_.end(); i++) {
+        for (i = responses_.begin(); i != responses_.end(); i++) {
             DialogueNode* temp_node = i->second;
             if (!temp_node->GetVisited() && temp_node->CheckCycleUtil()) {
                 return true;
-            }
-            else if (temp_node->GetStack()) { 
+            } else if (temp_node->GetStack()) {
                 return true;
             }
         }
