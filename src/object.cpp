@@ -105,7 +105,7 @@ bool Portal::CheckCollision(SDL_Rect hitbox) {
     if (!collidable_) return false;
 
     bool intersection = SDL_HasIntersection(&hitbox_, &hitbox);
-    Action1();
+    if (intersection) Action1();
     return intersection;
 }
 
