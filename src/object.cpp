@@ -6,9 +6,6 @@ Object::Object() {} // TODO
 Object::~Object() {}
 
 Object::Object(int width, int height, bool collidable) {
-    // Initializing all the attributes. We set x = y = 0 for the moment,
-    // subject to change depending on whether or not we want it
-    // as an argument in the constructor
     SetHitbox(0, 0);
     hitbox_.w = width;
     hitbox_.h = height;
@@ -64,7 +61,7 @@ Object Object::Copy() {
 }
 
 bool Object::CheckCollision(Character character) {
-    // Checks if the object is collidable and if the character is currently colliding with it.SS
+    // Checks if the object is collidable and if the character is currently colliding with it
     if (!collidable_) return false;
 
     SDL_Rect character_hitbox_ = character.GetHitbox();
@@ -73,7 +70,7 @@ bool Object::CheckCollision(Character character) {
 }
 
 bool Object::CheckCollision(SDL_Rect hitbox) {
-    // Checks if the object is collidable and if the character is currently colliding with it.SS
+    // Checks if the object is collidable and if the character is currently colliding with it.
     if (!collidable_) return false;
 
     bool intersection = SDL_HasIntersection(&hitbox_, &hitbox);
@@ -84,7 +81,6 @@ void Object::Render() {
     TextureManager::Instance()->DrawFrame(textureId_, {32, 0, 32, 32},
                                           {position_.x, position_.y, 32, 32},
                                           Game::renderer_);
-
 }
 
 // Used as placedholders 
@@ -100,8 +96,16 @@ Portal::Portal(SDL_Rect coordinates, std::string map_id, Position starting_posit
     collidable_ = true;
 }
 
+bool Portal::CheckCollision(Character character) {
+    if (!collidable_) return false;
+
+    SDL_Rect character_hitbox_ = character.GetHitbox();
+    bool intersection = SDL_HasIntersection(&hitbox_, &character_hitbox_);
+    if (intersection) Action1();
+    return intersection;
+}
+
 bool Portal::CheckCollision(SDL_Rect hitbox) {
-    // Checks if the object is collidable and if the character is currently colliding with it.SS
     if (!collidable_) return false;
 
     bool intersection = SDL_HasIntersection(&hitbox_, &hitbox);
@@ -162,10 +166,5 @@ bool Switch::GetState(){
 }
 
 void Switch::ToggleState(){
-    if(state_ == true){
-        state_ = false;
-    }
-    else {
-        state_ = true;
-    }
+    state_ = !state_;
 }

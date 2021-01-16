@@ -12,8 +12,6 @@ class Object {
     Object(int width, int height, bool collidable);
     Object(std::string texture_id, int width, int height, bool collidable, int x, int y);
     ~Object();
-    // may want to have a texture sheet as an argument in the constructor,
-    // to do once we have a functioning texture manager
 
     int GetWidth();
     int GetHeight();
@@ -33,14 +31,14 @@ class Object {
     // Check if the player is colliding with the object
     bool CheckCollision(Character character);
     bool CheckCollision(SDL_Rect hitbox);
-    template <typename T> void CollideInterract(T item){
+    template <typename T> void CollideInteract(T item){
       if (CheckCollision(item)) {
         Action1();
       }
     }
 
     // A method that calls an interaction if a sufficient condition is met
-    // To be defined in the subclasses
+    // To be overloaded in the subclasses
     void Interact();
 
     void Render();
@@ -59,6 +57,7 @@ class Portal : public Object {
   public:
     Portal(SDL_Rect coordinates, std::string map_id, Position starting_position);
     bool CheckCollision(SDL_Rect hitbox);
+    bool CheckCollision(Character character);
     void Action1();
 
   private:
