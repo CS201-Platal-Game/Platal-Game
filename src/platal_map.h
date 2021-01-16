@@ -8,6 +8,7 @@
 #include "utils/tiles.h"
 #include <vector>
 #include <map>
+#include <string>
 // Chris here working on platal_map objects, Since textures are not yet defined the outcome can't be tested, so I am coding for a general idea.
 
 class Map {

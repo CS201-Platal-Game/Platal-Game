@@ -1,7 +1,7 @@
 #include "platal_map.h"
 #include "game.h" // added game.h, just in case
 #include "utils/csv2map.h"
-//Chris here changing stuff for the map part, changes still need to be made, 
+#include "utils/sound_manager.h"
 
 Direction Map::protag_orientation_ = kDown;
 
@@ -32,11 +32,16 @@ Map::Map() {
 void Map::LoadMap(char *filename, Position starting_pos) {
     struct MapBundle tmp;
     tmp = csv2map(filename);
-
     width_ = tmp.width;
     height_ = tmp.height;
     map_array_ = tmp.map_array;
-
+    std::string music = tmp.music;
+    std::string music_file = "./sound/music/";
+    music_file.append(music).append(".wav");
+    if (music != "None") {
+        SoundManager::Instance()->LoadMusic(music, music_file);
+        SoundManager::Instance()->PlayMusic(music);
+    }
     center_position_ = {starting_pos.x*64 - vpwidth_/2,
                         starting_pos.y*64 - vpheight_/2};
 }
