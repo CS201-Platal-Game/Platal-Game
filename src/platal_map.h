@@ -33,6 +33,9 @@ class Map {
     Object RemoveObject(int obj_id); // return the object if it was found
 
     int map_id_; // the name of the location the map represents
+    
+    void AddSwitch(Switch item);
+    Switch RemoveSwitch(int obj_id);
 
     static Direction protag_orientation_;
 
@@ -43,7 +46,8 @@ class Map {
   
     //int** map_array_; // loaded from csv
     std::vector<std::vector<int>> map_array_;
-    std::map <SDL_Rect, std::vector<Object>, SDLRectCompare> objects_; // map from position on screen to object
+    std::map<SDL_Rect, std::vector<Object>, SDLRectCompare> objects_; // map from position on screen to object
+    std::map<SDL_Rect, std::vector<Switch>, SDLRectCompare> switches_; 
     std::map <Position*, Character> npc_; // map from pointers to position on screen to object
   
     SDL_Rect src_, dest_; // attributes used while rendering
