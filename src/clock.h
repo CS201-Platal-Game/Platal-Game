@@ -83,6 +83,13 @@ class Synapses {
     unsigned AttendEvent(); // time skip: change Clock to ending_time,
                             // return event_id
 
+    // Interface.
+    void Render();
+    void HandleInput(SDL_Event event);
+
+    // Demo.
+    void InitializeDemo();
+
   private:
     void UpdateCurrentEvents();
     std::vector<Event> current_events_; // sorted by starting time (reverse)
