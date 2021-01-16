@@ -11,7 +11,7 @@
 
 class FontManager {
   public:
-    static FontManager* Instance(){
+    static FontManager* Instance() {
         if (myInstance == 0)
             myInstance = new FontManager();
         return myInstance;
@@ -24,9 +24,9 @@ class FontManager {
     void Draw(std::string id, std::string txt, int x, int y,
               SDL_Color, SDL_Renderer*);
     void DrawBold(std::string id, std::string txt, int x, int y,
-              SDL_Color, SDL_Renderer*);
+                  SDL_Color, SDL_Renderer*);
     void DrawIt(std::string id, std::string txt, int x, int y,
-              SDL_Color, SDL_Renderer*);
+                SDL_Color, SDL_Renderer*);
 
     int RenderWidth(std::string font_id, std::string txt);
 
@@ -35,7 +35,7 @@ class FontManager {
     ~FontManager() { myInstance->Clean(); };
     void Clean();
 
-private:
+  private:
     std::map<std::string, TTF_Font*> fontMap; // map with all the fonts
     FontManager() = default;
 

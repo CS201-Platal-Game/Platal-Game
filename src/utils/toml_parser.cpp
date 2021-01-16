@@ -1,5 +1,4 @@
 #include <assert.h>
-
 #include <fstream>
 #include <iostream>
 #include <map>
@@ -44,6 +43,7 @@ bool ParseMapTOML(const std::string& filename, MapTOML& map_toml) {
     return true;
 }
 
+// for immediate testing
 int main() {
     std::string filename = "../tomls/tree.toml";
     MapTOML map_toml;

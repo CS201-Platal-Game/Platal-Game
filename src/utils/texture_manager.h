@@ -1,30 +1,35 @@
 #pragma once
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
-#include <string>
 #include <iostream>
 #include <map>
+#include <string>
+
+#ifndef PLATAL_GAME_TEXTURE_MANAGER_H
+#define PLATAL_GAME_TEXTURE_MANAGER_H
 
 class TextureManager {
   public:
-    // this is Nina trying some stuff, it might be a disaster
-    static TextureManager* Instance(){
-        if (myInstance == 0){
+    static TextureManager* Instance() {
+        if (myInstance == 0) {
             myInstance = new TextureManager();
         }
         return myInstance;
     }
-      
+
     //initialiser
     bool Load(std::string id, std::string filename, SDL_Renderer* renderer); //load the element so we are able to reference it later
 
-    // for drawing static objects like the background image
-    // takes an id, position rendered (x,y), width, height and orientation
-    void Draw(std::string id, SDL_Rect src_, SDL_Rect dest_, SDL_Renderer* renderer, SDL_RendererFlip flip = SDL_FLIP_NONE );
+    // to draw static objects like the background image
+    void Draw(std::string id,
+              SDL_Rect src_, SDL_Rect dest_,
+              SDL_Renderer* renderer, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
-    // for drawing objects and characters (can also be used to draw tiled objects)
+    // to draw animated objects and characters (can also be used to draw tiled objects)
     // the frames thing is to facilitate animation of characters (think of a GIF, but as one long image with multiple frames)
-    void DrawFrame(std::string id, SDL_Rect src, SDL_Rect dest, SDL_Renderer *renderer, SDL_RendererFlip flip = SDL_FLIP_NONE);
+    void DrawFrame(std::string id,
+                   SDL_Rect src, SDL_Rect dest,
+                   SDL_Renderer* renderer, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
     // delete SDL texture (yes this is a doctor who reference)
     void exterminate(std::string id);
@@ -32,18 +37,10 @@ class TextureManager {
     ~TextureManager() { myInstance->Clean(); };
     void Clean();
 
-private:
+  private:
     std::map<std::string, SDL_Texture*> textureMap; // map with all SDL textures
-    TextureManager()= default;
+    TextureManager() = default;
     static TextureManager* myInstance;
 };
 
-// not sure this is 100% necessary but might make things easier
-// if I understood correctly what I'm doing then this should let us use MyTextureManager as a typename
-typedef TextureManager MyTextureManager;
-
-// in the event that I am overcomplicating, I'm leaving this stuff here
-//static SDL_Texture* LoadTexture(const char* filename);
-
-// take src rect from texture and draw it in the dest rect location
-//static void Draw(SDL_Texture* texture, SDL_Rect src, SDL_Rect dest);
+#endif
