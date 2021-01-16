@@ -93,7 +93,7 @@ void Protagonist::Render() {
         // array (by index): 0: left, 1: right, 2: up, 4: down
         switch (Map::protag_orientation_) {
         case kLeft: {
-            if (event_array[SDL_SCANCODE_LEFT]) {
+            if (event_array[SDL_SCANCODE_LEFT] && (Game::game_state_ == kWorld)) {
                 // key pressed -> run through the frames
                 animationArray_[0].Render(viewport_center_.x, viewport_center_.y, false);
                 animationArray_[0].Update();
@@ -105,7 +105,7 @@ void Protagonist::Render() {
         }
 
         case kRight: {
-            if (event_array[SDL_SCANCODE_RIGHT]) {
+            if (event_array[SDL_SCANCODE_RIGHT] && (Game::game_state_ == kWorld)) {
                 animationArray_[1].Render(viewport_center_.x, viewport_center_.y, false);
                 animationArray_[1].Update();
             } else {
@@ -115,7 +115,7 @@ void Protagonist::Render() {
         }
 
         case kUp: {
-            if (event_array[SDL_SCANCODE_UP]) {
+            if (event_array[SDL_SCANCODE_UP] && (Game::game_state_ == kWorld)) {
                 animationArray_[2].Render(viewport_center_.x, viewport_center_.y, false);
                 animationArray_[2].Update();
             } else {
@@ -125,7 +125,7 @@ void Protagonist::Render() {
         }
 
         case kDown: {
-            if (event_array[SDL_SCANCODE_DOWN]) {
+            if (event_array[SDL_SCANCODE_DOWN] && (Game::game_state_ == kWorld)) {
                 animationArray_[3].Render(viewport_center_.x, viewport_center_.y, false);
                 animationArray_[3].Update();
             } else {
