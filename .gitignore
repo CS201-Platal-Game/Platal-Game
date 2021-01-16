@@ -89,3 +89,4 @@ fonts/*.zip
 # valgrind
 vgcore*
 massif.out*
+maps/.~lock.room.csv#

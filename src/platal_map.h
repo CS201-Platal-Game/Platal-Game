@@ -8,6 +8,7 @@
 #include "utils/tiles.h"
 #include <vector>
 #include <map>
+#include <string>
 // Chris here working on platal_map objects, Since textures are not yet defined the outcome can't be tested, so I am coding for a general idea.
 
 class Map {
@@ -56,5 +57,8 @@ class Map {
     Position center_position_;
     Velocity protag_velocity_{0,0};
     Accel protag_accel_ = {32, 8, 16};
+
+    // backgroud music
+    std::string music_;
 };
 
