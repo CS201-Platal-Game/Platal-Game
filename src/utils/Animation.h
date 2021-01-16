@@ -33,7 +33,8 @@ private:
     int y_;
     // currently not necessary
     // bool animated_;
-
+    int frameTime = SDL_GetTicks();
+    int frameDelay = 1000/20;
 };
 
 //Old structure

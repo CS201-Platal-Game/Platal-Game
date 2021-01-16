@@ -17,8 +17,8 @@ AnimatedTexture::AnimatedTexture(std::string id, int cFrame, int mFrame,
 
     frame_.w = w; // sets the size of the rectangle
     frame_.h = h;
-    frame_.x = posX;
-    frame_.y = posY;
+    frame_.x = cFrame * frame_.w;
+    frame_.y = 0;
 }
 
 void AnimatedTexture::loadFile(std::string filename){
@@ -36,11 +36,14 @@ void AnimatedTexture::Render(int posX, int posY, bool reset) {
 
 
 void AnimatedTexture::Update() {
+    if (SDL_GetTicks() - frameTime < frameDelay)
+        return;
     if (currFrame_ >= maxFrame_){
         currFrame_ = 0;
     }
     else currFrame_++;
     // move onto next frame
     frame_.x = currFrame_ *  frame_.w;
+    frameTime = SDL_GetTicks();
 }
 

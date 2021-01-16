@@ -1,5 +1,6 @@
 #include "character.h"
 #include "game.h"
+#include "platal_map.h"
 #include "utils/texture_manager.h"
 #include <vector>
 #include <string>
@@ -83,9 +84,9 @@ void Protagonist::CreateAnimationArray(std::vector<std::pair<std::string, std::s
     // fill the array w instances of AnimatedTexture
     std::vector<std::pair<std::string, std::string>>::iterator i;
     for (i = idfiles.begin(); i != idfiles.end(); ++i) {
-        //below - id: , curr frame: 0, max frame (fixed): 6, width x height: 32 x 32, posX posY: viewport.x, viewport.y
-        textureArray.push_back(AnimatedTexture(i->first, 0, 6, 32, 32, viewport_center_.x, viewport_center_.y));
         TextureManager::Instance()->Load(i->first, i->second, Game::renderer_);
+        //below - id: , curr frame: 0, max frame (fixed): 6, width x height: 32 x 32, posX posY: viewport.x, viewport.y
+        textureArray.push_back(AnimatedTexture(i->first, 0, 5, 32, 32, viewport_center_.x, viewport_center_.y));
     }
 
     animationArray_ = textureArray; // set attribute
@@ -100,51 +101,39 @@ void Protagonist::Render() { // DO ANIMATION STUFF HERE, use array, this should 
         // do only on protagonist
         const Uint8* event_array = SDL_GetKeyboardState(nullptr);
         // the array will work as follows (by index): 0: left, 1: right, 2: up, 4: down
-        switch (orientation_) {
+        switch (Map::protag_orientation_) {
             case kLeft: {
                 AnimatedTexture leftAnimate = animationArray_[0]; // creates this variable for clarity
-                if (event_array[SDL_SCANCODE_LEFT]) { // if key is being pressed
-                    // QUESTION: should this a while loop?
                     leftAnimate.Render(viewport_center_.x, viewport_center_.y, false);
                     leftAnimate.Update(); // run through the frames
-                } else {
-                    // when not pressed show only first frame (static)
-                    leftAnimate.Render(viewport_center_.x, viewport_center_.y, true);
                 }
-            }
                 break;
 
             case kRight: {
                 AnimatedTexture rightAnimate = animationArray_[1];
-                if (event_array[SDL_SCANCODE_RIGHT]) {
+                /*if (event_array[SDL_SCANCODE_RIGHT]) {
                     rightAnimate.Render(viewport_center_.x, viewport_center_.y, false);
                     rightAnimate.Update();
                 } else {
                     rightAnimate.Render(viewport_center_.x, viewport_center_.y, true);
+                }*/
+                rightAnimate.Render(viewport_center_.x, viewport_center_.y, false);
+                rightAnimate.Update();
                 }
-            }
                 break;
 
             case kUp: {
                 AnimatedTexture upAnimate = animationArray_[2];
-                if (event_array[SDL_SCANCODE_UP]) {
                     upAnimate.Render(viewport_center_.x, viewport_center_.y, false);
                     upAnimate.Update();
-                } else {
-                    upAnimate.Render(viewport_center_.x, viewport_center_.y, true);
                 }
-            }
                 break;
 
             case kDown: {
                 AnimatedTexture downAnimate = animationArray_[3];
-                if (event_array[SDL_SCANCODE_DOWN]) {
                     downAnimate.Render(viewport_center_.x, viewport_center_.y, false);
                     downAnimate.Update();
-                } else {
-                    downAnimate.Render(viewport_center_.x, viewport_center_.y, true);
                 }
-            }
                 break;
 
             default: // default is to just render the static image
