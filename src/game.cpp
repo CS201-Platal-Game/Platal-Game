@@ -8,6 +8,8 @@
 // static members definition
 SDL_Renderer* Game::renderer_ = nullptr;
 SDL_Window* Game::window_ = nullptr;
+Map* Game::current_map_ = nullptr;
+
 // this stays just in the unlikely case that we wish to make game a singleton
 // Game* Game::myInstance = 0;
 

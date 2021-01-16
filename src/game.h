@@ -34,20 +34,18 @@ class Game {
     void Update();       // gets the objects to react to user input
     void Render();       // renders all elements to screen
 
-    void ChangeMap(int map_id); // TODO think about how this is gonna be
-                                // implemented - for later
-
     bool Running() { return is_running_; }
 
     static SDL_Renderer* renderer_;
     static SDL_Window* window_;
     static GameState game_state_;
+    static Map* current_map_;
+
 
   private:
     int width_, height_;
     bool is_running_;
     int count_ = 0;
-    Map* current_map_;
     HUD* hud_;
     Protagonist* player_;
     Dialogue* current_dialogue_;
