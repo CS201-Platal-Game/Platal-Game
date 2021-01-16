@@ -35,6 +35,9 @@ void Map::LoadMap(char *filename, Position starting_pos) {
     width_ = tmp.width;
     height_ = tmp.height;
     map_array_ = tmp.map_array;
+    music_ = music;
+
+    // We now load and play the music
     std::string music = tmp.music;
     std::string music_file = "./sound/music/";
     music_file.append(music).append(".wav");
@@ -42,6 +45,7 @@ void Map::LoadMap(char *filename, Position starting_pos) {
         SoundManager::Instance()->LoadMusic(music, music_file);
         SoundManager::Instance()->PlayMusic(music);
     }
+    
     center_position_ = {starting_pos.x*64 - vpwidth_/2,
                         starting_pos.y*64 - vpheight_/2};
 }

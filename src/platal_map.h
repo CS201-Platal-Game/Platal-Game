@@ -57,5 +57,8 @@ class Map {
     Position center_position_;
     Velocity protag_velocity_{0,0};
     Accel protag_accel_ = {32, 8, 16};
+
+    // backgroud music
+    std::string music_;
 };
 
