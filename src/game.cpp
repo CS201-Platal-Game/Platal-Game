@@ -18,9 +18,9 @@ GameState Game::game_state_ = GameState::kWorld;
 Game::Game() { is_running_ = false; }
 
 Game::~Game() {
-    TextureManager::Instance()->Clean(); // exterminate("player");
+    TextureManager::Instance()->Clean();
     std::cout << "cleaned textures" << std::endl;
-    FontManager::Instance()->Clean(); //->Exterminate("retganon");
+    FontManager::Instance()->Clean();
     std::cout << "cleaned fonts" << std::endl;
     SoundManager::Instance()->Clean();
     std::cout << "cleaned sounds" << std::endl;
@@ -62,8 +62,7 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height,
 
         renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
         if (renderer_) {
-            SDL_SetRenderDrawColor(renderer_, 0, 0, 0,
-                                   0); // 255, 255, 255, 255);
+            SDL_SetRenderDrawColor(renderer_, 0, 0, 0, 0);
             std::cout << "renderer created..." << std::endl;
         }
 
@@ -73,8 +72,6 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height,
         current_map_->LoadMap("./maps/room.csv", {6, 8});
 
         // create the game character
-        // might need to store that on the heap
-        //player_ = new Protagonist("player", {width / 2, height / 2});
         player_ = new Protagonist("player", {width/2, height/2},
                                   std::vector<std::pair<std::string, std::string>> {
                                           {"play_left", "./images/sprites/man_walk_left.png"},
@@ -98,16 +95,11 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height,
         synapses_->clock_ = clock_;
         clock_->synapses_ = synapses_;
 
-        // dialogue test
-        game_state_ = kWorld;
+        // create dialogue
         current_dialogue_ = new Dialogue("./dialogues/test.txt");
 
-        // hud test
+        // create hud
         hud_ = new HUD(2.5f, 50.0f, 50.0f);
-
-        // quiz failed test
-        // std::vector<Question> tmp;
-        // current_quiz_= new Quiz(tmp);
 
     } else {
         std::cout << "SDL_ERROR: \t" << SDL_GetError() << std::endl;
@@ -153,11 +145,6 @@ void Game::HandleEvents() {
             break;
         }
         break;
-    case SDL_KEYUP:
-
-        break;
-    // New case to be added for the implementation of the character interaction
-    // with the object
     default:
         // to be extended once the facilities to handle user input have been
         // created
@@ -171,7 +158,6 @@ void Game::Update() {
         int tick = SDL_GetTicks();
         if (tick - timestamp_ >= skip_) {
             if (!current_map_->IsLegal()) { // movement is illegal
-                // std::cout << "illegal" << std::endl;
                 current_map_->ZeroSpeed();
             } else {
                 current_map_->Move();
@@ -196,7 +182,6 @@ void Game::Render() {
     player_->Render();
 
     hud_->Render();
-    // current_quiz_->DisplayScore();
 
     // optional elements
     if (game_state_ == kDialogue) {

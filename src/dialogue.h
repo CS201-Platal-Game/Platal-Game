@@ -20,9 +20,6 @@ public:
     std::string getLine();
     std::vector<std::pair<std::string, DialogueNode*>> getResponses();
 
-    // Goes to the next DialogueNode.
-    void Next(int response_id);
-
     // Accesses the visited_ and in_stack_ attributes
     bool GetVisited();
     bool GetStack();

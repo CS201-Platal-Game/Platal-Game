@@ -2,14 +2,7 @@
 #include "SDL2/SDL.h"
 #include "game.h"
 #include "utils/font_manager.h"
-#include "utils/texture_manager.h"
-#include <fstream>
-#include <iostream>
 #include <string>
-
-// Chris still here making comments for myself and whoever is reading this
-// Here we have a case where we don't precise the stats, can be changed to a
-// specific situation if needed
 
 std::string sleep_flavor_text(float current, float max) {
     float ratio = current / max;
@@ -53,7 +46,6 @@ HUD::HUD() {
     MaxSocial = 100.0f;
     FontManager::Instance()->Load("hud_font", "./fonts/novem___.ttf", 25);
 }
-// Case where the GPA etc... of the character is precised
 
 HUD::HUD(float GPA, float Rest, float Social) {
     CurrentGPA = GPA;
@@ -64,9 +56,6 @@ HUD::HUD(float GPA, float Rest, float Social) {
     MaxSocial = 100.0f;
     FontManager::Instance()->Load("hud_font", "./fonts/novem___.ttf", 25);
 }
-
-// Here intially the Get functions were void, but changed to double since we
-// need something returned
 
 float HUD::GetGPA() { return CurrentGPA; }
 
@@ -87,16 +76,6 @@ float HUD::GetRest() { return CurrentRest; }
 float HUD::GetSocial() { return CurrentSocial; }
 
 void HUD::Render() {
-    // if height = 640 and width = 800, {0 = x position of top left corner, 640
-    // = y position of top left corner, 800 = width rect, 64 = height rect} The
-    // width and height can be changed if needed In order to get what we want I
-    // split the total width into 3 for the 3 stats, with 32 length on the
-    // outsides, and between the states rendered Tried combining different
-    // strings and transforming a double into a string with to_string, to give
-    // essentially one sentence that can then be changed depending on stats or
-    // preference
-
-    //SDL_Rect HUD_rect = {0, 580, 900, 64};
     SDL_Rect HUD_rect = {0, 0, 900, 64};
     SDL_SetRenderDrawBlendMode(Game::renderer_, SDL_BLENDMODE_BLEND);
     SDL_SetRenderDrawColor(Game::renderer_, 180, 180, 180, 100);
@@ -113,10 +92,10 @@ void HUD::Render() {
     restx = 300 + (300 -FontManager::Instance()->RenderWidth("hud_font", Rest_stat_string))/2;
     socialx = 600 + (FontManager::Instance()->RenderWidth("hud_font", Social_stat_string))/2;
 
-    FontManager::Instance()->Draw("hud_font", GPA_stat_string, gpax, 20, // x=32
+    FontManager::Instance()->Draw("hud_font", GPA_stat_string, gpax, 20,
                                   {16, 100, 16}, Game::renderer_);
-    FontManager::Instance()->Draw("hud_font", Rest_stat_string, restx, 20, // x= 288
+    FontManager::Instance()->Draw("hud_font", Rest_stat_string, restx, 20,
                                   {16, 16, 100}, Game::renderer_);
-    FontManager::Instance()->Draw("hud_font", Social_stat_string, socialx, 20, // x=620
+    FontManager::Instance()->Draw("hud_font", Social_stat_string, socialx, 20,
                                   {100, 16, 16}, Game::renderer_);
 }

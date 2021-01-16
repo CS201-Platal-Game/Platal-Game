@@ -1,7 +1,6 @@
 #include "dialogue.h"
 #include "game.h"
 #include "utils/font_manager.h"
-#include "utils/texture_manager.h"
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -36,11 +35,6 @@ std::string DialogueNode::getLine() {
 std::vector<std::pair<std::string, DialogueNode*>>
 DialogueNode::getResponses() {
     return responses_;
-}
-
-// Goes to the next DialogueNode.
-void DialogueNode::Next(int response_id) {
-    // TODO we dont need it anymore (I hope)
 }
 
 bool DialogueNode::GetVisited() {
@@ -87,7 +81,6 @@ void Dialogue::AddEdge(int node_id, int response_id, int next_node_id) {
 // Generates the dialogue from a text file (sample file in Notion/Structure).
 // Returns false on failure (e.g. file does not exist).
 bool Dialogue::Import(const char* filename) {
-    // TODO where do we put dialogue files? -> create a folder
     std::ifstream dialogue(filename);
     std::string line_reader;
     if (!dialogue) {
@@ -107,7 +100,6 @@ bool Dialogue::Import(const char* filename) {
         response_lines_.push_back(line_reader);
     };
     getline(dialogue, line_reader);
-    // int edge_n = std::stoi(line_reader);
     int from, with, to;
     while (dialogue >> from >> with >> to) {
         this->AddEdge(from, with, to);
@@ -119,8 +111,6 @@ bool Dialogue::Import(const char* filename) {
 
 // Prints the current line and possible responses, then call Next().
 void Dialogue::Advance() {
-    // TODO we probably don't need this either
-    current->PrintLine();
     current->PrintResponses();
 }
 
@@ -135,7 +125,7 @@ void Dialogue::Render() {
     int number_of_responses = current->getResponses().size();
 
     if (number_of_responses == 0) {
-        FontManager::Instance()->Draw("retganon", "Press Z or [Enter] to continue", 20,
+        FontManager::Instance()->Draw("retganon", "Press [Enter] or Z to continue", 20,
                                       530, {100, 100, 100}, Game::renderer_);
     }
 
@@ -159,7 +149,6 @@ void Dialogue::Render() {
                                               10 + i * (896 / 3), 600,
                                               {175, 175, 255}, Game::renderer_);
             }
-
         } else {
             FontManager::Instance()->Draw("retganon", respo.substr(0,spacepos),
                                           10 + i * (896 / 3), 570,
@@ -169,8 +158,8 @@ void Dialogue::Render() {
                                               10 + i * (896 / 3), 600,
                                               {255, 255, 255}, Game::renderer_);
             }
-        };
-    };
+        }
+    }
 }
 
 void Dialogue::HandleInput(SDL_Event event) {
