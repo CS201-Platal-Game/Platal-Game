@@ -15,15 +15,7 @@ unsigned Clock::GetHour() { return absolute_minute_ / 60; }
 unsigned Clock::GetAbsoluteMinute() { return absolute_minute_; }
 
 std::string Clock::GetClockString() {
-    std::string hour = std::to_string(GetHour());
-    std::string minute = std::to_string(GetMinute());
-    if (hour.size() == 1) {
-        hour = "0" + hour;
-    }
-    if (minute.size() == 1) {
-        minute = "0" + minute;
-    }
-    return hour + ":" + minute;
+    return ToString(GetHour()) + ":" + ToString(GetMinute());
 }
 
 Clock::Status Clock::JumpAbsoluteMinute(unsigned absolute_minute) {

@@ -3,6 +3,7 @@
 #include "SDL2/SDL.h"
 
 #include <cassert>
+#include <iostream>
 #include <string>
 #include <vector>
 
@@ -32,6 +33,9 @@ class Clock {
     unsigned GetHour();
     unsigned GetAbsoluteMinute();
     std::string GetClockString();
+    static std::string ToString(unsigned x) {
+        return (x < 10 ? "0" : "") + std::to_string(x);
+    };
 
     // Jumps to the specified absolute_minute.
     // Calls AdvanceMinute.
@@ -115,5 +119,9 @@ class Synapses {
     void UpdateCurrentEvents();
     std::vector<Event> current_events_; // sorted by starting time (reverse)
     std::vector<Day> days_;             // reversed for easy next day access
+
+    std::vector<std::string> options_ = {"Attend", "Ignore", "Skip 30 minutes"};
+    size_t selected_option_ = 2;
+
     // TODO: Tasks.
 };
