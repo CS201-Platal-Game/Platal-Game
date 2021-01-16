@@ -74,52 +74,25 @@ void Map::DrawMap() {
     }
 }
 
-/*
-bool Map::IsLegal(Position pos, Velocity vel) {
-    int vpwidth, vpheight;
-    SDL_GetWindowSize(Game::window_, &vpwidth, &vpheight);
-    vpwidth /= (2 * 64);
-    vpheight /= (2 * 64);
-
-    int x, y;
-    x = (pos.x)/64 + vpwidth;
-    y = (pos.y)/64 + vpheight;
-    std::cout << y << ", " << x << ", " << map_array_[y][x] << std::endl;
-
-    if (map_array_[y][x] != 0)
-        return true;
-    return false;
-}*/
-
-/*
-bool Map::IsLegal(){
-    int x, y;
-    x = (center_position_.x + vpwidth_/2 + protag_velocity_.xVel)/64;
-    y = (center_position_.y + vpheight_/2 + protag_velocity_.yVel)/64;
-    std::cout << x << ", " << y << "; " ;
-    std::cout << map_array_[y][x] << std::endl;
-    return (x >= 0 and y >= 0 and x < width_ and y < height_ and map_array_[y][x] != 0);
-}
-*/
 
 bool Map::IsLegal(){
     int x, y;
     switch (protag_orientation_){
         case kLeft:
-            x = (center_position_.x + vpwidth_/2 + protag_velocity_.xVel)/64;
+            x = (-1 + center_position_.x + vpwidth_/2 + protag_velocity_.xVel)/64;
             y = (center_position_.y + vpheight_/2)/64;
             break;
         case kRight:
-            x = (center_position_.x + vpwidth_/2 + protag_velocity_.xVel + 63)/64;
+            x = (1 + center_position_.x + vpwidth_/2 + protag_velocity_.xVel + 63)/64;
             y = (center_position_.y + vpheight_/2)/64;
             break;
         case kUp:
             x = (center_position_.x + vpwidth_/2)/64;
-            y = (center_position_.y + vpheight_/2 + protag_velocity_.yVel)/64;
+            y = (-1 + center_position_.y + vpheight_/2 + protag_velocity_.yVel)/64;
             break;
         case kDown:
             x = (center_position_.x + vpwidth_/2)/64;
-            y = (center_position_.y + vpheight_/2 + protag_velocity_.yVel + 63)/64;
+            y = (1 + center_position_.y + vpheight_/2 + protag_velocity_.yVel + 63)/64;
             break;
         default:
             x = center_position_.x;

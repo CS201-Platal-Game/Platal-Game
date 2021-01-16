@@ -18,7 +18,7 @@ class HUD {
 
 	public:
 		HUD();
-		~HUD();
+		~HUD() = default;
 		HUD(float CurrentGPA, float CurrentRest, float CurrentSocial);
 
     float GetGPA();
