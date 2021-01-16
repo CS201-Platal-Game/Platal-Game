@@ -18,7 +18,7 @@ class Clock {
     };
 
     Clock();
-    ~Clock();
+    ~Clock() = default;
 
     Synapses* synapses_;
 

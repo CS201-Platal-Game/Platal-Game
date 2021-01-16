@@ -14,7 +14,7 @@
 class Map {
   public:
     Map(); // added empty default constructor, could be changed later
-    ~Map(); // the map deconstructor
+    ~Map() = default; // the map deconstructor
 
     void LoadMap(char *filename, Position starting_pos); // load map from file
     void DrawMap(); // draw map to screen

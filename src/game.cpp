@@ -20,11 +20,21 @@ Game::~Game() {
     std::cout << "cleaned textures" << std::endl;
     FontManager::Instance()->Clean(); //->Exterminate("retganon");
     std::cout << "cleaned fonts" << std::endl;
+    SoundManager::Instance()->Clean();
+    std::cout << "cleaned sounds" << std::endl;
+
+    delete hud_;
+    delete current_dialogue_;
+    delete clock_;
+    delete synapses_;
+    delete main_menu_;
+    delete current_map_;
+
     SDL_DestroyRenderer(renderer_);
     std::cout << "freed renderer" << std::endl;
     SDL_DestroyWindow(window_);
     std::cout << "freed window" << std::endl;
-    // need to add the delete map
+
     TTF_Quit();
     IMG_Quit();
     SDL_Quit();
