@@ -34,7 +34,7 @@ private:
     // currently not necessary
     // bool animated_;
     int frameTime = SDL_GetTicks();
-    int frameDelay = 1000/20;
+    int frameDelay = 1000/25;
 };
 
 //Old structure

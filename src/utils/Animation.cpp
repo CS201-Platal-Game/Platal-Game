@@ -30,6 +30,7 @@ void AnimatedTexture::Render(int posX, int posY, bool reset) {
     // put posX and posY just in case but it should (probably) be viewport_center.x and .y 
     if (reset){ // if you want to "force" the display of the initial frame
         currFrame_ = 0;
+        frame_.x = 0;
     }
     TextureManager::Instance()->DrawFrame(id_, frame_, {posX, posY, 64, 64}, Game::renderer_);
 }
