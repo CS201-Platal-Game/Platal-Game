@@ -44,6 +44,7 @@ void MainMenu::HandleInput(SDL_Event event) {
 
 void MainMenu::Render() {
     SDL_Rect menu_rect = {0, 460, 896, 240};
+
     SDL_SetRenderDrawBlendMode(Game::renderer_, SDL_BLENDMODE_BLEND);
     SDL_SetRenderDrawColor(Game::renderer_, 0, 0, 0, 196);
     SDL_RenderFillRect(Game::renderer_, &menu_rect);
@@ -63,6 +64,6 @@ void MainMenu::Render() {
         FontManager::Instance()->Draw("retganon", current_option, draw_x,
                                       draw_y, color, Game::renderer_);
 
-        draw_x += current_option.size() * 20;
+        draw_x += current_option.size() * 25;
     }
 }
