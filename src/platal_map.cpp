@@ -147,6 +147,24 @@ void Map::HandleInput(SDL_Event event) {
             //velocity_.yVel = 0;
             protag_velocity_.xVel = 0;
             break;
+        
+        case SDLK_e: {
+            SDL_Rect new_hitbox_ = {center_position_.x, center_position_.y, 32, 32}; 
+            std::vector<SDL_Rect> tiles_to_check = GetTiles(new_hitbox_);
+
+            std::vector<SDL_Rect>::iterator iter;
+            for (iter = tiles_to_check.begin(); iter != tiles_to_check.end(); iter++) {
+                SDL_Rect rect = *iter;
+                std::vector<Switch> vec_switch = switches_[rect];
+
+                std::vector<Switch>::iterator vec_it;
+                for (vec_it = vec_switch.begin(); vec_it != vec_switch.end(); vec_it++){
+                    vec_it->KeyInteraction(new_hitbox_);
+                }
+            }
+        }
+        break;
+
         default:
             break;
     }
@@ -286,6 +304,33 @@ Object Map::RemoveObject(int obj_id) {// or maybe its name
         }
     }
     return res;
+}
+
+Switch Map::RemoveSwitch(int obj_id) {
+    std::map<SDL_Rect, std::vector<Switch>>::iterator map_it;
+    Switch res = Switch();
+    for (map_it = switches_.begin(); map_it != switches_.end(); map_it++){
+        std::vector<Switch>::iterator vec_it;
+        for (vec_it = map_it->second.begin(); vec_it != map_it->second.end(); vec_it++){
+            if (vec_it->GetObjId() == obj_id){
+                res = *vec_it;
+                map_it->second.erase(vec_it);
+            }
+        }
+    }
+    return res;
+}
+
+void Map::AddSwitch(Switch item){
+    std::vector<SDL_Rect> tiles = GetTiles(item); 
+    std::vector<SDL_Rect>::iterator it;
+    for (it = tiles.begin(); it != tiles.end(); it ++) {
+        if (switches_.find(*it) == switches_.end()) {
+            std::vector<Switch> *list = new std::vector<Switch>;
+            switches_[*it] = *list;
+        }
+        switches_[*it].push_back(item);
+    }
 }
 
 void Map::AddNpc(Character npc){
