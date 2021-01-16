@@ -41,7 +41,6 @@ int Character::GetCharId() {
 }
 
 SDL_Rect Character::GetHitbox() {
-    // Update the hitbox x and y before returning it
     hitbox_.x = position_.x;
     hitbox_.y = position_.y;
     return hitbox_;
@@ -58,17 +57,16 @@ Protagonist::Protagonist(const std::string &name, const Position &position) {
   position_ = {0,0};
 }
 
-// constructor - dunno if this is too messy, contact Nina if that's the case
+// constructor
 Protagonist::Protagonist(const std::string &name, const Position &position,
  std::vector<std::pair<std::string, std::string>> idfiles) {
   stats_ = Stats();
   viewport_center_ = position;
   position_ = {0,0};
 
-  // the following is my fancy scheme to fill the animation array w/ instances of animations
+  // fills animation array w/ instances of animations
   std::vector<std::pair<std::string, std::string>>::iterator i;
   for (i = idfiles.begin(); i != idfiles.end(); ++i) {
-        //below - id: , curr frame: 0, max frame (fixed): 6, width x height: 32 x 32, posX posY: viewport.x, viewport.y
         animationArray_.push_back(AnimatedTexture(i->first, 0, 6, 32, 32, viewport_center_.x, viewport_center_.y));
         TextureManager::Instance()->Load(i->first, i->second, Game::renderer_);
     } 
@@ -76,39 +74,32 @@ Protagonist::Protagonist(const std::string &name, const Position &position,
 
 void Protagonist::CreateAnimationArray(std::vector<std::pair<std::string, std::string>> idfiles){
     // function to fill animation array
-    // This is meant to create the array of instances of "AnimatedTexture" based on the input of the files to load
-    // and the IDs.
-    // THESE VECTORS NEED !!!! TO BE OF THE SAME LENGTH !!!!
-
-    std::vector<AnimatedTexture> textureArray; // create an array with the number of files to load
-    // fill the array w instances of AnimatedTexture
+    std::vector<AnimatedTexture> textureArray; 
     std::vector<std::pair<std::string, std::string>>::iterator i;
     for (i = idfiles.begin(); i != idfiles.end(); ++i) {
         TextureManager::Instance()->Load(i->first, i->second, Game::renderer_);
-        //below - id: , curr frame: 0, max frame (fixed): 5, width x height: 32 x 32, posX posY: viewport.x, viewport.y
         textureArray.push_back(AnimatedTexture(i->first, 0, 5, 32, 32, viewport_center_.x, viewport_center_.y));
     }
-
-    animationArray_ = textureArray; // set attribute
+    animationArray_ = textureArray; 
 }
 
-void Protagonist::Render() { // DO ANIMATION STUFF HERE, use array, this should only be one line
+void Protagonist::Render() {
     if (animationArray_.empty()){
         TextureManager::Instance()->Draw("player", {0, 0, 32, 32},
                                          {viewport_center_.x, viewport_center_.y, 64, 64},
                                          Game::renderer_);
-    } else {
-        // do only on protagonist
+    } 
+    else {
         const Uint8* event_array = SDL_GetKeyboardState(nullptr);
-        // the array will work as follows (by index): 0: left, 1: right, 2: up, 4: down
+        // array (by index): 0: left, 1: right, 2: up, 4: down
         switch (Map::protag_orientation_) {
             case kLeft: {
-                if (event_array[SDL_SCANCODE_LEFT]) { // if key is being pressed
-                    // QUESTION: should this a while loop?
+                if (event_array[SDL_SCANCODE_LEFT]) { 
+                    // key pressed -> run through the frames
                     animationArray_[0].Render(viewport_center_.x, viewport_center_.y, false);
-                    animationArray_[0].Update(); // run through the frames
+                    animationArray_[0].Update(); 
                 } else {
-                    // when not pressed show only first frame (static)
+                    // shows first frame (static)
                     animationArray_[0].Render(viewport_center_.x, viewport_center_.y, true);
                 }
                 break;
@@ -144,9 +135,7 @@ void Protagonist::Render() { // DO ANIMATION STUFF HERE, use array, this should 
                 break;
             }
 
-            default: // default is to just render the static image
-                // I can either do it like this or using the animation class
-                // don't know - which is better?
+            default: // renders the static image
                 TextureManager::Instance()->Draw(name_, {0, 0, 32, 32},
                                                  {viewport_center_.x, viewport_center_.y, 64, 64}, Game::renderer_);
         }
@@ -155,7 +144,6 @@ void Protagonist::Render() { // DO ANIMATION STUFF HERE, use array, this should 
 
 
 /********* NPC *********/
-
 void NPC::MoveRoute() {
     if (moving_ ) {
         if (route_.empty()) {
