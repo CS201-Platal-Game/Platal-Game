@@ -31,7 +31,7 @@ void AnimatedTexture::Render(int posX, int posY, bool reset) {
     if (reset){ // if you want to "force" the display of the initial frame
         currFrame_ = 0;
     }
-    TextureManager::Instance()->DrawFrame(id_, frame_, {posX, posY, 32, 32}, Game::renderer_);
+    TextureManager::Instance()->DrawFrame(id_, frame_, {posX, posY, 64, 64}, Game::renderer_);
 }
 
 

@@ -74,9 +74,15 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height,
 
         // create the game character
         // might need to store that on the heap
-        player_ = new Protagonist("player", {width / 2, height / 2});
+        //player_ = new Protagonist("player", {width / 2, height / 2});
+        player_ = new Protagonist("player", {width/2, height/2},
+                                  std::vector<std::pair<std::string, std::string>> {
+                                          {"play_left", "./images/sprites/man_walk_left.png"},
+                                          {"play_right", "./images/sprites/man_walk_right.png"},
+                                          {"play_up", "./images/sprites/man_walk_up.png"},
+                                          {"play_down", "./images/sprites/man_walk_front.png"}});
         TextureManager::Instance()->Load(
-            "player", "./images/sprites/littleman1.png", renderer_);
+            "player", "./images/sprites/neutral_forward.png", renderer_);
 
         FontManager::Instance()->Load("retganon10", "./fonts/chary___.ttf", 10);
         FontManager::Instance()->Load("retganon", "./fonts/chary___.ttf", 32);
