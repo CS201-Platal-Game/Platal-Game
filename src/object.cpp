@@ -134,6 +134,7 @@ void Switch::KeyInteraction(SDL_Rect hitbox) {
     const Uint8* event_array = SDL_GetKeyboardState(nullptr);
     if (active_ && event_array[SDL_SCANCODE_E] && intersection) {
         Action2();
+        ToggleState();
     }
 }
 
