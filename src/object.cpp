@@ -91,11 +91,26 @@ void Object::Render() {
 void Object::Action1() {}
 void Object::Action2() {}
 
-Portal::Portal(int width, int height, int map_id) {
-    hitbox_.w = width;
-    hitbox_.h = height;
+Portal::Portal(SDL_Rect coordinates, std::string map_id, Position starting_position) {
+    hitbox_ = coordinates;
+    position_.x = coordinates.x;
+    position_.y = coordinates.y;
     map_id_ = map_id;
-    collidable_ = false;
+    starting_position_ = starting_position;
+    collidable_ = true;
+}
+
+bool Portal::CheckCollision(SDL_Rect hitbox) {
+    // Checks if the object is collidable and if the character is currently colliding with it.SS
+    if (!collidable_) return false;
+
+    bool intersection = SDL_HasIntersection(&hitbox_, &hitbox);
+    Action1();
+    return intersection;
+}
+
+void Portal::Action1(){
+    Game::current_map_->LoadMap((char *)map_id_.c_str(), starting_position_);
 }
 
 Switch::Switch(int width, int height, bool collidable, int x, int y, 

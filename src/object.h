@@ -3,6 +3,7 @@
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
 #include "utils/structs.h"
+#include <string>
 
 class Object {
   public:
@@ -56,10 +57,13 @@ class Object {
 // Object signalling map changes.
 class Portal : public Object {
   public:
-    Portal(int width, int height, int map_id);
+    Portal(SDL_Rect coordinates, std::string map_id, Position starting_position);
+    bool CheckCollision(SDL_Rect hitbox);
+    void Action1();
 
   private:
-    int map_id_;
+    std::string map_id_;
+    Position starting_position_;
 };
 
 class Switch : public Object {
