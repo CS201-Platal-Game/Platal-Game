@@ -2,13 +2,29 @@
 
 // ---------- HOURS & MINUTES ----------
 
-Clock::Clock() { absolute_minute_ = kStartingAbsoluteMinute; }
+Clock::Clock() {
+    absolute_minute_ = kStartingAbsoluteMinute;
+    // NOTE: for demo purposes.
+    InitializeDemo();
+}
 
 unsigned Clock::GetMinute() { return absolute_minute_ % 60; }
 
 unsigned Clock::GetHour() { return absolute_minute_ / 60; }
 
 unsigned Clock::GetAbsoluteMinute() { return absolute_minute_; }
+
+std::string Clock::GetClockString() {
+    std::string hour = std::to_string(GetHour());
+    std::string minute = std::to_string(GetMinute());
+    if (hour.size() == 1) {
+        hour = "0" + hour;
+    }
+    if (minute.size() == 1) {
+        minute = "0" + minute;
+    }
+    return hour + ":" + minute;
+}
 
 Clock::Status Clock::JumpAbsoluteMinute(unsigned absolute_minute) {
     if (absolute_minute >= kMaxAbsoluteMinute) {
@@ -70,11 +86,12 @@ std::string Clock::GetDateString() {
     return date_string;
 }
 
-void Clock::AddDate(const Clock::Date& date) {
-    if (calendar_.empty()) {
-        date_index_ = 0;
-    } else {
-        date_index_++;
-    }
-    calendar_.push_back(date);
+void Clock::AddDate(const Clock::Date& date) { calendar_.push_back(date); }
+
+void Clock::InitializeDemo() {
+    AddDate({2, 18, 1, 2020});
+    AddDate({3, 19, 1, 2020});
+    AddDate({4, 20, 1, 2020});
+    AddDate({5, 21, 1, 2020});
+    AddDate({6, 22, 1, 2020});
 }

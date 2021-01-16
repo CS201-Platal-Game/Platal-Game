@@ -56,6 +56,8 @@ void MainMenu::Render() {
         draw_x += 20;
 
         std::string current_option = options_[i];
+
+        // Highlighting.
         SDL_Color color = {255, 255, 255};
         if (i == selected_option_) {
             color = {175, 175, 255};
@@ -64,6 +66,7 @@ void MainMenu::Render() {
         FontManager::Instance()->Draw("retganon", current_option, draw_x,
                                       draw_y, color, Game::renderer_);
 
-        draw_x += current_option.size() * 25;
+        // Spacing for next option.
+        draw_x += current_option.size() * 15 + 50;
     }
 }
