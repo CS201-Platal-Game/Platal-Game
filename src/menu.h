@@ -8,12 +8,18 @@
 class MainMenu {
   public:
     MainMenu();
+
+    // Menu options.
     void Continue();
+    void DialogueDemo();
+    void Synapses();
     void Quit();
+
     void Render();
     void HandleInput(SDL_Event event);
 
   private:
-    std::vector<std::string> options_ = {"Continue", "Quit"};
+    std::vector<std::string> options_ = {"Continue", "DialogueDemo", "Synapses",
+                                         "Quit"};
     size_t selected_option_ = 0;
 };

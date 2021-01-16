@@ -2,13 +2,29 @@
 
 // ---------- HOURS & MINUTES ----------
 
-Clock::Clock() { absolute_minute_ = kStartingAbsoluteMinute; }
+Clock::Clock() {
+    absolute_minute_ = kStartingAbsoluteMinute;
+    // NOTE: for demo purposes.
+    InitializeDemo();
+}
 
 unsigned Clock::GetMinute() { return absolute_minute_ % 60; }
 
 unsigned Clock::GetHour() { return absolute_minute_ / 60; }
 
 unsigned Clock::GetAbsoluteMinute() { return absolute_minute_; }
+
+std::string Clock::GetClockString() {
+    std::string hour = std::to_string(GetHour());
+    std::string minute = std::to_string(GetMinute());
+    if (hour.size() == 1) {
+        hour = "0" + hour;
+    }
+    if (minute.size() == 1) {
+        minute = "0" + minute;
+    }
+    return hour + ":" + minute;
+}
 
 Clock::Status Clock::JumpAbsoluteMinute(unsigned absolute_minute) {
     if (absolute_minute >= kMaxAbsoluteMinute) {
@@ -70,64 +86,12 @@ std::string Clock::GetDateString() {
     return date_string;
 }
 
-void Clock::AddDate(const Clock::Date& date) {
-    if (calendar_.empty()) {
-        date_index_ = 0;
-    } else {
-        date_index_++;
-    }
-    calendar_.push_back(date);
-}
+void Clock::AddDate(const Clock::Date& date) { calendar_.push_back(date); }
 
-// ---------- SYNAPSES ----------
-
-std::vector<Event> Synapses::GetCurrentEvents() {
-    UpdateCurrentEvents();
-    return current_events_;
-}
-
-void Synapses::AddDay(const Day& day) { days_.push_back(day); }
-
-void Synapses::UpdateDay() {
-    if (days_.empty()) {
-        return;
-    }
-    Day day = days_.back();
-    days_.pop_back();
-
-    current_events_.clear();
-    for (int i = (int)day.events.size() - 1; i >= 0; --i) {
-        if (!current_events_.empty()) {
-            assert(current_events_.back().start_time >=
-                   day.events[i].start_time);
-        }
-        current_events_.push_back(day.events[i]);
-    }
-    // TODO: Task.
-}
-
-void Synapses::UpdateCurrentEvents() {
-    while (!current_events_.empty() &&
-           clock_->GetAbsoluteMinute() > current_events_.back().start_time) {
-        current_events_.pop_back();
-    } // remove events as soon as it started.
-}
-
-unsigned Synapses::IgnoreEvent() {
-    if (current_events_.empty()) {
-        return 0;
-    }
-    Event event = current_events_.back();
-    current_events_.pop_back();
-    return event.event_id;
-}
-
-unsigned Synapses::AttendEvent() {
-    if (current_events_.empty()) {
-        return 0;
-    }
-    Event event = current_events_.back();
-    current_events_.pop_back();
-    clock_->JumpAbsoluteMinute(event.end_time);
-    return event.event_id;
+void Clock::InitializeDemo() {
+    AddDate({2, 18, 1, 2020});
+    AddDate({3, 19, 1, 2020});
+    AddDate({4, 20, 1, 2020});
+    AddDate({5, 21, 1, 2020});
+    AddDate({6, 22, 1, 2020});
 }
