@@ -32,9 +32,13 @@ int main(void) {
         game->Render();
 
         frameTime = SDL_GetTicks() - frameStart; //end chrono
-
+				
         if (frameDelay > frameTime) // delay if game runs too fast
-            SDL_Delay(frameDelay - frameTime);
+            SDL_Delay(frameDelay - frameTime - 5);
+
+	frameTime = SDL_GetTicks() - frameStart;
+	game->DisplayFps(static_cast<int>(1000.0 / frameTime));
+	game->Show();
     }
 
     delete game;
