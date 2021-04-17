@@ -37,17 +37,20 @@ class Game {
 
     void HandleEvents(); // reacts to user input
     void Update();       // gets the objects to react to user input
-    void Render();       // renders all elements to screen
+    void Render();       // renders all elements
+		void Show();				 // displays all elements on screen
 
     bool Running() { return is_running_; }
 
+		void DisplayFps(int fps); 
+		
     static SDL_Renderer* renderer_;
     static SDL_Window* window_;
     static GameState game_state_;
     static Map* current_map_;
 
-  private:
-    int width_, height_;
+	private:
+		int width_, height_;
     bool is_running_;
     int count_ = 0;
     HUD* hud_;

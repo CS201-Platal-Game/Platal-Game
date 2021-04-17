@@ -83,6 +83,7 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height,
 
         FontManager::Instance()->Load("retganon10", "./fonts/chary___.ttf", 10);
         FontManager::Instance()->Load("retganon", "./fonts/chary___.ttf", 32);
+	FontManager::Instance()->Load("fps", "./fonts/8bitlim.ttf", 18);
 
         SoundManager::Instance()->SetVolume(MIX_MAX_VOLUME / 2);
 
@@ -192,6 +193,17 @@ void Game::Render() {
         synapses_->Render();
     }
 
-    SDL_RenderPresent(renderer_);
-    SDL_SetRenderDrawColor(renderer_, 0, 0, 0, 0);
+    //SDL_RenderPresent(renderer_);
+    //SDL_SetRenderDrawColor(renderer_, 0, 0, 0, 0);
+}
+
+
+void Game::Show() { 
+  SDL_RenderPresent(renderer_); 
+  SDL_SetRenderDrawColor(renderer_, 0, 0, 0, 0); 
+}
+
+void Game::DisplayFps(int fps){
+  FontManager::Instance()->Draw("fps", std::to_string(fps), 
+				10, 10, {200, 200, 0, 200}, renderer_);
 }

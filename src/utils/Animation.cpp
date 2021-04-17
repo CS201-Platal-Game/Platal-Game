@@ -5,7 +5,7 @@ AnimatedTexture::AnimatedTexture(std::string id, int cFrame, int mFrame,
                                  int w, int h,
                                  int posX, int posY) {
     currFrame_ = cFrame;
-    maxFrame_ = mFrame;
+    maxFrame_ = mFrame-1;
     x_ = posX;
     y_ = posY;
     id_ = id;
